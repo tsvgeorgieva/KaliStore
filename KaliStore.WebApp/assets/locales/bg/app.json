@@ -1,0 +1,50 @@
+{
+  "config": {
+    "pageTitle": "Page Title"
+  },
+  "login": {
+    "title": "Вход",
+    "systemLogin": "Вход в системата",
+    "user": "Потребителско име",
+    "password": "Парола",
+    "login": "Вход",
+    "logout": "Изход",
+    "loggedInSuccessful": "Успешен вход в системата",
+    "loggedInUnsuccessful": "Неуспешен вход в системата"
+  },
+  "common": {
+    "save": "Запис",
+    "cancel": "Отказ",
+    "search": "Търсене",
+    "status": "Статус",
+    "name": "Име",
+    "date": "Дата",
+    "fromDate": "От дата",
+    "toDate": "До дата",
+    "saveSuccessful": "Данните са записани успешно.",
+    "dateAdded": "Дата на добавяне",
+    "value": "Стойност",
+    "ok": "Ок",
+    "close": "Затвори",
+    "yes": "Да",
+    "no": "Не",
+    "amount": "Сума",
+    "currency": "Валута",
+    "count": "Брой"
+  },
+  "home":{
+    "title": "Начало"
+  },
+  "contacts":{
+    "title": "Контакти"
+  },
+  "aboutUs": {
+    "title": "За нас"
+  },
+  "register": {
+    "title": "Регистрация"
+  },
+  "navbar":{
+    "search": "Търси"
+  }
+}

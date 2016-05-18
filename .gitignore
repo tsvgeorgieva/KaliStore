@@ -1,0 +1,10 @@
+KaliStore.WebApp/src/**/*.html
+node_modules
+jspm_packages
+bower_components
+.idea
+.DS_Store
+dist/
+*.orig
+**/.sass-cache
+**/.sass-cache/*

@@ -1,0 +1,30 @@
+template
+  //div.container
+  nav.navbar.navbar-fixed-top.navbar-light.bg-faded
+    div.row
+      div.col-sm-12
+        ul.nav.navbar-nav
+          template(repeat.for="navModel of router.navigation")
+            li.nav-item(class="${ navModel.isActive ? 'active' : '' }")
+              a.nav-link(href.bind="navModel.href", title.bind="navModel.title")
+                i.fa(class.bind="navModel.config.favicon", if.bind="navModel.config.favicon") &nbsp;
+                span(if.bind="!navModel.config.iconOnly") ${navModel.title}
+        ul.nav.navbar-nav.pull-xs-right
+          template(if.bind="isUserLoggedIn")
+            li.nav-item
+              span Hello, ${userName}
+          template(if.bind="!isUserLoggedIn")
+            li.nav-item
+              a.nav-link(href="#/login", title.bind="'login.title' | t") ${'login.title' | t}
+            li.nav-item
+              a.nav-link(href="#/register", title.bind="'register.title' | t") ${'register.title' | t}
+
+
+    div.row(style="display: flex; align-items: center;")
+      div.col-sm-3
+        form.form-inline
+          input.form-control(type="text", placeholder.bind="'navbar.search' | t")
+      div.col-sm-6.text-xs-center
+        img(src="assets/images/logo.png", style="max-height:150px")
+      div.col-sm-3
+
