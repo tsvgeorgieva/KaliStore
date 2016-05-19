@@ -32,10 +32,10 @@
     "currency": "Валута",
     "count": "Брой"
   },
-  "home":{
+  "home": {
     "title": "Начало"
   },
-  "contacts":{
+  "contacts": {
     "title": "Контакти"
   },
   "aboutUs": {
@@ -44,7 +44,13 @@
   "register": {
     "title": "Регистрация"
   },
-  "navbar":{
+  "navbar": {
     "search": "Търси"
+  },
+  "products": {
+    "allProducts": "Всички продукти"
+  },
+  "cart": {
+    "search": "Кошница"
   }
 }
