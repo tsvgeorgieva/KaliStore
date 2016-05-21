@@ -16,6 +16,12 @@ body {
   overflow-y: auto;
 }
 
+@media only screen and (max-width: 768px) {
+  .page-host {
+    top: 209px;
+  }
+}
+
 .splash {
   text-align: center;
   margin: 10% 0 0 0;

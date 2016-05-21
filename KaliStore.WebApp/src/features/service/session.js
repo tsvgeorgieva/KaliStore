@@ -87,25 +87,25 @@ export class Session {
     const data = JSON.parse(localStorage[constant.appData]);
 
     this.userName = data.userName;
-    this.userClaims = data.userClaims.reduce(function(hash, userClaim) {
-      hash[userClaim.type] = userClaim.value;
-      return hash;
-    }, {});
-    this.userRoles = data.userRoles.reduce((hash, userRole) => {
-      hash[userRole] = true;
-      return hash;
-    }, {});
-    this.userAccessRights = data.userAccessRights.reduce((hash, accessRight) => {
-      hash[accessRight] = true;
-      return hash;
-    }, {});
+    // this.userClaims = data.userClaims.reduce(function(hash, userClaim) {
+    //   hash[userClaim.type] = userClaim.value;
+    //   return hash;
+    // }, {});
+    // this.userRoles = data.userRoles.reduce((hash, userRole) => {
+    //   hash[userRole] = true;
+    //   return hash;
+    // }, {});
+    // this.userAccessRights = data.userAccessRights.reduce((hash, accessRight) => {
+    //   hash[accessRight] = true;
+    //   return hash;
+    // }, {});
 
     // todo: delete
     this.userAccessRights['access'] = true;
 
     this.isLoggedIn = true;
-    this.token = data.token;
-    this.eventAggregator.publish(new UserLoggedInEvent(data.token));
+    // this.token = data.token;
+    // this.eventAggregator.publish(new UserLoggedInEvent(data.token));
   }
 
   rememberedToken() {

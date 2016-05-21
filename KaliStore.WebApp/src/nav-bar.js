@@ -31,6 +31,8 @@ export class NavBar {
     eventAggregator.subscribe(HttpSessionTimedOutMessage, function () {
       this.logout();
     }.bind(this));
+
+    window.navbar = this;
   }
 
   get isUserLoggedIn() {
@@ -63,8 +65,8 @@ export class NavBar {
   }
 
   logout() {
-    this.session.clearUser();
-    this.router.navigate('login');
+    this.session.logoutUser();
+    //this.router.navigate('login');
   }
 }
 

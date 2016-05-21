@@ -42,15 +42,30 @@
     "title": "За нас"
   },
   "register": {
-    "title": "Регистрация"
+    "title": "Регистрация",
+    "confirmPassword": "Повторете паролата",
+    "passwordsDoNotMatch": "Паролите не съвпадат",
+    "signup": "Регистрирай се"
   },
   "navbar": {
-    "search": "Търси"
+    "search": "Търси",
+    "hello": "Здравей",
+    "logout": "Изход"
   },
   "products": {
     "allProducts": "Всички продукти"
   },
   "cart": {
     "search": "Кошница"
+  },
+  "models":{
+    "user": {
+      "userName": "Потребителско име",
+      "fullName": "Име",
+      "password": "Парола",
+      "city": "Град",
+      "address": "Адрес",
+      "phone": "Телефон"
+    }
   }
 }

@@ -5,6 +5,7 @@
   nav-bar(router.bind="router")
 
   div.page-host(style="background: white;")
-    router-view
+    div.container
+      router-view
 
   loading-mask(show-mask.bind="showLoadingMask")

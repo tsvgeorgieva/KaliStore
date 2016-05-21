@@ -1,2 +1,41 @@
 template
-  h1 Register
+  form.m-x-auto(style="max-width: 500px")
+    h1.text-xs-center ${'register.title' | t}
+    div.form-group.row
+      div.col-sm-4
+        label.form-control-label  ${'models.user.userName'| t}
+      div.col-sm-8
+        input.form-control(type="text", value.bind="user.userName")
+    div.form-group.row
+      div.col-sm-4
+        span.form-control-label ${'models.user.password'| t}
+      div.col-sm-8
+        input.form-control(type="password", value.bind="user.password")
+    div.form-group.row
+      div.col-sm-4
+        span.form-control-label ${'register.confirmPassword'| t}
+      div.col-sm-8
+        input.form-control(type="password", value.bind="confirmPassword")
+    div.form-group.row
+      div.col-sm-4
+        span.form-control-label ${'models.user.fullName'| t}
+      div.col-sm-8
+        input.form-control(type="text", value.bind="user.fullName")
+    div.form-group.row
+      div.col-sm-4
+        span.form-control-label ${'models.user.city'| t}
+      div.col-sm-8
+        select3(items.bind="cities", value.bind="user.city")
+    div.form-group.row
+      div.col-sm-4
+        span.form-control-label ${'models.user.address'| t}
+      div.col-sm-8
+        input.form-control(type="text", value.bind="user.address")
+    div.form-group.row
+      div.col-sm-4
+        span.form-control-label ${'models.user.phone'| t}
+      div.col-sm-8
+        input.form-control(type="number", value.bind="user.phone")
+    div.form-group.row
+      div.col-sm-12.text-sm-right
+        base-button(on-click.call="register()", type="btn-success", title="register.signup", name="register.signup")

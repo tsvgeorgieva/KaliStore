@@ -12,22 +12,24 @@ template
         ul.nav.navbar-nav.pull-xs-right
           template(if.bind="isUserLoggedIn")
             li.nav-item
-              span Hello, ${userName}
+              a.nav-link ${'navbar.hello' | t}, ${session.getUserName()}
+            li.nav-item
+              a.nav-link(click.trigger="logout()") ${'navbar.logout' | t}
           template(if.bind="!isUserLoggedIn")
             li.nav-item
               a.nav-link(href="#/login", title.bind="'login.title' | t") ${'login.title' | t}
             li.nav-item
               a.nav-link(href="#/register", title.bind="'register.title' | t") ${'register.title' | t}
           li.nav-item
-            a.nav-link(href="#/cart")
-              i.fa.fa-shopping-cart.fa-lg
+            a.nav-link(href="#/cart", title.bind="'cart.title' | t")
+              i.fa.fa-shopping-cart.fa-lg(style="font-size: 1.9em")
 
 
-    div.row(style="display: flex; align-items: center;")
-      div.col-sm-3
-        form.form-inline
+    div.row
+      //(style="display: flex; align-items: center;")
+      div.col-md-3
           input.form-control(type="text", placeholder.bind="'navbar.search' | t")
-      div.col-sm-6.text-xs-center
-        img(src="assets/images/logo.png", style="max-height:150px")
-      div.col-sm-3
+      div.col-md-6.text-xs-center
+        img(src="assets/images/logo.png", style="height:150px; max-width:100%;")
+      div.col-md-3
 

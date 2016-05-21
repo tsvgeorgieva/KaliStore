@@ -11,9 +11,10 @@ export function configure(aurelia) {
     .standardConfiguration()
     .developmentLogging()
     .plugin('aurelia-animator-css')
-    .plugin('aurelia-validation', (config) => {
-      config.useLocale('bg-BG');
-    })
+    // .plugin('aurelia-validatejs' , (config) => {
+    //     debugger;
+    //   config.useLocale('bg-BG');
+    // })
     .plugin('aurelia-i18n', (instance) => {
       // adapt options to your needs (see http://i18next.com/pages/doc_init.html)
       instance.setup({
@@ -57,7 +58,8 @@ export function configure(aurelia) {
     .feature('features/elements/popover')
     .feature('features/elements/select3')
     .feature('features/elements/splitter')
-    .feature('features/elements/tabs');
+    .feature('features/elements/tabs')
+    .feature('features/models');
 
   aurelia.start().then(a => a.setRoot());
 }

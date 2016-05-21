@@ -1,8 +1,8 @@
 template
-  button.btn.btn-sm(click.delegate="buttonClicked()",
+  button.btn(click.delegate="buttonClicked()",
              disabled.bind="disabled",
              title="${title | t}",
              class.bind="type")
     i.fa.fa-lg(class.bind="icon", if.bind="icon")
     span(if.bind="icon && name") &nbsp;
-    span(if.bind="name") ${name}
+    span(if.bind="name") ${name | t}
