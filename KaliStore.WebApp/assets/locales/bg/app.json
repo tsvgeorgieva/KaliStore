@@ -4,13 +4,9 @@
   },
   "login": {
     "title": "Вход",
-    "systemLogin": "Вход в системата",
-    "user": "Потребителско име",
-    "password": "Парола",
-    "login": "Вход",
-    "logout": "Изход",
-    "loggedInSuccessful": "Успешен вход в системата",
-    "loggedInUnsuccessful": "Неуспешен вход в системата"
+    "signin": "Влез",
+    "loginSuccessful": "Успешен вход в системата",
+    "loginUnsuccessful": "Неуспешен вход в системата"
   },
   "common": {
     "save": "Запис",
