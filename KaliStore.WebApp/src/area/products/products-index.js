@@ -4,15 +4,15 @@ import {inject, useView} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 
 @inject(Session, I18N)
-@useView('libs/child-router/tabs-router.html')
-//@useView('libs/child-router/navbar-router.html')
+//@useView('libs/child-router/tabs-router.html')
+@useView('libs/child-router/null-router.html')
 export class ProductsIndex extends ChildRouter {
   constructor(session, i18n) {
     super(session);
     this.i18n = i18n;
     this.navModel = [{
       route: '',
-      redirect: 'all-products'
+      redirect: 'all-products/:searchQuery'
     }, {
       route: 'all-products',
       name: 'all-products',

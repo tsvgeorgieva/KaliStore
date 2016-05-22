@@ -1,2 +1,13 @@
 template
-  h1 All Products
+  div.card-columns
+    template(repeat.for="product of products")
+        //.col-sm-3
+        div.card
+          img.card-img-top(src.bind="product.picture")
+          div.card-block
+            h4.card-title ${product.title}
+            p.card-text ${product.description}
+            base-button(on-click.call="addToCart(product)", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
+            | &nbsp;
+            a.btn.btn-info.pull-right(href="#/products/${product.id}") ${'products.details' | t}
+

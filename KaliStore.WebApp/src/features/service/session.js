@@ -4,6 +4,7 @@ import {Router} from 'aurelia-router';
 import {Logger} from './logger';
 import {UserLoggedInEvent} from './event/user-logged-in-event';
 import {UserLoggedOutEvent} from './event/user-logged-out-event';
+import {LocalStorageManager} from './local-storage-manager';
 
 const constant = {
   appData: 'appData'

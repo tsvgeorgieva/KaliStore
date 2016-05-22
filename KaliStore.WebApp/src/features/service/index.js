@@ -2,7 +2,7 @@ import {Config} from './config';
 
 export {Logger} from './logger';
 export {Session} from './session';
-
+export {LocalStorageManager} from './local-storage-manager';
 export {Http} from './http-client/http';
 export {HubFactory} from './ws/hub-factory';
 export {WS} from './ws/ws';

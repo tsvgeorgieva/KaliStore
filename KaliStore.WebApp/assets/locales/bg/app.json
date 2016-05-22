@@ -49,10 +49,12 @@
     "logout": "Изход"
   },
   "products": {
-    "allProducts": "Всички продукти"
+    "allProducts": "Всички продукти",
+    "buy" : "Купи",
+    "details" : "Детайли"
   },
   "cart": {
-    "search": "Кошница"
+    "title": "Количка"
   },
   "models":{
     "user": {

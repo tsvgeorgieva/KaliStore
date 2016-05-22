@@ -45,6 +45,7 @@ System.config({
     "hubspot/tether": "github:hubspot/tether@1.1.1",
     "jquery": "npm:jquery@2.2.0",
     "models": "features/models/index",
+    "events": "features/events/index",
     "moment": "npm:moment@2.11.2",
     "nathancahill/Split.js": "github:nathancahill/Split.js@1.0.6",
     "service": "features/service/index",

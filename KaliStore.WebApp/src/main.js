@@ -59,7 +59,8 @@ export function configure(aurelia) {
     .feature('features/elements/select3')
     .feature('features/elements/splitter')
     .feature('features/elements/tabs')
-    .feature('features/models');
+    .feature('features/models')
+    .feature('features/events');
 
   aurelia.start().then(a => a.setRoot());
 }

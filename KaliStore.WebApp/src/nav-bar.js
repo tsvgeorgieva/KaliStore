@@ -2,35 +2,38 @@ import {bindable} from 'aurelia-framework';
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Session, HttpSessionTimedOutMessage} from 'service';
-//import {Router} from 'aurelia-router';
+import {AddProductToCartEvent} from 'events';
+import {Router} from 'aurelia-router';
 import {I18N} from 'aurelia-i18n';
 import {Http, Logger} from 'service';
 import {DialogService} from 'dialog';
+import {LocalStorageManager} from 'service';
 
-@inject(Session, I18N, Http, Logger, DialogService, EventAggregator)
+@inject(Session, I18N, Http, Logger, DialogService, EventAggregator, LocalStorageManager, Router)
 export class NavBar {
   @bindable router = null;
 
-  constructor(session, i18n, http, logger, dialogService, eventAggregator) {
+  constructor(session, i18n, http, logger, dialogService, eventAggregator, localStorageManager, router) {
     this.session = session;
-    //this.router = router;
+    this.router = router;
     this.i18n = i18n;
     this.http = http;
     this.logger = logger;
     this.dialogService = dialogService;
+    this.localStorageManager = localStorageManager;
+    
+    this.searchQuery = '';
 
-    this.hasFocus = true;
-    this.searchTerm = undefined;
-
-    this.label = {
-      logout: this.i18n.tr('navBar.logout')
-    };
-
-    this.reminders = [];
+    this.cartProducts = this.localStorageManager.get('products') || [];
+    this.cartProductsCount = this.cartProducts.length;
 
     eventAggregator.subscribe(HttpSessionTimedOutMessage, function () {
       this.logout();
     }.bind(this));
+
+    eventAggregator.subscribe(AddProductToCartEvent, (event) => {
+      this.addToCart(event.product, event.quantity);
+    });
 
     window.navbar = this;
   }
@@ -44,12 +47,7 @@ export class NavBar {
   }
 
   search() {
-    throw new Error('not implemented: ' + this.searchTerm);
-  }
-
-  get userSettingsUrl() {
-    let userId = Number(this.session.getUserClaim('userId'));
-    return `#/administration/employee/${userId}/info`;
+    this.router.navigate('#/products/all-products/' + this.searchQuery);
   }
 
   hoverSettings(isHovered) {
@@ -67,6 +65,13 @@ export class NavBar {
   logout() {
     this.session.logoutUser();
     //this.router.navigate('login');
+  }
+
+  addToCart(product, quantity) {
+    this.cartProductsCount += quantity;
+    this.cartProducts.push(product);
+
+    this.localStorageManager.save('products', this.cartProducts);
   }
 }
 
