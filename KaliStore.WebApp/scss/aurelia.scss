@@ -2,7 +2,7 @@
  * Base structure
  */
 body {
-  background: #262626;
+  //background: #ffcccc;
   margin: 0;
 }
 
@@ -25,13 +25,13 @@ body {
 .splash .message {
   font-size: 72px;
   line-height: 72px;
-  color: rgb(222, 222, 212);
-  text-shadow: rgba(255, 255, 255, 0.5) 0 0 15px;
-  text-transform: uppercase;
+  //color: rgb(222, 222, 212);
+  text-shadow: black 0 0 5px;
+  //text-transform: uppercase;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.splash .fa-spinner {
+.splash .fa {
   text-align: center;
   display: inline-block;
   font-size: 72px;

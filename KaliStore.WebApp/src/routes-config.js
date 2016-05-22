@@ -11,11 +11,11 @@ export class RoutesConfig {
   getRoutes() {
     return [{
       route: '',
-      redirect: 'home'
+      redirect: 'products'
     }, {
-      route: 'home',
-      name: 'home',
-      moduleId: './area/home/home',
+      route: 'products',
+      name: 'products',
+      moduleId: './area/products/products-index',
       nav: true,
       title: this.i18n.tr('home.title')
     }, {
@@ -30,6 +30,24 @@ export class RoutesConfig {
       moduleId: './area/contacts/contacts',
       nav: true,
       title: this.i18n.tr('contacts.title')
+    }, {
+      route: 'login',
+      name: 'login',
+      moduleId: './area/login/login',
+      nav: false,
+      title: this.i18n.tr('login.title')
+    }, {
+      route: 'register',
+      name: 'register',
+      moduleId: './area/register/register',
+      nav: false,
+      title: this.i18n.tr('register.title')
+    }, {
+      route: 'cart',
+      name: 'cart',
+      moduleId: './area/cart/cart',
+      nav: false,
+      title: this.i18n.tr('cart.title')
     }];
   }
 }
