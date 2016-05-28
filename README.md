@@ -13,6 +13,7 @@ You should have Ruby installed and added to yout PATH
 2. Run the given commands bellow in the same order in the console (you should have fulfilled the Prerequisites first)
 
     --- Initial commands ---
+
         1. Run once
 
             gem install sass

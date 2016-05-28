@@ -43,6 +43,8 @@ export class App {
         model: {errors: model.errors}
       });
     }.bind(this));
+    
+    
   }
 
   configureRouter(config, router) {

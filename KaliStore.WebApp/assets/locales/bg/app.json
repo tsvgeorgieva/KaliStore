@@ -50,8 +50,11 @@
   },
   "products": {
     "allProducts": "Всички продукти",
-    "buy" : "Купи",
-    "details" : "Детайли"
+    "buy": "Купи",
+    "details": "Детайли",
+    "size": "Размер",
+    "materials": "Материали",
+    "price": "Цена"
   },
   "cart": {
     "title": "Количка"

@@ -1,2 +1,18 @@
 template
-  h1 Product ${productId}
+  div.row
+    div.col-sm-6
+      img(src.bind="product.picture")
+    div.col-sm-6
+      div
+        h1 Product ${productId}
+        div
+          label ${'products.size' | t}:
+          text ${productSize}
+        div
+          label ${'products.materials' | t}:
+          text ${productMaterials}
+        div
+          label ${'products.price' | t}:
+          text ${productPrice}
+      p ${productDescription}
+      base-button(on-click.call="addToCart(product)", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
