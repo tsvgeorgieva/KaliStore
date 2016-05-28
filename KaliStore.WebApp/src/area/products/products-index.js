@@ -12,7 +12,7 @@ export class ProductsIndex extends ChildRouter {
     this.i18n = i18n;
     this.navModel = [{
       route: '',
-      redirect: 'all-products/:searchQuery'
+      redirect: 'all-products'
     }, {
       route: 'all-products',
       name: 'all-products',

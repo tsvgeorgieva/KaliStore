@@ -6,19 +6,19 @@ body {
   margin: 0;
 }
 
-.page-host {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 184px;
-  bottom: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+//.page-host {
+//  position: absolute;
+//  left: 0;
+//  right: 0;
+//  top: 136px;
+//  bottom: 0;
+//  overflow-x: hidden;
+//  overflow-y: auto;
+//}
 
 @media only screen and (max-width: 768px) {
   .page-host {
-    top: 209px;
+    top: 149px;
   }
 }
 
@@ -49,17 +49,17 @@ sup > i.required-asterisk {
   font-size: 8px;
 }
 
-.content-host {
-  position: relative;
-  height: 100%;
-  bottom: 0;
-  overflow-y: auto;
-  padding-top: 3px;
-}
+//.content-host {
+//  position: relative;
+//  height: 100%;
+//  bottom: 0;
+//  overflow-y: auto;
+//  padding-top: 3px;
+//}
 
 router-view {
   display: block;
-  height: 100%;
+  //height: 100%;
 }
 
 

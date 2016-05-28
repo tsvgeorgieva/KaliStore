@@ -1,5 +1,5 @@
 template
-  nav.navbar.navbar-fixed-top.navbar-light.bg-faded
+  nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
     div.row
       div.col-sm-12
         ul.nav.navbar-nav
@@ -8,7 +8,20 @@ template
               a.nav-link(href.bind="navModel.href", title.bind="navModel.title")
                 i.fa(class.bind="navModel.config.favicon", if.bind="navModel.config.favicon") &nbsp;
                 span(if.bind="!navModel.config.iconOnly") ${navModel.title}
+          li.nav-item
+            form(submit.trigger="search()")
+              div.input-group
+                input.form-control(type="text", placeholder.bind="'navbar.search' | t", value.bind="searchQuery")
+                span.input-group-btn
+                  button.btn.btn-secondary(click.trigger="search()")
+                    i.fa.fa-search
         ul.nav.navbar-nav.pull-xs-right
+          li.nav-item
+            a.nav-link(href="#/cart", title.bind="'cart.title' | t")
+              i.fa.fa-shopping-cart.fa-lg(style="font-size: 1.9em; color: white")
+              //, class="${cartProductsCount > 0 ? 'text-primary': ''}")
+              | &nbsp;
+              span.label.label-pill(style="font-size: 1em", class="${cartProductsCount > 0 ? 'label-info': 'label-default'}") ${cartProductsCount}
           template(if.bind="isUserLoggedIn")
             li.nav-item
               a.nav-link ${'navbar.hello' | t}, ${session.getUserName()}
@@ -19,23 +32,49 @@ template
               a.nav-link(href="#/login", title.bind="'login.title' | t") ${'login.title' | t}
             li.nav-item
               a.nav-link(href="#/register", title.bind="'register.title' | t") ${'register.title' | t}
-
-
+  // placeholder for the fixed top navbar
+  nav.navbar.navbar-light.bg-faded
     div.row
-      div.col-md-3.text-sm-center
-        form.form-inline(submit.trigger="search()")
-          div.input-group
-            input.form-control(type="text", placeholder.bind="'navbar.search' | t", value.bind="searchQuery")
-            span.input-group-btn
-              button.btn.btn-secondary(click.trigger="search()")
-                i.fa.fa-search
-      div.col-md-6.text-xs-center
-        img(src="assets/images/logo.png", style="height:150px; max-width:100%;")
-      div.col-md-3.text-sm-center
-        div
-          a(href="#/cart", title.bind="'cart.title' | t")
-            i.fa.fa-shopping-cart.fa-lg(style="font-size: 1.9em", class="${cartProductsCount > 0 ? 'text-primary': ''}")
-            | &nbsp;
-            span.label.label-pill(style="font-size: 1em", class="${cartProductsCount > 0 ? 'label-primary': 'label-default'}") ${cartProductsCount}
+      div.col-xs-12
+        ul.nav.navbar-nav
+          li.nav-item
+            a.nav-link pesho
+  div.container
+    nav.navbar.navbar-light.bg-faded
+      div.row
+        div.col-md-3.text-sm-center
+
+        div.col-md-6.text-xs-center
+          img(src="assets/images/logo.png", style="height:100px; max-width:100%;")
+        div.col-md-3.text-sm-center
+          div
+      div.row
+        div.col-xs-12
+          ul.nav.navbar-nav
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+            li.nav-item
+              a.nav-link Картички
+
 
 

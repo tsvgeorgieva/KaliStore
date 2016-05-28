@@ -1,13 +1,22 @@
 template
-  div.card-columns
+  div.row
     template(repeat.for="product of products")
-        //.col-sm-3
+      div.col-sm-6.col-md-4.col-lg-3
         div.card
-          img.card-img-top(src.bind="product.picture")
+          a(href="#/products/${product.id}")
+            img.card-img-top.img-fluid(src.bind="product.picture")
           div.card-block
-            h4.card-title ${product.title}
-            p.card-text ${product.description}
+            h4.card-title
+              a(href="#/products/${product.id}") ${product.title}
+            div
+              span ${product.rating.toFixed(1)}
+              | &nbsp;
+              span.rating
+                span(repeat.for="rateValue of ratings",
+                class.bind="product.rating.toFixed(0) >= rateValue ? 'filled-star star' : 'star'")
+            div.card-text ${product.price | sumFormat}
             base-button(on-click.call="addToCart(product)", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
-            | &nbsp;
-            a.btn.btn-info.pull-right(href="#/products/${product.id}") ${'products.details' | t}
+          div.card-footer
+
+            a.btn.btn-primary(href="#/products/${product.id}") ${'products.details' | t}
 

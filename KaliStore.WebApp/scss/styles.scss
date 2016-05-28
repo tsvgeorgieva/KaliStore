@@ -4,25 +4,6 @@
 @import "animate";
 @import "aurelia";
 
-// todo: check this!
-// ==Reminders==
-@keyframes blink {
-  0% { background-color: white; color: black;}
-  100% { background-color: green; color:white;}
-}
-@-webkit-keyframes blink {
-  0% { background-color: white; color: black;}
-  100% {background-color: green; color:white; }
-}
-.blink {
-  -webkit-animation: blink 1s linear infinite;
-  -moz-animation: blink 1s linear infinite;
-  -ms-animation: blink 1s linear infinite;
-  -o-animation: blink 1s linear infinite;
-  animation: blink 1s linear infinite;
-}
-// ============
-
 // ==Popover==
 .popover .popover-content > div {
   display: block !important;
@@ -33,6 +14,45 @@
 #toast-container.toast-top-right,
 #toast-container.toast-top-left,
 #toast-container.toast-top-full-width {
-  top: 40px;
+  //top: 40px;
 }
 // ===========
+
+
+//====== Rating
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 15px;
+}
+
+.rating span.star, .rating span.filled-star {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+}
+
+.rating.rating-hover span.star:hover,
+.rating.rating-hover span.filled-star:hover {
+  cursor: pointer;
+}
+
+.rating span.star:before {
+  content: "\f006";
+  padding-right: 3px;
+  color: #777777;
+}
+
+.rating.rating-hover span.star:hover:before,
+.rating.rating-hover span.star:hover ~ span.star:before {
+  content: "\f005";
+  color: gold;
+}
+
+.rating span.filled-star:before,
+.rating.rating-hover span:hover ~ span.filled-star:before {
+  content: "\f005";
+  padding-right: 3px;
+  color: #e3cf7a;
+}

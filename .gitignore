@@ -8,3 +8,5 @@ dist/
 *.orig
 **/.sass-cache
 **/.sass-cache/*
+**/.picasaoriginals/**/*
+**/.picasa.ini
