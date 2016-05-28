@@ -27,7 +27,8 @@ export class ProductsRepository {
         name: 'Картон'
       }],
       size: "20см x 10см",
-      picture: `assets/images/kartichka1.jpg`
+      picture: `assets/images/kartichka1.jpg`,
+      category: "Картички"
     }, {
       id: 2,
       title: "Картичка с рози",
@@ -43,7 +44,8 @@ export class ProductsRepository {
         name: 'Картон'
       }],
       size: "20см x 10см",
-      picture: `assets/images/kartichka2.jpg`
+      picture: `assets/images/kartichka2.jpg`,
+      category: "Картички"
     }, {
       id: 3,
       title: "Коледна картичка с елен",
@@ -62,7 +64,8 @@ export class ProductsRepository {
         name: 'Брокат'
       }],
       size: "20см x 10см",
-      picture: `assets/images/kartichka3.jpg`
+      picture: `assets/images/kartichka3.jpg`,
+      category: "Картички"
     }, {
       id: 4,
       title: "Детска торта от картон",
@@ -84,7 +87,8 @@ export class ProductsRepository {
         name: 'Панделка'
       }],
       size: "40см x 40см x 20см",
-      picture: `assets/images/torta.jpg`
+      picture: `assets/images/torta.jpg`,
+      category: "Торти"
     }, {
       id: 5,
       title: "Детска диадема",
@@ -103,7 +107,8 @@ export class ProductsRepository {
         name: 'Панделка'
       }],
       size: "стандартен",
-      picture: `assets/images/diadema.jpg`
+      picture: `assets/images/diadema.jpg`,
+      category: "Аксесоари"
     }];
 
     this.localStorageManager.save("products", this.products);

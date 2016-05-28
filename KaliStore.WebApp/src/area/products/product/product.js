@@ -12,7 +12,7 @@ export class Product {
   
   activate(routeParams) {
     this.product = this.productsRepository.get(parseInt(routeParams.productId));
-    this.product.materials = this.product.materials.map(m => m.name).join(', ')
+    this.product.materialsList = this.product.materials.map(m => m.name).join(', ')
   }
 
   addToCart() {

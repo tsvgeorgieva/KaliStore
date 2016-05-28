@@ -8,12 +8,14 @@ import {I18N} from 'aurelia-i18n';
 import {Http, Logger} from 'service';
 import {DialogService} from 'dialog';
 import {LocalStorageManager} from 'service';
+import {CategoriesRepository} from 'repository';
 
-@inject(Session, I18N, Http, Logger, DialogService, EventAggregator, LocalStorageManager, Router)
+@inject(Session, I18N, Http, Logger, DialogService, EventAggregator, LocalStorageManager, Router, CategoriesRepository)
 export class NavBar {
   @bindable router = null;
+  categories = [];
 
-  constructor(session, i18n, http, logger, dialogService, eventAggregator, localStorageManager, router) {
+  constructor(session, i18n, http, logger, dialogService, eventAggregator, localStorageManager, router, categoriesRepository) {
     this.session = session;
     this.router = router;
     this.i18n = i18n;
@@ -21,6 +23,8 @@ export class NavBar {
     this.logger = logger;
     this.dialogService = dialogService;
     this.localStorageManager = localStorageManager;
+    this.categoriesRepository = categoriesRepository;
+    this.categories = this.categoriesRepository.getAll();
     
     this.searchQuery = '';
 

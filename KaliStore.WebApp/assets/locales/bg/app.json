@@ -54,7 +54,8 @@
     "details": "Детайли",
     "size": "Размер",
     "materials": "Материали",
-    "price": "Цена"
+    "price": "Цена",
+    "category": "Категория"
   },
   "cart": {
     "title": "Количка"

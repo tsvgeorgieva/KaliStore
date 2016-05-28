@@ -51,30 +51,6 @@ template
       div.row
         div.col-xs-12
           ul.nav.navbar-nav
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-            li.nav-item
-              a.nav-link Картички
-
-
-
+            template(repeat.for="category of categories")
+              li.nav-item
+                a.nav-link ${category.title}
