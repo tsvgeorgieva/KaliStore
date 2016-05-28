@@ -18,5 +18,8 @@ template
           div
             label.font-weight-bold ${'products.price' | t}:
             text ${product.price | sumFormat}
+        hr
+        div.card-block
           p ${product.description}
+        div.card-footer
           base-button(on-click.call="addToCart()", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
