@@ -24,7 +24,7 @@ export class NavBar {
     
     this.searchQuery = '';
 
-    this.cartProducts = this.localStorageManager.get('products') || [];
+    this.cartProducts = this.localStorageManager.get('cartProducts') || [];
     this.cartProductsCount = this.cartProducts.length;
 
     eventAggregator.subscribe(HttpSessionTimedOutMessage, function () {
@@ -71,7 +71,7 @@ export class NavBar {
     this.cartProductsCount += quantity;
     this.cartProducts.push(product);
 
-    this.localStorageManager.save('products', this.cartProducts);
+    this.localStorageManager.save('cartProducts', this.cartProducts);
   }
 }
 
