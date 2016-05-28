@@ -1,18 +1,22 @@
 template
   div.row
-    div.col-sm-6
+    div.col-sm-5
       img(src.bind="product.picture", style="max-width: 400px;")
-    div.col-sm-6
-      div
-        h1 ${product.title}
-        div
-          label ${'products.size' | t}:
-          text ${product.size}
-        div
-          label ${'products.materials' | t}:
-          text ${product.materials}
-        div
-          label ${'products.price' | t}:
-          text ${product.price | sumFormat}
-      p ${product.description}
-      base-button(on-click.call="addToCart()", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
+    div.col-sm-7
+      div.card
+        h3.card-header ${product.title}
+        div.card-block
+          div
+            label.font-weight-bold ${'products.size' | t}:
+            text ${product.size}
+          div
+            label.font-weight-bold ${'products.materials' | t}:
+            text ${product.materialsList}
+          div
+            label.font-weight-bold ${'products.category' | t}:
+            text ${product.category}
+          div
+            label.font-weight-bold ${'products.price' | t}:
+            text ${product.price | sumFormat}
+          p ${product.description}
+          base-button(on-click.call="addToCart()", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
