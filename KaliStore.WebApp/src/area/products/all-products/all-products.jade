@@ -15,7 +15,6 @@ template
                 span(repeat.for="rateValue of ratings",
                 class.bind="product.rating.toFixed(0) >= rateValue ? 'filled-star star' : 'star'")
             div.card-text ${product.price | sumFormat}
-            base-button(on-click.call="addToCart(product)", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
           div.card-footer
 
             a.btn.btn-primary(href="#/products/${product.id}") ${'products.details' | t}
