@@ -14,10 +14,9 @@ export class ProductsIndex extends ChildRouter {
       route: '',
       redirect: 'all-products'
     }, {
-      route: 'all-products',
+      route: ['all-products', 'all-products/:searchQuery'],
       name: 'all-products',
       moduleId: './all-products/all-products',
-      title: this.i18n.tr('products.allProducts'),
       nav: false
     }, {
       route: ':productId',
