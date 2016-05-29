@@ -9,13 +9,9 @@ template
             h4.card-title
               a(href="#/products/${product.id}") ${product.title}
             div
-              span ${product.rating.toFixed(1)}
-              | &nbsp;
-              span.rating
-                span(repeat.for="rateValue of ratings",
-                class.bind="product.rating.toFixed(0) >= rateValue ? 'filled-star star' : 'star'")
+              //rating(rating.bind="product.rating", rate.trigger="rate(product, $event.detail.rateValue)")
+              rating(rating.bind="product.rating", readonly.bind="true")
             div.card-text ${product.price | sumFormat}
           div.card-footer
-
             a.btn.btn-primary(href="#/products/${product.id}") ${'products.details' | t}
 

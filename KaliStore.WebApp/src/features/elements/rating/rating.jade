@@ -1,0 +1,8 @@
+template
+  require(from="./rating.css")
+  span
+    | ${rating.toFixed(1)}
+    | &nbsp;
+    span.rating(class.bind="readonly ? '' : 'rating-hover'")
+      template(repeat.for="rateValue of ratings")
+        span.star(class.bind="rating.toFixed(0) >= rateValue ? 'filled-star' : ''", click.trigger="rate(rateValue)")
