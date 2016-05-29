@@ -31,6 +31,9 @@ export class ProductsRepository {
     return this.products.filter(p => p.title.toLocaleLowerCase().indexOf(lowerCaseQuery) > -1);
   }
 
+  getByCategory(categoryId) {
+    return this.products.filter(p => p.category.id === categoryId);
+  }
 }
 
 const initialProducts = [{

@@ -53,4 +53,4 @@ template
           ul.nav.navbar-nav
             template(repeat.for="category of categories")
               li.nav-item
-                a.nav-link ${category.title}
+                a.nav-link(href="#/products/category/${category.id}") ${category.title}

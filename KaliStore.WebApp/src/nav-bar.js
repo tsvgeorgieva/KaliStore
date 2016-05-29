@@ -51,7 +51,7 @@ export class NavBar {
   }
 
   search() {
-    this.router.navigate('#/products/all-products/' + this.searchQuery);
+    this.router.navigate('#/products/search/' + this.searchQuery);
   }
 
   hoverSettings(isHovered) {
