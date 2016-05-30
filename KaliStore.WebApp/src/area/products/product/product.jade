@@ -4,7 +4,7 @@ template
       img(src.bind="product.picture", style="max-width: 400px;")
     div.col-sm-7
       div.card
-        h3.card-header ${product.title}
+        h4.card-header ${product.title}
         div.card-block
           div
             label.font-weight-bold ${'products.size' | t}:
@@ -14,7 +14,7 @@ template
             text ${product.materialsList}
           div
             label.font-weight-bold ${'products.category' | t}:
-            text ${product.category}
+            text ${product.category.title}
           div
             label.font-weight-bold ${'products.price' | t}:
             text ${product.price | sumFormat}
@@ -23,3 +23,14 @@ template
           p ${product.description}
         div.card-footer
           base-button(on-click.call="addToCart()", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
+  div.m-t-2
+    h3 ${'products.similar' | t}:
+    div.row.m-t-2
+      template(repeat.for="similarProduct of similarProducts")
+        div.col-sm-2
+          div.card
+            a(href="#/products/${similarProduct.id}")
+              img.card-img-top.img-fluid(src.bind="similarProduct.picture")
+            div.card-block
+              h5.card-title
+                a(href="#/products/${similarProduct.id}") ${similarProduct.title}

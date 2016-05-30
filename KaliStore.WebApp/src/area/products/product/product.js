@@ -5,6 +5,8 @@ import {AddProductToCartEvent} from 'events';
 
 @inject(EventAggregator, ProductsRepository)
 export class Product {
+  similarProducts = [];
+
   constructor(eventAggregator, productsRepository) {
     this.eventAggregator = eventAggregator;
     this.productsRepository = productsRepository;
@@ -12,10 +14,15 @@ export class Product {
   
   activate(routeParams) {
     this.product = this.productsRepository.get(parseInt(routeParams.productId));
-    this.product.materialsList = this.product.materials.map(m => m.name).join(', ')
+    this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
+    this.setSimilarProducts();
   }
 
   addToCart() {
     this.eventAggregator.publish(new AddProductToCartEvent(this.product, 1));
+  }
+
+  setSimilarProducts() {
+    this.similarProducts = this.productsRepository.getByCategory(this.product.category.id).filter(p => p.id !== this.product.id);
   }
 }

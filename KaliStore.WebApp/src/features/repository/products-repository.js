@@ -55,7 +55,8 @@ const initialProducts = [{
   category: {
     id: 1,
     title: "Картички"
-  }
+  },
+  daysToMake: 2
 }, {
   id: 2,
   title: "Картичка с рози",
@@ -75,7 +76,8 @@ const initialProducts = [{
   category: {
     id: 1,
     title: "Картички"
-  }
+  },
+  daysToMake: 2
 }, {
   id: 3,
   title: "Коледна картичка с елен",
@@ -98,7 +100,8 @@ const initialProducts = [{
   category: {
     id: 1,
     title: "Картички"
-  }
+  },
+  daysToMake: 2
 }, {
   id: 4,
   title: "Детска торта от картон",
@@ -124,7 +127,8 @@ const initialProducts = [{
   category: {
     id: 2,
     title: "Торти"
-  }
+  },
+  daysToMake: 5
 }, {
   id: 5,
   title: "Детска диадема",
@@ -147,5 +151,6 @@ const initialProducts = [{
   category: {
     id: 3,
     title: "Аксесоари"
-  }
+  },
+  daysToMake: 3
 }];
