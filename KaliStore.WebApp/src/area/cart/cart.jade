@@ -1,2 +1,22 @@
 template
-  h1 Cart
+  h1 ${'cart.title' | t}
+  div.row
+    div.col-lg-8.col-md-12
+      ul.list-group
+        template(repeat.for="cartProduct of cartProducts")
+          li.list-group-item
+            div.row
+              div.col-sm-5
+                a(href="#/products/${cartProduct.product.id}")
+                  img.card-img-top.img-fluid(src.bind="cartProduct.product.picture", style="width: auto; height: 10em")
+              div.col-sm-7
+                h4
+                  a(href="#/products/${cartProduct.product.id}") ${cartProduct.product.title}
+                div
+                  label.font-weight-bold ${'products.daysToMake' | t}:
+                  text ${cartProduct.product.daysToMake} ${'products.days' | t}
+                div(style="width: 20%;")
+                  input.form-control(type="number", min="1", max="30", value.bind="cartProduct.quantity")
+                label.lead ${cartProduct.product.price | sumFormat}
+
+    div.col-lg-4.col-md-12

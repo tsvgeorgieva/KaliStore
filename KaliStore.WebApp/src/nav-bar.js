@@ -9,13 +9,14 @@ import {Http, Logger} from 'service';
 import {DialogService} from 'dialog';
 import {LocalStorageManager} from 'service';
 import {CategoriesRepository} from 'repository';
+import {CartRepository} from 'repository';
 
-@inject(Session, I18N, Http, Logger, DialogService, EventAggregator, LocalStorageManager, Router, CategoriesRepository)
+@inject(Session, I18N, Http, Logger, DialogService, EventAggregator, LocalStorageManager, Router, CategoriesRepository, CartRepository)
 export class NavBar {
   @bindable router = null;
   categories = [];
 
-  constructor(session, i18n, http, logger, dialogService, eventAggregator, localStorageManager, router, categoriesRepository) {
+  constructor(session, i18n, http, logger, dialogService, eventAggregator, localStorageManager, router, categoriesRepository, cartRepository) {
     this.session = session;
     this.router = router;
     this.i18n = i18n;
@@ -25,6 +26,7 @@ export class NavBar {
     this.localStorageManager = localStorageManager;
     this.categoriesRepository = categoriesRepository;
     this.categories = this.categoriesRepository.getAll();
+    this.cartRepository = cartRepository;
     
     this.searchQuery = '';
 
@@ -72,10 +74,11 @@ export class NavBar {
   }
 
   addToCart(product, quantity) {
+    //TODO: get this from cart repository
     this.cartProductsCount += quantity;
     this.cartProducts.push(product);
 
-    this.localStorageManager.save('cartProducts', this.cartProducts);
+    this.cartRepository.add(product.id, quantity);
   }
 }
 

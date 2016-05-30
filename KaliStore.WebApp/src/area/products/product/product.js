@@ -5,6 +5,8 @@ import {AddProductToCartEvent} from 'events';
 
 @inject(EventAggregator, ProductsRepository)
 export class Product {
+  similarProducts = [];
+
   constructor(eventAggregator, productsRepository) {
     this.eventAggregator = eventAggregator;
     this.productsRepository = productsRepository;
