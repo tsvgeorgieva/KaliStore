@@ -23,3 +23,13 @@ template
           p ${product.description}
         div.card-footer
           base-button(on-click.call="addToCart()", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
+  div
+    h3 ${'products.similar' | t}:
+    div.row
+      template(repeat.for="similarProduct of similarProducts")
+        div.col-sm-2.card
+          a.card-block(href="#/products/${similarProduct.id}")
+            img.card-img-top.img-fluid(src.bind="similarProduct.picture")
+          div.card-block
+            h4.card-title
+              a(href="#/products/${similarProduct.id}") ${similarProduct.title}
