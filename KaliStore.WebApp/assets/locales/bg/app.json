@@ -1,6 +1,6 @@
 {
   "config": {
-    "pageTitle": "Page Title"
+    "pageTitle": "Нещо Красиво"
   },
   "login": {
     "title": "Вход",
@@ -52,6 +52,7 @@
     "allProducts": "Всички продукти",
     "buy": "Купи",
     "details": "Детайли",
+    "detailsForProduct": "Детайли за продукт",
     "size": "Размер",
     "materials": "Материали",
     "price": "Цена",

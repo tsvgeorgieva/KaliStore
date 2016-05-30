@@ -17,11 +17,13 @@ export class ProductsIndex extends ChildRouter {
       route: ['all-products', 'search/:searchQuery', 'category/:categoryId'],
       name: 'all-products',
       moduleId: './all-products/all-products',
+      title: this.i18n.tr('products.allProducts'),
       nav: false
     }, {
       route: ':productId',
       name: 'product',
-      moduleId: './product/product'
+      moduleId: './product/product',
+      title: this.i18n.tr('products.detailsForProduct')
     }];
   }
 }
