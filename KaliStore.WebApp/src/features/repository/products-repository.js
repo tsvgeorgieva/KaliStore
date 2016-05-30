@@ -38,9 +38,9 @@ export class ProductsRepository {
 
 const initialProducts = [{
   id: 1,
-  title: "Пролетна картичка",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-  "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  title: 'Пролетна картичка',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   price: {
     amount: 10,
     currency: 'BGN'
@@ -50,18 +50,18 @@ const initialProducts = [{
     id: 1,
     name: 'Картон'
   }],
-  size: "20см x 10см",
+  size: '20см x 10см',
   picture: `assets/images/kartichka1.jpg`,
   category: {
     id: 1,
-    title: "Картички"
+    title: 'Картички'
   },
   daysToMake: 2
 }, {
   id: 2,
-  title: "Картичка с рози",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-  "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  title: 'Картичка с рози',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   price: {
     amount: 10,
     currency: 'BGN'
@@ -71,18 +71,18 @@ const initialProducts = [{
     id: 1,
     name: 'Картон'
   }],
-  size: "20см x 10см",
+  size: '20см x 10см',
   picture: `assets/images/kartichka2.jpg`,
   category: {
     id: 1,
-    title: "Картички"
+    title: 'Картички'
   },
   daysToMake: 2
 }, {
   id: 3,
-  title: "Коледна картичка с елен",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-  "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  title: 'Коледна картичка с елен',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   price: {
     amount: 10,
     currency: 'BGN'
@@ -95,18 +95,18 @@ const initialProducts = [{
     id: 2,
     name: 'Брокат'
   }],
-  size: "20см x 10см",
+  size: '20см x 10см',
   picture: `assets/images/kartichka3.jpg`,
   category: {
     id: 1,
-    title: "Картички"
+    title: 'Картички'
   },
   daysToMake: 2
 }, {
   id: 4,
-  title: "Детска торта от картон",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-  "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  title: 'Детска торта от картон',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   price: {
     amount: 30,
     currency: 'BGN'
@@ -122,18 +122,18 @@ const initialProducts = [{
     id: 4,
     name: 'Панделка'
   }],
-  size: "40см x 40см x 20см",
+  size: '40см x 40см x 20см',
   picture: `assets/images/torta.jpg`,
   category: {
     id: 2,
-    title: "Торти"
+    title: 'Торти'
   },
   daysToMake: 5
 }, {
   id: 5,
-  title: "Детска диадема",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-  "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  title: 'Детска диадема',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   price: {
     amount: 8,
     currency: 'BGN'
@@ -146,11 +146,11 @@ const initialProducts = [{
     id: 4,
     name: 'Панделка'
   }],
-  size: "стандартен",
+  size: 'стандартен',
   picture: `assets/images/diadema.jpg`,
   category: {
     id: 3,
-    title: "Аксесоари"
+    title: 'Аксесоари'
   },
   daysToMake: 3
 }];
