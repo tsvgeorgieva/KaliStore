@@ -62,6 +62,7 @@ export function configure(aurelia) {
     .feature('features/elements/rating')
     .feature('features/models')
     .feature('features/events')
+    .feature('features/enum')
     .feature('features/repository');
 
   aurelia.start().then(a => a.setRoot());

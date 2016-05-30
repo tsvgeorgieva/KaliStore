@@ -1,21 +1,16 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {Router} from 'aurelia-router';
-import {Logger} from './logger';
 import {UserLoggedInEvent} from './event/user-logged-in-event';
 import {UserLoggedOutEvent} from './event/user-logged-out-event';
-import {LocalStorageManager} from './local-storage-manager';
+import {UsersRepository} from 'repository';
+import {localStorageManager} from './local-storage-manager';
 
-const constant = {
-  appData: 'appData'
-};
+const currentUserKey = 'currentUser';
 
-@inject(Router, Logger, EventAggregator)
+@inject(EventAggregator)
 export class Session {
 
-  constructor(router, logger, eventAggregator) {
-    this.router = router;
-    this.logger = logger;
+  constructor(eventAggregator) {
     this.eventAggregator = eventAggregator;
 
     this.initUserData();
@@ -26,9 +21,7 @@ export class Session {
   }
 
   initUserData() {
-    this.userName = null;
-    this.userClaims = [];
-    this.userRoles = [];
+    this.user = {};
     this.userAccessRights = [];
 
     this.isLoggedIn = false;
@@ -36,17 +29,12 @@ export class Session {
   }
 
   loginUser(data) {
-    // todo: check data params
-    if (data) {
-      localStorage[constant.appData] = JSON.stringify(data);
-      this.restoreData();
-    } else {
-      throw new Error('Argument Exception!');
-    }
+    localStorageManager.save(currentUserKey, data);
+    this.restoreData();
   }
 
   logoutUser() {
-    localStorage.clear();
+    localStorageManager.clear(currentUserKey);
     this.initUserData();
     this.eventAggregator.publish(new UserLoggedOutEvent());
   }
@@ -61,61 +49,33 @@ export class Session {
     });
   }
 
-  userHasRole(requredRole) {
-    return this.userRoles[requredRole] === true;
-  }
-
-  userHasAtLeastOneRole(requiredRoles) {
-    return requiredRoles.some(requiredRole => {
-      return this.userHasRole(requiredRole);
-    });
-  }
-
-  getUserClaim(claimType) {
-    return this.userClaims[claimType];
-  }
-
   isUserLoggedIn() {
     return this.isLoggedIn === true;
   }
 
   userRemembered() {
-    let isInLocalStorage = localStorage[constant.appData] !== undefined;
-    return isInLocalStorage;
+    return localStorageManager.has(currentUserKey);
   }
 
-  restoreData() {
-    const data = JSON.parse(localStorage[constant.appData]);
+  restoreData(data) {
+    data = data || localStorageManager.get(currentUserKey);
 
-    this.userName = data.userName;
-    // this.userClaims = data.userClaims.reduce(function(hash, userClaim) {
-    //   hash[userClaim.type] = userClaim.value;
-    //   return hash;
-    // }, {});
-    // this.userRoles = data.userRoles.reduce((hash, userRole) => {
-    //   hash[userRole] = true;
-    //   return hash;
-    // }, {});
-    // this.userAccessRights = data.userAccessRights.reduce((hash, accessRight) => {
-    //   hash[accessRight] = true;
-    //   return hash;
-    // }, {});
-
-    // todo: delete
-    this.userAccessRights['access'] = true;
+    this.user = data;
+    this.userAccessRights = this._reduceToHash(data.userAccessRights);
 
     this.isLoggedIn = true;
-    // this.token = data.token;
-    // this.eventAggregator.publish(new UserLoggedInEvent(data.token));
-  }
-
-  rememberedToken() {
-    const token = JSON.parse(localStorage[constant.appData]).token;
-    return token;
+    this.eventAggregator.publish(new UserLoggedInEvent());
   }
 
   getUserName() {
-    return this.userName;
+    return this.user.userName;
+  }
+  
+  _reduceToHash(array){
+    return array.reduce((hash, item) => {
+      hash[item] = true;
+      return hash;
+    }, {});
   }
 }
 

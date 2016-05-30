@@ -4,7 +4,7 @@ template
       div.col-sm-12
         ul.nav.navbar-nav
           template(repeat.for="navModel of router.navigation")
-            li.nav-item(class="${ navModel.isActive ? 'active' : '' }")
+            li.nav-item(if.bind="checkAccess(navModel)", class="${ navModel.isActive ? 'active' : '' }")
               a.nav-link(href.bind="navModel.href", title.bind="navModel.title")
                 i.fa(class.bind="navModel.config.favicon", if.bind="navModel.config.favicon") &nbsp;
                 span(if.bind="!navModel.config.iconOnly") ${navModel.title}

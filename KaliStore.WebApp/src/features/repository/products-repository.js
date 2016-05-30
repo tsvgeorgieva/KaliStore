@@ -1,13 +1,10 @@
-import {LocalStorageManager} from 'service';
-import {inject} from 'aurelia-framework';
+import {localStorageManager} from 'service';
 
 const productsKey = 'products';
 
-@inject(LocalStorageManager)
 export class ProductsRepository {
-  constructor(localStorageManager) {
-    this.localStorageManager = localStorageManager;
-    this.products = this.localStorageManager.get(productsKey);
+  constructor() {
+    this.products = localStorageManager.get(productsKey);
     if (this.products === undefined) {
       this.initialize();
     }
@@ -15,7 +12,7 @@ export class ProductsRepository {
 
   initialize() {
     this.products = initialProducts;
-    this.localStorageManager.save(productsKey, this.products);
+    localStorageManager.save(productsKey, this.products);
   }
 
   get(id) {

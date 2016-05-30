@@ -1,47 +1,32 @@
-import {bindable} from 'aurelia-framework';
-import {inject} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {Session, HttpSessionTimedOutMessage} from 'service';
-import {AddProductToCartEvent} from 'events';
+import {bindable, inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {I18N} from 'aurelia-i18n';
-import {Http, Logger} from 'service';
-import {DialogService} from 'dialog';
-import {LocalStorageManager} from 'service';
-import {CategoriesRepository} from 'repository';
-import {CartRepository} from 'repository';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {Session, HttpSessionTimedOutMessage, localStorageManager} from 'service';
+import {AddProductToCartEvent} from 'events';
+import {CategoriesRepository, CartRepository} from 'repository';
 
-@inject(Session, I18N, Http, Logger, DialogService, EventAggregator, LocalStorageManager, Router, CategoriesRepository, CartRepository)
+@inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository)
 export class NavBar {
   @bindable router = null;
   categories = [];
+  searchQuery = '';
 
-  constructor(session, i18n, http, logger, dialogService, eventAggregator, localStorageManager, router, categoriesRepository, cartRepository) {
+  constructor(session, eventAggregator, router, categoriesRepository, cartRepository) {
     this.session = session;
     this.router = router;
-    this.i18n = i18n;
-    this.http = http;
-    this.logger = logger;
-    this.dialogService = dialogService;
-    this.localStorageManager = localStorageManager;
     this.categoriesRepository = categoriesRepository;
-    this.categories = this.categoriesRepository.getAll();
     this.cartRepository = cartRepository;
-    
-    this.searchQuery = '';
 
-    this.cartProducts = this.localStorageManager.get('cartProducts') || [];
+    this.categories = this.categoriesRepository.getAll();
+
+    this.cartProducts = localStorageManager.get('cartProducts') || [];
     this.cartProductsCount = this.cartProducts.length;
 
-    eventAggregator.subscribe(HttpSessionTimedOutMessage, function () {
-      this.logout();
-    }.bind(this));
+    eventAggregator.subscribe(HttpSessionTimedOutMessage, () => this.logout());
 
     eventAggregator.subscribe(AddProductToCartEvent, (event) => {
       this.addToCart(event.product, event.quantity);
     });
-
-    window.navbar = this;
   }
 
   get isUserLoggedIn() {
@@ -70,7 +55,7 @@ export class NavBar {
 
   logout() {
     this.session.logoutUser();
-    //this.router.navigate('login');
+    this.router.navigate('login');
   }
 
   addToCart(product, quantity) {

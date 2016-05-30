@@ -1,11 +1,8 @@
-import {LocalStorageManager} from 'service';
-import {inject} from 'aurelia-framework';
+import {localStorageManager} from 'service';
 
-@inject(LocalStorageManager)
 export class CategoriesRepository {
-  constructor(localStorageManager) {
-    this.localStorageManager = localStorageManager;
-    this.categories = this.localStorageManager.get('categories');
+  constructor() {
+    this.categories = localStorageManager.get('categories');
     if (this.categories === undefined) {
       this.initialize();
     }
@@ -14,7 +11,7 @@ export class CategoriesRepository {
   initialize() {
     this.categories = initialCategories;
 
-    this.localStorageManager.save('categories', this.categories);
+    localStorageManager.save('categories', this.categories);
   }
 
   get(id) {

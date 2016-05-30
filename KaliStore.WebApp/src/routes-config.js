@@ -1,6 +1,6 @@
 import {I18N} from 'aurelia-i18n';
 import {inject} from 'aurelia-framework';
-//import {accessRight} from 'enum/access-right';
+import {accessRight} from 'enum';
 
 @inject(I18N)
 export class RoutesConfig {
@@ -48,6 +48,13 @@ export class RoutesConfig {
       moduleId: './area/cart/cart',
       nav: false,
       title: this.i18n.tr('cart.title')
+    }, {
+      route: 'admin',
+      name: 'admin',
+      moduleId: './area/admin/admin',
+      nav: true,
+      title: this.i18n.tr('admin.title'),
+      accessRight: accessRight.adminPanel
     }];
   }
 }

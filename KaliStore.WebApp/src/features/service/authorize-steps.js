@@ -18,14 +18,14 @@ class BaseAuthorizeStep {
   }
 
   run(navigationInstruction, next) {
-    if (!this.session.isUserLoggedIn() && navigationInstruction.config.route !== this.loginRoute) {
-      this.logger.warn(this.locale.translate('pleaseLogin'));
-      return next.cancel(new Redirect(this.loginRoute));
-    }
+    // if (!this.session.isUserLoggedIn() && navigationInstruction.config.route !== this.loginRoute) {
+    //   this.logger.warn(this.locale.translate('pleaseLogin'));
+    //   return next.cancel(new Redirect(this.loginRoute));
+    // }
 
     let canAccess = this.authorize(navigationInstruction);
     if (canAccess === false) {
-      this.logger.error(this.locale.translate('notAuthorized'));
+      //this.logger.error(this.locale.translate('notAuthorized'));
       return next.cancel();
     }
 
@@ -37,7 +37,7 @@ class BaseAuthorizeStep {
       return this.canAccess(navigationInstruction);
     } else {
       let canAccess = this.canAccess(navigationInstruction);
-      if (hasRole) {
+      if (canAccess) {
         return this.authorize(navigationInstruction.parentInstruction);
       } else {
         return false;

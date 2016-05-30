@@ -50,7 +50,7 @@ export class App {
   configureRouter(config, router) {
     //config.options.pushState = true;
     config.title = this.i18n.tr('config.pageTitle');
-    //config.addPipelineStep('authorize', AccessRightsAuthorizeStep);
+    config.addPipelineStep('authorize', AccessRightsAuthorizeStep);
     config.map(this.routesConfig.getRoutes());
     config.mapUnknownRoutes('./not-found', 'not-found');
 

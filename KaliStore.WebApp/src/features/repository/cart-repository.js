@@ -1,13 +1,10 @@
-import {LocalStorageManager} from 'service';
-import {inject} from 'aurelia-framework';
+import {localStorageManager} from 'service';
 
 const cartKey = 'cart';
 
-@inject(LocalStorageManager)
 export class CartRepository {
-  constructor(localStorageManager) {
-    this.localStorageManager = localStorageManager;
-    this.cart = this.localStorageManager.get(cartKey) || {};
+  constructor() {
+    this.cart = localStorageManager.get(cartKey) || {};
   }
 
   add(productId, quantity) {
@@ -16,7 +13,7 @@ export class CartRepository {
     } else {
       this.cart[productId] = quantity;
     }
-    this.localStorageManager.save(cartKey, this.cart);
+    localStorageManager.save(cartKey, this.cart);
   }
 
   remove(productId, quantity) {
@@ -28,7 +25,7 @@ export class CartRepository {
     } else {
       delete this.cart[productId];
     }
-    this.localStorageManager.save(cartKey, this.cart);
+    localStorageManager.save(cartKey, this.cart);
   }
 
   getAll() {

@@ -53,6 +53,7 @@ System.config({
     "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "utils": "features/utils/index",
     "repository": "features/repository/index",
+    "enum": "features/enum/index",
     "github:CodeSeven/toastr@2.1.2": {
       "css": "github:systemjs/plugin-css@0.1.20",
       "jquery": "github:components/jquery@2.2.0"
