@@ -2,6 +2,7 @@
 export class User {
   constructor(data){
     data = data || {};
+    this.id = data.id;
     this.userName = data.userName;
     this.password = data.password;
     this.fullName = data.fullName;
@@ -12,6 +13,7 @@ export class User {
   
   getData(){
     return {
+      id: this.id,
       userName: this.userName,
       password: this.password,
       fullName: this.fullName,

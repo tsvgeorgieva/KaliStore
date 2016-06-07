@@ -41,7 +41,9 @@
     "title": "Регистрация",
     "confirmPassword": "Повторете паролата",
     "passwordsDoNotMatch": "Паролите не съвпадат",
-    "signup": "Регистрирай се"
+    "signup": "Регистрирай се",
+    "userNameTaken": "Потребителското име е заето. Моля, изберете друго",
+    "fillAllRequiredFields": "Моля попълнете всички задължителни полета"
   },
   "navbar": {
     "search": "Търси",
@@ -75,7 +77,7 @@
       "title": "Данни за клиента"
     }
   },
-  "models":{
+  "models": {
     "user": {
       "userName": "Потребителско име",
       "fullName": "Име",
@@ -87,5 +89,8 @@
   },
   "admin": {
     "title": "Администрация"
+  },
+  "userProfile" : {
+    "title": "Профил"
   }
 }

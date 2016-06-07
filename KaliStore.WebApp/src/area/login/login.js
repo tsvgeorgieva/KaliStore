@@ -20,7 +20,7 @@ export class Login {
   login() {
     let user = this.usersRepository.getByUserName(this.userName);
     if (user !== undefined && this.password === user.password) {
-      this.session.loginUser(user);
+      this.session.loginUser(user.id);
       this.router.navigate('');
     } else {
       this.logger.error(this.i18n.tr('login.loginUnsuccessful'));

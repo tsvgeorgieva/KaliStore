@@ -35,10 +35,33 @@ export class UsersRepository {
 
   save(user) {
     user.id = ++this.lastId;
-    user.userAccessRights = [];
+    user.userAccessRights = [accessRight.userProfile];
     this.users.push(user);
 
     localStorageManager.save(usersKey, this.users);
+    return user.id;
+  }
+
+  edit(user){
+    let currentUser = this.get(user.id);
+    //currentUser.password = user.password || currentUser.password;
+    currentUser.city = user.city || currentUser.city;
+    currentUser.fullName = user.fullName || currentUser.fullName;
+    currentUser.address = user.address || currentUser.address;
+    currentUser.phone = user.phone || currentUser.phone;
+    localStorageManager.save(usersKey, this.users);
+  }
+
+  userHasAccessRight(userId, requiredAccessRight) {
+    const user = this.get(userId);
+    return user.userAccessRights[requiredAccessRight] === true;
+  }
+
+  userHasAllAccessRights(userId, requiredAccessRights) {
+    const user = this.get(userId);
+    return requiredAccessRights.every(accessRight => {
+      return this.userHasAccessRight(userId, accessRight);
+    });
   }
 }
 
@@ -53,7 +76,7 @@ const initialUsers = [{
   },
   address: 'ул. Пършевица 5',
   phone: '2873278',
-  userAccessRights: []
+  userAccessRights: [accessRight.userProfile]
 }, {
   id: 2,
   userName: 'admin',
@@ -65,5 +88,5 @@ const initialUsers = [{
   },
   address: 'ул. Пършевица 5',
   phone: '2873278',
-  userAccessRights: [accessRight.adminPanel]
+  userAccessRights: [accessRight.userProfile, accessRight.adminPanel]
 }];
