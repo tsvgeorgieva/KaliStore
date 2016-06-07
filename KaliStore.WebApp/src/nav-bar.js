@@ -2,30 +2,36 @@ import {bindable, inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Session, HttpSessionTimedOutMessage, localStorageManager} from 'service';
-import {AddProductToCartEvent} from 'events';
-import {CategoriesRepository, CartRepository} from 'repository';
+import {AddProductToCartEvent, RemoveProductFromCartEvent} from 'events';
+import {CategoriesRepository, CartRepository, ProductsRepository} from 'repository';
 
-@inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository)
+@inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository, ProductsRepository)
 export class NavBar {
   @bindable router = null;
   categories = [];
   searchQuery = '';
+  cartProducts = [];
+  cartProductsCount = 0;
 
-  constructor(session, eventAggregator, router, categoriesRepository, cartRepository) {
+  constructor(session, eventAggregator, router, categoriesRepository, cartRepository, productsRepository) {
     this.session = session;
     this.router = router;
     this.categoriesRepository = categoriesRepository;
     this.cartRepository = cartRepository;
+    this.productsRepository = productsRepository;
 
     this.categories = this.categoriesRepository.getAll();
 
-    this.cartProducts = localStorageManager.get('cartProducts') || [];
-    this.cartProductsCount = this.cartProducts.length;
+    this.loadCartProducts();
 
     eventAggregator.subscribe(HttpSessionTimedOutMessage, () => this.logout());
 
     eventAggregator.subscribe(AddProductToCartEvent, (event) => {
-      this.addToCart(event.product, event.quantity);
+      this.loadCartProducts();
+    });
+
+    eventAggregator.subscribe(RemoveProductFromCartEvent, () => {
+      this.loadCartProducts();
     });
 
     eventAggregator.subscribe('router:navigation:complete', () => {
@@ -69,12 +75,12 @@ export class NavBar {
     this.router.navigate('login');
   }
 
-  addToCart(product, quantity) {
-    //TODO: get this from cart repository
-    this.cartProductsCount += quantity;
-    this.cartProducts.push(product);
-
-    this.cartRepository.add(product.id, quantity);
+  loadCartProducts() {
+    const cart = this.cartRepository.getAll()
+    this.cartProducts = Object.keys(cart).map(k => {
+      return {product: this.productsRepository.get(parseInt(k)), quantity: cart[k]}
+    });
+    this.cartProductsCount = this.cartProducts.reduce((sum, cartProduct) => sum + cartProduct.quantity, 0);
   }
 }
 

@@ -4,7 +4,6 @@ import {ProductsRepository} from 'repository';
 @inject(ProductsRepository)
 export class AllProducts {
   products = [];
-  
 
   constructor(productsRepository) {
     this.productsRepository = productsRepository;

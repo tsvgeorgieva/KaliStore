@@ -56,6 +56,12 @@ export class RoutesConfig {
       title: this.i18n.tr('userProfile.title'),
       accessRight: accessRight.userProfile
     }, {
+      route: 'checkout',
+      name: 'checkout',
+      moduleId: './area/checkout/checkout',
+      nav: false,
+      title: this.i18n.tr('checkout.title')
+    }, {
       route: 'admin',
       name: 'admin',
       moduleId: './area/admin/admin-index',

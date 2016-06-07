@@ -10,13 +10,25 @@ template
                 a(href="#/products/${cartProduct.product.id}")
                   img.card-img-top.img-fluid(src.bind="cartProduct.product.picture", style="width: auto; height: 10em")
               div.col-sm-7
-                h4
-                  a(href="#/products/${cartProduct.product.id}") ${cartProduct.product.title}
+                div.row
+                  div.col-sm-10
+                    h4
+                      a(href="#/products/${cartProduct.product.id}") ${cartProduct.product.title}
+                  div.col-sm-2
+                    remove-button(on-click.call="removeProduct(cartProduct)", type="btn-sm btn-secondary")
                 div
                   label.font-weight-bold ${'products.daysToMake' | t}:
                   text ${cartProduct.product.daysToMake} ${'products.days' | t}
                 div(style="width: 20%;")
-                  input.form-control(type="number", min="1", max="30", value.bind="cartProduct.quantity")
+                  input.form-control(type="number", min="1", max="30", value.bind="cartProduct.quantity", change.trigger="changeProductQuantity(cartProduct)")
                 label.lead ${cartProduct.product.price | sumFormat}
-
     div.col-lg-4.col-md-12
+      div.card
+        div.card-block
+          div(style="font-size: 1.5em")
+            label.font-weight-bold ${'cart.totalPrice' | t}:
+            text
+          a.btn.btn-primary(href="#/checkout", name="cart.proceed")
+            i.fa.fa-angle-double-right.fa-lg
+            | &nbsp;
+            | ${'cart.proceed' | t}

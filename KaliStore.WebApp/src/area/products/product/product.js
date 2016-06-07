@@ -1,15 +1,16 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {inject} from 'aurelia-framework';
-import {ProductsRepository} from 'repository';
+import {ProductsRepository, CartRepository} from 'repository';
 import {AddProductToCartEvent} from 'events';
 
-@inject(EventAggregator, ProductsRepository)
+@inject(EventAggregator, ProductsRepository, CartRepository)
 export class Product {
   similarProducts = [];
 
-  constructor(eventAggregator, productsRepository) {
+  constructor(eventAggregator, productsRepository, cartRepository) {
     this.eventAggregator = eventAggregator;
     this.productsRepository = productsRepository;
+    this.cartRepository = cartRepository;
   }
   
   activate(routeParams) {
@@ -19,6 +20,7 @@ export class Product {
   }
 
   addToCart() {
+    this.cartRepository.add(this.product.id, 1);
     this.eventAggregator.publish(new AddProductToCartEvent(this.product, 1));
   }
 

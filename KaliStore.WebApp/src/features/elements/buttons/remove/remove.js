@@ -7,6 +7,7 @@ export class RemoveButton {
   @bindable onClick = null;
   @bindable title = 'Премахни';
   @bindable name = '';
+  @bindable type = 'btn-default';
 
   constructor(element) {
     this.element = element;

@@ -65,7 +65,18 @@
     "days": "дена"
   },
   "cart": {
-    "title": "Количка"
+    "title": "Количка",
+    "infoText": "Информация за поръчката",
+    "productsPrice": "Всички продукти",
+    "deliveryPrice": "Цена на доставка",
+    "totalPrice": "Обща сума",
+    "proceed": "Продължи"
+  },
+  "checkout": {
+    "title": "Поръчка",
+    "userInfo": {
+      "title": "Данни за клиента"
+    }
   },
   "models": {
     "user": {
