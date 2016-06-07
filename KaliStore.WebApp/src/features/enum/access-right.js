@@ -1,3 +1,4 @@
 export const accessRight = {
-  adminPanel: 'adminPanel'
+  adminPanel: 'adminPanel',
+  userProfile: 'userProfile'
 };

@@ -7,11 +7,12 @@ import {localStorageManager} from './local-storage-manager';
 
 const currentUserKey = 'currentUser';
 
-@inject(EventAggregator)
+@inject(EventAggregator, UsersRepository)
 export class Session {
 
-  constructor(eventAggregator) {
+  constructor(eventAggregator, usersRepository) {
     this.eventAggregator = eventAggregator;
+    this.usersRepository = usersRepository;
 
     this.initUserData();
 
@@ -28,8 +29,9 @@ export class Session {
     this.isBusy = false;
   }
 
-  loginUser(data) {
-    localStorageManager.save(currentUserKey, data);
+  loginUser(userId) {
+    this.user = this.usersRepository.get(userId);
+    localStorageManager.save(currentUserKey, this.user);
     this.restoreData();
   }
 
@@ -69,6 +71,10 @@ export class Session {
 
   getUserName() {
     return this.user.userName;
+  }
+
+  getUserId() {
+    return this.user.id;
   }
   
   _reduceToHash(array){

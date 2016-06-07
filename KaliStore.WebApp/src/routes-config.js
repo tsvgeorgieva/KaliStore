@@ -49,6 +49,13 @@ export class RoutesConfig {
       nav: false,
       title: this.i18n.tr('cart.title')
     }, {
+      route: 'profile',
+      name: 'profile',
+      moduleId: './area/user-profile/user-profile',
+      nav: false,
+      title: this.i18n.tr('userProfile.title'),
+      accessRight: accessRight.userProfile
+    }, {
       route: 'admin',
       name: 'admin',
       moduleId: './area/admin/admin',

@@ -24,7 +24,7 @@ template
               span.label.label-pill(style="font-size: 1em", class="${cartProductsCount > 0 ? 'label-info': 'label-default'}") ${cartProductsCount}
           template(if.bind="isUserLoggedIn")
             li.nav-item
-              a.nav-link ${'navbar.hello' | t}, ${session.getUserName()}
+              a.nav-link(href="#/profile") ${'navbar.hello' | t}, ${session.getUserName()}
             li.nav-item
               a.nav-link(click.trigger="logout()") ${'navbar.logout' | t}
           template(if.bind="!isUserLoggedIn")
