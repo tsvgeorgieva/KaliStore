@@ -26,7 +26,8 @@
     "no": "Не",
     "amount": "Сума",
     "currency": "Валута",
-    "count": "Брой"
+    "count": "Брой",
+    "filter": "Филтрирай"
   },
   "home": {
     "title": "Начало"
@@ -68,16 +69,24 @@
   },
   "models": {
     "user": {
+      "id": "ИД",
       "userName": "Потребителско име",
       "fullName": "Име",
       "password": "Парола",
       "city": "Град",
       "address": "Адрес",
-      "phone": "Телефон"
+      "phone": "Телефон",
+      "email": "Имейл",
+      "isBlocked": "Блокиран"
     }
   },
   "admin": {
-    "title": "Администрация"
+    "title": "Администрация",
+    "usersManagement": {
+      "title": "Управление на потребители",
+      "block": "Блокирай",
+      "unblock": "Отблокирай"
+    }
   },
   "userProfile" : {
     "title": "Профил"

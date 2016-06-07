@@ -27,6 +27,12 @@ export class NavBar {
     eventAggregator.subscribe(AddProductToCartEvent, (event) => {
       this.addToCart(event.product, event.quantity);
     });
+
+    eventAggregator.subscribe('router:navigation:complete', () => {
+      this.checkIfInAdminPanel();
+    });
+
+    window.navBar = this;
   }
 
   get isUserLoggedIn() {
@@ -35,6 +41,11 @@ export class NavBar {
 
   get userName() {
     return this.session.getUserName();
+  }
+
+  checkIfInAdminPanel(){
+    // FIXME: huge hack...
+    this.isInAdminPanel = this.router.currentInstruction.config.name === 'admin';
   }
 
   search() {

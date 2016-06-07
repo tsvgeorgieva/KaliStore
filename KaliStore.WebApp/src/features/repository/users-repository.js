@@ -42,13 +42,28 @@ export class UsersRepository {
     return user.id;
   }
 
-  edit(user){
-    let currentUser = this.get(user.id);
+  edit(userData){
+    const user = this.get(userData.id);
+
+    //TODO: separate method for changing password?
     //currentUser.password = user.password || currentUser.password;
-    currentUser.city = user.city || currentUser.city;
-    currentUser.fullName = user.fullName || currentUser.fullName;
-    currentUser.address = user.address || currentUser.address;
-    currentUser.phone = user.phone || currentUser.phone;
+
+    user.city = userData.city || user.city;
+    user.fullName = userData.fullName || user.fullName;
+    user.address = userData.address || user.address;
+    user.phone = userData.phone || user.phone;
+    localStorageManager.save(usersKey, this.users);
+  }
+  
+  block(userId){
+    const user = this.get(userId);
+    user.isBlocked = true;
+    localStorageManager.save(usersKey, this.users);
+  }
+  
+  unblock(userId){
+    const user = this.get(userId);
+    user.isBlocked = false;
     localStorageManager.save(usersKey, this.users);
   }
 
@@ -76,6 +91,8 @@ const initialUsers = [{
   },
   address: 'ул. Пършевица 5',
   phone: '2873278',
+  email: 'pesho@abv.bg',
+  isBlocked: false,
   userAccessRights: [accessRight.userProfile]
 }, {
   id: 2,
@@ -88,5 +105,21 @@ const initialUsers = [{
   },
   address: 'ул. Пършевица 5',
   phone: '2873278',
+  email: 'admin@neshtokrasivo.bg',
+  isBlocked: false,
   userAccessRights: [accessRight.userProfile, accessRight.adminPanel]
+}, {
+  id: 3,
+  userName: 'loshiq',
+  password: '123',
+  fullName: 'Losho Loshev',
+  city: {
+    id: 1,
+    name: 'София'
+  },
+  address: 'ул. Ала Бала 5',
+  phone: '5555555',
+  email: 'loshiq@losho.bg',
+  isBlocked: true,
+  userAccessRights: [accessRight.userProfile]
 }];
