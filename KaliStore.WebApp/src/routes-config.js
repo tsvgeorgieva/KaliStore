@@ -49,6 +49,12 @@ export class RoutesConfig {
       nav: false,
       title: this.i18n.tr('cart.title')
     }, {
+      route: 'checkout',
+      name: 'checkout',
+      moduleId: './area/checkout/checkout',
+      nav: false,
+      title: this.i18n.tr('checkout.title')
+    }, {
       route: 'admin',
       name: 'admin',
       moduleId: './area/admin/admin',
