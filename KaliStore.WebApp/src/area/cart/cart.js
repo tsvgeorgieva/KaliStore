@@ -5,12 +5,15 @@ import {AddProductToCartEvent, RemoveProductFromCartEvent} from 'events';
 
 @inject(EventAggregator, CartRepository, ProductsRepository)
 export class Cart {
+  totalPrice = 0;
+
   constructor(eventAggregator, cartRepository, productsRepository) {
     this.eventAggregator = eventAggregator;
     this.cartRepository = cartRepository;
     this.productsRepository = productsRepository;
     this.cart = this.cartRepository.getAll();
     this.loadProducts();
+    this.calculateTotalPrice();
   }
   
   loadProducts() {
@@ -22,6 +25,7 @@ export class Cart {
   removeProduct(cartProduct) {
     this.cartRepository.remove(cartProduct.product.id);
     this.loadProducts();
+    this.calculateTotalPrice();
     this.eventAggregator.publish(new RemoveProductFromCartEvent(cartProduct.product, cartProduct.quantity));
   }
 
@@ -35,5 +39,11 @@ export class Cart {
       this.cartRepository.add(cartProduct.product.id, newQuantity - oldQuantity);
       this.eventAggregator.publish(new AddProductToCartEvent(cartProduct.product, newQuantity - oldQuantity));
     }
+    this.loadProducts();
+    this.calculateTotalPrice();
+  }
+
+  calculateTotalPrice() {
+    this.totalPrice = this.cartProducts.reduce((total, cartProduct) => total + (cartProduct.quantity * cartProduct.product.price.amount), 0);
   }
 }

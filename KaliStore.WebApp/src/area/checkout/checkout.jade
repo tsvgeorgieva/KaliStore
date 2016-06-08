@@ -1,10 +1,47 @@
 template
   div(show.bind="checkoutStep === 1")
-    h1 ${'checkout.userInfo.title' | t}
     div.row
       div.col-sm-6
         div.card
-
+          div.card-block
+            h4 ${'checkout.userInfo.title' | t}
+          hr
+          div.card-block
+            form
+              div.form-group.row
+                div.col-sm-3
+                  label.form-control-label ${'models.user.fullName' | t}
+                div.col-sm-9
+                  input.form-control(type='text', placeholder="${'checkout.userInfo.name' | t}")
+              div.form-group.row
+                div.col-sm-3
+                  label.form-control-label ${'models.user.email' | t}
+                div.col-sm-9
+                  input.form-control(type='email', placeholder="${'checkout.userInfo.email' | t}")
+              div.form-group.row
+                div.col-sm-3
+                  label.form-control-label ${'models.user.phone' | t}
+                div.col-sm-9
+                  input.form-control(type='text', placeholder="${'checkout.userInfo.phoneNumber' | t}")
+              div.form-group.row
+                div.col-sm-3
+                  label.form-control-label ${'models.user.city' | t}
+                div.col-sm-9
+                  select3(items.bind="cities", value.bind="user.city", options.bind="{emptyValue: undefined, modelValueBind: true}")
+              div.form-group.row
+                div.col-sm-3
+                  label.form-control-label ${'models.user.address' | t}
+                div.col-sm-9
+                  input.form-control(type='text', placeholder="${'checkout.userInfo.address' | t}")
+              hr
+              div.form-group.row
+                input#differentShipment(type="checkbox")
+                label(for="differentShipment") Желая поръчката да се достави на друг адрес
+              button.btn.btn-primary(type='submit')
+                i.fa.fa-angle-double-right.fa-lg
+                | &nbsp;
+                | ${'cart.proceed' | t}
       div.col-sm-6
         div.card
+
   div()

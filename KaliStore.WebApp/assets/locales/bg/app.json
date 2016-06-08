@@ -69,12 +69,17 @@
     "productsPrice": "Всички продукти",
     "deliveryPrice": "Цена на доставка",
     "totalPrice": "Обща сума",
-    "proceed": "Продължи"
+    "proceed": "Продължи",
+    "bgCurrencyLabel": "лв."
   },
   "checkout": {
     "title": "Поръчка",
     "userInfo": {
-      "title": "Данни за клиента"
+      "title": "Данни за клиента",
+      "name": "Въведете Вашето име и фамилия",
+      "email": "Въведете имейл адрес",
+      "phoneNumber": "Въведете телефонен номер",
+      "address": "Въведете адрес"
     }
   },
   "models": {
@@ -84,7 +89,8 @@
       "password": "Парола",
       "city": "Град",
       "address": "Адрес",
-      "phone": "Телефон"
+      "phone": "Телефон",
+      "email": "Имейл"
     }
   },
   "admin": {
