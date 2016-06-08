@@ -9,6 +9,8 @@ export class User {
     this.city = data.city;
     this.address = data.address;
     this.phone = data.phone;
+    this.email = data.email;
+    this.isBlocked = data.isBlocked || false;
   }
   
   getData(){
@@ -19,7 +21,9 @@ export class User {
       fullName: this.fullName,
       city: this.city,
       address: this.address,
-      phone: this.phone
+      phone: this.phone,
+      email: this.email,
+      isBlocked: this.isBlocked
     };
   }
 }

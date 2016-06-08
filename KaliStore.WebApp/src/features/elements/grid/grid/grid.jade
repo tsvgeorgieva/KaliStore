@@ -21,11 +21,11 @@ template
             th(repeat.for="$column of columns", class="${ $column.class !== '' ? $column.class : '' }")
 
               div(if.bind="$column.filter === 'input'")
-                input.form-control(value.bind="$column.filterValue", placeholder="filter...", input.delegate="$column.updateFilter()")
+                input.form-control(value.bind="$column.filterValue", placeholder="${'common.filter' | t}", input.delegate="$column.updateFilter()")
 
               div.filter-boolean(if.bind="$column.filter === 'boolean'")
-                base-button(on-click.call="$column.trueFilterToggle()", icon.bind="$column.trueFilter ? 'fa-check-circle-o' : 'fa-circle-o'")
-                base-button(on-click.call="$column.falseFilterToggle()", icon.bind="$column.falseFilter ? 'fa-times-circle-o' : 'fa-circle-o'")
+                base-button(on-click.call="$column.trueFilterToggle()", type="btn-sm", icon.bind="$column.trueFilter ? 'fa-check-circle-o' : 'fa-circle-o'")
+                base-button(on-click.call="$column.falseFilterToggle()", type="btn-sm", icon.bind="$column.falseFilter ? 'fa-times-circle-o' : 'fa-circle-o'")
 
               div.filter-datetime(if.bind="$column.filter === 'date-from-to'")
                 datepicker(value.bind="$column.filterValueFrom", change.trigger="$column.updateFilter()", icon.bind="false")
