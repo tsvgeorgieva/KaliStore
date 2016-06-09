@@ -3,6 +3,7 @@ import {CitiesRepository, OfficesRepository, CartRepository, ProductsRepository}
 
 @inject(CitiesRepository, OfficesRepository, CartRepository, ProductsRepository)
 export class Checkout {
+  currentCheckoutStep = 1;
   differentShipmentAddress = false;
   toAddress;
   cities = [];
@@ -48,5 +49,17 @@ export class Checkout {
       amount: this.totalProductsPrice.amount + this.deliveryPrice.amount,
       currency: 'BGN'
     };
+  }
+
+  proceed() {
+    this.currentCheckoutStep = 2;
+  }
+
+  back() {
+    this.currentCheckoutStep = 1;
+  }
+
+  order() {
+    
   }
 }

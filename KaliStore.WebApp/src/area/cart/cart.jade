@@ -28,7 +28,7 @@ template
           div(style="font-size: 1.5em")
             label.font-weight-bold ${'cart.totalPrice' | t}:
             text ${totalPrice | sumFormat}
-          a.btn.btn-primary(href="#/checkout", name="cart.proceed")
+          a.btn.btn-success(href="#/checkout", name="cart.order")
             i.fa.fa-angle-double-right.fa-lg
             | &nbsp;
-            | ${'cart.proceed' | t}
+            | ${'cart.order' | t}
