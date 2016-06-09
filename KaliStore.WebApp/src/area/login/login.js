@@ -19,7 +19,7 @@ export class Login {
 
   login() {
     let user = this.usersRepository.getByUserName(this.userName);
-    if (user !== undefined && user.isBlocked === false && this.password === user.password) {
+    if (user !== undefined && user.isBlocked !== true && this.password === user.password) {
       this.session.loginUser(user.id);
       this.router.navigate('');
     } else {

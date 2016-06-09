@@ -27,7 +27,7 @@ template
         div.card-block
           div(style="font-size: 1.5em")
             label.font-weight-bold ${'cart.totalPrice' | t}:
-            text ${totalPrice} ${'cart.bgCurrencyLabel' | t}
+            text ${totalPrice | sumFormat}
           a.btn.btn-primary(href="#/checkout", name="cart.proceed")
             i.fa.fa-angle-double-right.fa-lg
             | &nbsp;
