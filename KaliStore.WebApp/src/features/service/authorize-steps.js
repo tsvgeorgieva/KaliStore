@@ -25,7 +25,7 @@ class BaseAuthorizeStep {
 
     let canAccess = this.authorize(navigationInstruction);
     if (canAccess === false) {
-      //this.logger.error(this.locale.translate('notAuthorized'));
+      this.logger.error(this.locale.translate('notAuthorized'));
       return next.cancel(new Redirect(''));
     }
 
