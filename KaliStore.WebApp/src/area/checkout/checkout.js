@@ -117,15 +117,20 @@ export class Checkout {
       delivery: this.deliveryInfo,
       products: this.cart,
       totalPrice: this.totalPrice,
-      status: "Потвърдена поръчка"
+      status: this.i18n.tr('order.status.initial')
     };
-    this.ordersRepository.save(order);
     if (this.paymentAtDelivery) {
+      
+      this.ordersRepository.save(order);
+      
       this.logger.success(this.i18n.tr('order.successful'));
       this.router.navigate('');
       this.cartRepository.empty();
       this.eventAggregator.publish(new OrderComplete({}));
     } else if (this.paymentAtDelivery === false) {
+      
+      this.ordersRepository.save(order);
+      
       this.router.navigate('#/payment');
     }
   }
