@@ -11,7 +11,7 @@ template
                 div.col-sm-3.col-xs-12
                   label.form-control-label ${'models.user.fullName' | t}
                 div.col-sm-9.col-xs-12
-                  input.form-control(type='text', value.bind="userInfo.name", placeholder="${'checkout.userInfo.addName' | t}", required="true")
+                  input.form-control(type='text', value.bind="userInfo.fullName", placeholder="${'checkout.userInfo.addName' | t}", required="true")
               div.form-group.row
                 div.col-sm-3.col-xs-12
                   label.form-control-label ${'models.user.email' | t}
@@ -52,7 +52,7 @@ template
                 div(if.bind="differentShipmentAddress === false")
                   div
                     label.font-weight-bold ${'models.user.fullName' | t}:
-                    text ${userInfo.name}
+                    text ${userInfo.fullName}
                   div
                     label.font-weight-bold ${'models.user.phone' | t}:
                     text ${userInfo.phoneNumber}
@@ -97,12 +97,12 @@ template
               hr
               h4 ${'checkout.paymentInfo.title' | t}
               div.form-group
-                input#paymentAtDelivery(type="radio", name="paymentMethod", required="true")
+                input#paymentAtDelivery(type="radio", name="paymentMethod", model.bind="true", checked.bind="paymentAtDelivery", required="true")
                 label(for="paymentAtDelivery") ${'checkout.paymentInfo.atDelivery.title' | t}
                 div
                   small.text-muted ${'checkout.paymentInfo.atDelivery.description' | t}
               div.form-group
-                input#paymentWithCard(type="radio", name="paymentMethod", required="true")
+                input#paymentWithCard(type="radio", name="paymentMethod", model.bind="false", checked.bind="paymentAtDelivery", required="true")
                 label(for="paymentWithCard") ${'checkout.paymentInfo.withCard.title' | t}
                 div
                   small.text-muted ${'checkout.paymentInfo.withCard.description' | t}
@@ -135,7 +135,7 @@ template
               text ${deliveryPrice | sumFormat}
             div
               label.lead ${'cart.totalPrice' | t}:
-              text ${totalPrice | sumFormat}
+              text.lead ${totalPrice | sumFormat}
   div(if.bind="currentCheckoutStep === 2")
     h1 ${'checkout.orderInfo.title' | t}
     div.row
@@ -143,17 +143,48 @@ template
         div.card.card-block
           h5.card-title ${'checkout.orderInfo.client' | t}
           hr
+          div ${userInfo.fullName} - ${userInfo.phoneNumber}
+          div ${userInfo.address}, ${userInfo.city.name}
+          div ${userInfo.email}
       div.col-md-4.col-xs-12
         div.card.card-block
           h5.card-title ${'checkout.orderInfo.delivery' | t}
           hr
+          div.font-weight-bold ${deliveryInfo.type}
+          div ${deliveryInfo.client.name} - ${deliveryInfo.client.phoneNumber}
+          div ${deliveryInfo.address}, ${deliveryInfo.city.name}
       div.col-md-4.col-xs-12
         div.card.card-block
           h5.card-title ${'checkout.orderInfo.payment' | t}
           hr
+          div.font-weight-bold ${paymentInfo.method}
+          div ${paymentInfo.description}
       div.col-xs-12
         div.card.card-block
-          h5.card-title ${'checkout.orderInfo.payment' | t}
+          h5.card-title ${'checkout.title' | t}
           hr
+          ul.list-group
+            template(repeat.for="cartProduct of cartProducts")
+              li.list-group-item
+                div.row(style="font-size: 0.8em")
+                  div.col-xs-2
+                    img.card-img-top.img-fluid(src.bind="cartProduct.product.picture", style="width: auto; height: 3em")
+                  div.col-xs-4
+                    span ${cartProduct.product.title}
+                  div.col-xs-2
+                    span ${cartProduct.quantity} ${'checkout.quantityLabel' | t}
+                  div.col-xs-4
+                    label.font-weight-bold ${cartProduct.product.price | sumFormat}
+          div.card-block.row
+            div.col-sm-6.col-xs-12
+              div
+                label.font-weight-bold ${'products.price' | t}:
+                text ${totalProductsPrice | sumFormat}
+              div
+                label.font-weight-bold ${'cart.deliveryPrice' | t}:
+                text ${deliveryPrice | sumFormat}
+            div.col-sm-6.col-xs-12(style="text-align: right")
+              label.lead ${'cart.totalPrice' | t}:
+              text.lead ${totalPrice | sumFormat}
     base-button(on-click.call="back()", type="btn-secondary", title="${'cart.back' | t}", name="${'cart.back' | t}" icon="fa-angle-double-left")
     base-button(on-click.call="order()", type="btn-success", title="${'cart.order' | t}", name="${'cart.order' | t}" icon="fa-angle-double-right")

@@ -110,6 +110,12 @@
     },
     "quantityLabel": "бр."
   },
+  "order": {
+    "successful": "Вашата поръчка беше направена успешно!"
+  },
+  "payment": {
+    "title": "Плащане"
+  },
   "models": {
     "user": {
       "id": "ИД",

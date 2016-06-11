@@ -2,7 +2,7 @@ import {bindable, inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Session, HttpSessionTimedOutMessage, localStorageManager} from 'service';
-import {AddProductToCartEvent, RemoveProductFromCartEvent} from 'events';
+import {AddProductToCartEvent, RemoveProductFromCartEvent, OrderComplete} from 'events';
 import {CategoriesRepository, CartRepository, ProductsRepository} from 'repository';
 
 @inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository, ProductsRepository)
@@ -31,6 +31,10 @@ export class NavBar {
     });
 
     eventAggregator.subscribe(RemoveProductFromCartEvent, () => {
+      this.loadCartProducts();
+    });
+
+    eventAggregator.subscribe(OrderComplete, () => {
       this.loadCartProducts();
     });
 

@@ -31,4 +31,9 @@ export class CartRepository {
   getAll() {
     return this.cart;
   }
+
+  empty() {
+    localStorageManager.clear(cartKey);
+    this.cart = {};
+  }
 }
