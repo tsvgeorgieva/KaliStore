@@ -111,10 +111,27 @@
     "quantityLabel": "бр."
   },
   "order": {
-    "successful": "Вашата поръчка беше направена успешно!"
+    "successful": "Вашата поръчка беше направена успешно!",
+    "status": {
+      "initial": "Потвърдена поръчка"
+    }
   },
   "payment": {
-    "title": "Плащане"
+    "title": "Плащане",
+    "header": "Данни на картата за плащането",
+    "buy": "Купи сега",
+    "card": {
+      "number": "Номер на картата",
+      "code": "CVV2/CVC2 код",
+      "codePlaceholder": "CVV2/CVC2",
+      "validUntil": "Дата на изтичане на картата",
+      "ownerName": "Притежател на картата"
+    },
+    "placeholders": {
+      "number": "XXXX XXXX XXXX XXXX",
+      "code": "CVV2/CVC2",
+      "ownerName": "Името, което е върху картата"
+    }
   },
   "models": {
     "user": {
