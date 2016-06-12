@@ -164,6 +164,9 @@
       "block": "Блокирай",
       "unblock": "Отблокирай"
     },
+    "categoriesManagement": {
+      "title": "Управление на категории"
+    },
     "materialsManagement": {
       "title": "Управление на материали",
       "addMaterial": "Добави материал"
