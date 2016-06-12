@@ -45,7 +45,7 @@ System.config({
     "events": "features/events/index",
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.5.0",
-    "hubspot/tether": "github:hubspot/tether@1.1.1",
+    "hubspot/tether": "github:HubSpot/tether@1.1.1",
     "jquery": "npm:jquery@2.2.0",
     "models": "features/models/index",
     "moment": "npm:moment@2.11.2",
