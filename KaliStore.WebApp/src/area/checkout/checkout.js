@@ -3,10 +3,17 @@ import {I18N} from 'aurelia-i18n';
 import {Router} from 'aurelia-router';
 import {Logger, Session, localStorageManager} from 'service';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {CitiesRepository, OfficesRepository, CartRepository, ProductsRepository, OrdersRepository} from 'repository';
+import {
+  CitiesRepository,
+  OfficesRepository,
+  CartRepository,
+  ProductsRepository,
+  OrdersRepository,
+  UsersRepository
+} from 'repository';
 import {OrderComplete} from 'events';
 
-@inject(I18N, Router, Logger, Session, EventAggregator, CitiesRepository, OfficesRepository, CartRepository, ProductsRepository, OrdersRepository)
+@inject(I18N, Router, Logger, Session, EventAggregator, CitiesRepository, OfficesRepository, CartRepository, ProductsRepository, OrdersRepository, UsersRepository)
 export class Checkout {
   currentCheckoutStep = 1;
   differentShipmentAddress = false;
@@ -20,24 +27,36 @@ export class Checkout {
   deliveryInfo = {};
   paymentInfo = {};
 
-  constructor(i18n, router, logger, session, eventAggregator, citiesRepository, officesRepository, cartRepository, productsRepository, ordersRepository) {
+  constructor(i18n, router, logger, session, eventAggregator, citiesRepository, officesRepository, cartRepository, productsRepository, ordersRepository, usersRepository) {
     this.citiesRepository = citiesRepository;
     this.officesRepository = officesRepository;
     this.cartRepository = cartRepository;
     this.productsRepository = productsRepository;
     this.ordersRepository = ordersRepository;
+    this.usersRepository = usersRepository;
     this.i18n = i18n;
     this.router = router;
     this.logger = logger;
     this.session = session;
     this.eventAggregator = eventAggregator;
 
+    if (this.session.isUserLoggedIn()) {
+      const currentUser = this.usersRepository.get(this.session.getUserId());
+      this.userInfo = {
+        fullName: currentUser.fullName,
+        email: currentUser.email,
+        phoneNumber: currentUser.phone,
+        city: currentUser.city,
+        address: currentUser.address
+      };
+    }
+
     this.cities = this.citiesRepository.getAll();
     this.offices = this.officesRepository.getAll();
     this.cart = this.cartRepository.getAll();
     this.loadProducts();
     this.calculatePrices();
-    
+
     this.deliveryPrice = {
       amount: 3.70,
       currency: 'BGN'
@@ -89,7 +108,7 @@ export class Checkout {
       this.deliveryInfo.client.name = this.userInfo.fullName;
       this.deliveryInfo.client.phoneNumber = this.userInfo.phoneNumber;
     }
-    
+
     if (this.paymentAtDelivery) {
       this.paymentInfo.method = this.i18n.tr('checkout.paymentInfo.atDelivery.title');
       this.paymentInfo.description = this.i18n.tr('checkout.paymentInfo.atDelivery.description');
@@ -98,7 +117,7 @@ export class Checkout {
       this.paymentInfo.description = this.i18n.tr('checkout.paymentInfo.withCard.description');
     }
   }
-  
+
   back() {
     this.currentCheckoutStep = 1;
   }
@@ -121,14 +140,14 @@ export class Checkout {
     };
     if (this.paymentAtDelivery) {
       this.ordersRepository.save(order);
-      
+
       this.logger.success(this.i18n.tr('order.successful'));
       this.router.navigate('');
       this.cartRepository.empty();
       this.eventAggregator.publish(new OrderComplete({}));
     } else if (this.paymentAtDelivery === false) {
       localStorageManager.save("currentOrder", order);
-      
+
       this.router.navigate('#/payment');
     }
   }
