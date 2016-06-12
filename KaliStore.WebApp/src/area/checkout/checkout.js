@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 import {Router} from 'aurelia-router';
-import {Logger, Session} from 'service';
+import {Logger, Session, localStorageManager} from 'service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {CitiesRepository, OfficesRepository, CartRepository, ProductsRepository, OrdersRepository} from 'repository';
 import {OrderComplete} from 'events';
@@ -120,7 +120,6 @@ export class Checkout {
       status: this.i18n.tr('order.status.initial')
     };
     if (this.paymentAtDelivery) {
-      
       this.ordersRepository.save(order);
       
       this.logger.success(this.i18n.tr('order.successful'));
@@ -128,8 +127,7 @@ export class Checkout {
       this.cartRepository.empty();
       this.eventAggregator.publish(new OrderComplete({}));
     } else if (this.paymentAtDelivery === false) {
-      
-      this.ordersRepository.save(order);
+      localStorageManager.save("currentOrder", order);
       
       this.router.navigate('#/payment');
     }
