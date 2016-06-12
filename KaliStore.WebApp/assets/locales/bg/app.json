@@ -163,6 +163,10 @@
       "title": "Управление на потребители",
       "block": "Блокирай",
       "unblock": "Отблокирай"
+    },
+    "materialsManagement": {
+      "title": "Управление на материали",
+      "addMaterial": "Добави материал"
     }
   },
   "userProfile" : {
