@@ -11,7 +11,6 @@ import {HttpRequestStartedMessage, HttpRequestFinishedMessage,
 import {RoutesConfig} from './routes-config';
 
 import {DialogService} from 'dialog';
-import {ErrorsDialog} from './errors-dialog/errors-dialog';
 
 @inject(I18N, RoutesConfig, EventAggregator, DialogService)
 export class App {
@@ -29,22 +28,6 @@ export class App {
     eventAggregator.subscribe(HttpRequestFinishedMessage, function () {
       this.showLoadingMask = false;
     }.bind(this));
-
-    eventAggregator.subscribe(HttpBadRequestMessage, function (model) {
-      this.dialogService.openDialog({
-        viewModel: ErrorsDialog,
-        model: {errors: [model.error]}
-      });
-    }.bind(this));
-
-    eventAggregator.subscribe(HttpServerErrorRequestMessage, function (model) {
-      this.dialogService.openDialog({
-        viewModel: ErrorsDialog,
-        model: {errors: model.errors}
-      });
-    }.bind(this));
-    
-    
   }
 
   configureRouter(config, router) {
