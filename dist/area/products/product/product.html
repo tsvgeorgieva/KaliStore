@@ -1,0 +1,54 @@
+
+<template>
+  <div class="row">
+    <div class="col-sm-5"><img src.bind="product.picture" style="max-width: 400px;"/></div>
+    <div class="col-sm-7">
+      <div class="card">
+        <h4 class="card-header">${product.title}</h4>
+        <div class="card-block">
+          <div>
+            <label class="font-weight-bold">${'models.product.category' | t}:</label>
+            <text>${product.category.name}</text>
+          </div>
+          <div>
+            <label class="font-weight-bold">${'models.product.size' | t}:</label>
+            <text>${product.size}</text>
+          </div>
+          <div>
+            <label class="font-weight-bold">${'models.product.materials' | t}:</label>
+            <text>${product.materialsList}</text>
+          </div>
+          <div>
+            <label class="font-weight-bold">${'models.product.daysToMake' | t}:</label>
+            <text>${product.daysToMake} ${product.daysToMake > 1 ? 'products.days' : 'products.day' | t}</text>
+          </div>
+          <div>
+            <label class="font-weight-bold">${'models.product.price' | t}:</label>
+            <text>${product.price | sumFormat}</text>
+          </div>
+        </div>
+        <hr/>
+        <div class="card-block">
+          <p>${product.description}</p>
+        </div>
+        <div class="card-footer">
+          <base-button on-click.call="addToCart()" type="btn-primary" icon="fa-cart-plus" name="products.buy" title="products.buy"></base-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="m-t-2">
+    <h3>${'products.similar' | t}:</h3>
+    <div class="row m-t-2">
+      <template repeat.for="similarProduct of similarProducts">
+        <div class="col-sm-2">
+          <div class="card"><a href="#/products/${similarProduct.id}"><img src.bind="similarProduct.picture" class="card-img-top img-fluid"/></a>
+            <div class="card-block">
+              <h5 class="card-title"><a href="#/products/${similarProduct.id}">${similarProduct.title}</a></h5>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,33 @@
+tree-view {
+  display: block;
+}
+
+tree-view > div > a > div.indent {
+  float: left;
+  height: 100%;
+}
+
+tree-view > div > a > div.content {
+  /*display: inline-block;*/
+  width:auto;
+  overflow:hidden;
+}
+
+tree-view .list-group-item {
+	cursor: pointer;
+}
+
+tree-view span.indent {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+tree-view span.icon {
+	width: 15px;
+	margin-right: 5px;
+}
+
+tree-view .node-disabled {
+	color: silver;
+	cursor: not-allowed;
+}

@@ -1,0 +1,20 @@
+
+<template>
+  <require from="./styles/assign.css"></require>
+  <grid data.bind="leftItems" height="auto" selection="single" select-grid-row.trigger="select($event.detail.$item)" deselect-grid-row.trigger="deselect($event.detail.$item)" selected-item.bind="_selectedItem" style="overflow-y: hidden" class="col-lg-5">
+    <grid-row>
+      <grid-col heading.bind="leftHeading" nosort="nosort"><span>${$item.name}</span></grid-col>
+    </grid-row>
+  </grid>
+  <div class="col-lg-2 text-center">
+    <button click.trigger="moveAllRight()" disabled.bind="leftItems.length === 0" class="assign-button btn fa fa-angle-double-right"></button>
+    <button click.trigger="moveRight()" disabled.bind="moveRightDisabled" class="assign-button btn fa fa-angle-right"></button>
+    <button click.trigger="moveLeft()" disabled.bind="moveLeftDisabled" class="assign-button btn fa fa-angle-left"></button>
+    <button click.trigger="moveAllLeft()" disabled.bind="rightItems.length === 0" class="assign-button btn fa fa-angle-double-left"></button>
+  </div>
+  <grid data.bind="rightItems" height="auto" selection="single" select-grid-row.trigger="select($event.detail.$item)" deselect-grid-row.trigger="deselect($event.detail.$item)" selected-item.bind="_selectedItem" style="overflow-y: hidden" class="col-lg-5">
+    <grid-row>
+      <grid-col heading.bind="rightHeading" nosort="nosort"><span>${$item.name}</span></grid-col>
+    </grid-row>
+  </grid>
+</template>

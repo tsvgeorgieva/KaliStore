@@ -1,0 +1,33 @@
+
+<template>
+  <h1>${'myOrders.title' | t}</h1>
+  <ul class="list-group">
+    <template repeat.for="order of orders">
+      <li class="list-group-item">
+        <h5>${'myOrders.number' | t}${order.id}</h5>
+        <div class="row">
+          <div class="col-xs-6">
+            <div>
+              <label class="font-weight-bold">${'myOrders.delivery' | t}:&nbsp;</label><span>${order.delivery.address}, ${order.delivery.city.name}</span>
+            </div>
+            <duv>
+              <label class="font-weight-bold">${'myOrders.client' | t}:&nbsp;</label><span>${order.delivery.client.name} - ${order.delivery.client.phoneNumber}</span>
+            </duv>
+          </div>
+          <div class="col-xs-6">
+            <template repeat.for="orderProduct of order.products">
+              <div>${orderProduct.quantity} x ${orderProduct.product.title}</div>
+            </template>
+            <label class="lead">${'myOrders.price' | t}:&nbsp;</label><span class="lead">${order.totalPrice | sumFormat}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <progress value.bind="order.status" max="4" class="progress progress-striped progress-info"></progress>
+          </div>
+        </div>
+        <div class="row text-xs-right"><span class="col-xs-3">${'order.status.initial' | t}</span><span class="col-xs-3">${'order.status.packaging' | t}</span><span class="col-xs-3">${'order.status.traveling' | t}</span><span class="col-xs-3">${'order.status.delivered' | t}</span></div>
+      </li>
+    </template>
+  </ul>
+</template>

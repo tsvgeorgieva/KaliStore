@@ -1,0 +1,4 @@
+
+<template>
+  <button click.delegate="buttonClicked()" disabled.bind="disabled" title="${title | t}" class.bind="type" class="btn"><i class.bind="icon" if.bind="icon" class="fa fa-lg"></i><span if.bind="icon &amp;&amp; name">&nbsp;</span><span if.bind="name">${name | t}</span></button>
+</template>

@@ -1,0 +1,14 @@
+
+<template>
+  <grid data.bind="products" show-filters="true">
+    <grid-row>
+      <grid-col nosort="nosort" heading="models.product.picture" width="67" class="text-lg-center"><img src.bind="$item.picture" style="max-width: 50px"/></grid-col>
+      <grid-col field="title" heading="models.product.title" filter="input">${$item.title}</grid-col>
+      <grid-col field="category.id" heading="models.product.category" filter="select" filter-items.bind="categories">${$item.category.name}</grid-col>
+      <grid-col field="price.amount" heading="models.product.price" filter="input" class="text-lg-right">${$item.price | sumFormat}</grid-col>
+      <grid-col nosort="nosort" width="50">
+        <edit-button on-click.call="editProduct($item)" type="btn-sm"></edit-button>
+      </grid-col>
+    </grid-row>
+  </grid>
+</template>

@@ -1,0 +1,12 @@
+
+<template>
+  <require from="./nav-bar"></require>
+  <require from="CodeSeven/toastr/build/toastr.min.css"></require>
+  <nav-bar router.bind="router"></nav-bar>
+  <div style="background: white;" class="page-host m-t-1">
+    <div class="container">
+      <router-view></router-view>
+    </div>
+  </div>
+  <loading-mask show-mask.bind="showLoadingMask"></loading-mask>
+</template>

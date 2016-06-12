@@ -1,0 +1,29 @@
+
+<template>
+  <require from="./select3.css"></require>
+  <div class="select3">
+    <div class="input-group">
+      <input type="text" value.bind="selectedItemName" readonly="readonly" disabled.bind="disabled" placeholder="${opts.caption | t}" focus.trigger="onValueInputFocus()" mousedown.trigger="toggleDropdown()" keydown.trigger="onValueInputKeyPressed($event)" class="form-control select3-value-box"/>
+      <div class="input-group-btn">
+        <button tabindex="-1" type="button" disabled.bind="disabled" show.bind="!opts.disableClear &amp;&amp; value !== opts.emptyValue" mousedown.trigger="clearValue()" class="btn btn-secondary btn-default"><i class="fa fa-times"></i></button>
+        <button tabindex="-1" type="button" disabled.bind="disabled" mousedown.trigger="toggleDropdown()" class="btn btn-secondary btn-default"><i class.bind="isDropdownOpen? 'fa-caret-up' : 'fa-caret-down'" class="fa"></i></button>
+      </div>
+    </div>
+    <div show.bind="isDropdownOpen" class="select3-dropdown">
+      <input type="text" value.bind="searchedItem" keydown.trigger="onSearchInputKeyPressed($event)" blur.trigger="closeDropdown(false)" class="select3-search-box form-control"/>
+      <div class="select3-dropdown-results-container">
+        <div mousewheel.trigger="scrollDropdown($event)" class="select3-dropdown-results">
+          <div if.bind="filteredData.length === 0" class="select3-result select3-no-results-message">${opts.noResultsMessage}</div>
+          <div repeat.for="datum of filteredDataShort" mousedown.trigger="selectItem(datum)" innerhtml.bind="datum.highlightedName" mouseenter.trigger="setHover(datum)" class="select3-result ${datum.item[opts.id] === hoveredDatum.item[opts.id] ? 'hovered' : ''} ${(opts.modelValueBind ? value[opts.id] : value) === datum.item[opts.id] || parseInt(opts.modelValueBind ? value[opts.id] : value) === datum.item[opts.id] ? 'selected' : ''}"></div>
+        </div>
+        <div mousewheel.trigger="scrollDropdown($event)" class="select3-scrollbar">
+          <button tabindex="-1" type="button" mousedown.trigger="startScrollUp()" mouseup.trigger="stopScrollUp()" mouseleave.trigger="stopScrollUp()" class="select3-scrollbar-up-btn ${filteredDataShortStartIndex === 0 ? 'disabled': 'enabled'}"><span class="fa fa-caret-up"></span></button>
+          <div mousedown.trigger="onDraggerContainerClick($event)" class="select3-scrollbar-dragger-container">
+            <div style.bind="{height: draggerHeight + 'px', top: draggerTop + 'px'}" mousedown.trigger="startScrollbarDragging()" class="select3-scrollbar-dragger"></div>
+          </div>
+          <button tabindex="-1" type="button" mousedown.trigger="startScrollDown()" mouseup.trigger="stopScrollDown()" mouseleave.trigger="stopScrollDown()" class="select3-scrollbar-down-btn ${filteredDataShortEndIndex === filteredData.length - 1 ? 'disabled': 'enabled'}"><span class="fa fa-caret-down"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

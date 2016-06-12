@@ -1,0 +1,1 @@
+module.exports = require("github:nathancahill/Split.js@1.0.6/split");

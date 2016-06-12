@@ -1,0 +1,43 @@
+
+<template>
+  <form style="max-width: 700px" class="m-x-auto">
+    <div>Profile</div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.fullName'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="text" value.bind="user.fullName" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.city'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <select3 items.bind="cities" value.bind="user.city" options.bind="{emptyValue: undefined, modelValueBind: true}"></select3>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.address'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="text" value.bind="user.address" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.phone'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="number" value.bind="user.phone" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 text-sm-right col-xs-12">
+        <save-button on-click.call="save()" name="common.save"></save-button>
+      </div>
+    </div>
+  </form>
+</template>

@@ -1,0 +1,16 @@
+
+<template>
+  <require from="./compose-relative-to-parent"></require>
+  <require from="./tree-view.css"></require>
+  <div class="list-group"><a repeat.for="$item of treeData" show.bind="$item.visible &amp;&amp; !$item.filtered" click.trigger="listItemClicked($item)" class.bind="$item.selected ? 'active': ''" class="list-group-item">
+      <div class="indent"><span repeat.for="num of $item.nestedLevel" class="indent"></span><span if.bind="!$item.hasChildren" class="indent"></span><span if.bind="$item.hasChildren" click.trigger="$item.toggleChildrenVisibility($event)" class="icon fa ${$item.expanded ? 'fa-minus-square-o': 'fa-plus-square-o'}"></span></div>
+      <div class="content">
+        <template if.bind="$item.view">
+          <compose-relative-to-parent view.bind="$item.view" view-model.bind="$item.viewModel"></compose-relative-to-parent>
+          <!--compose-relative-to-parent(view.bind="$item.view")-->
+        </template>
+        <template if.bind="!$item.view">
+          <div class="label label-pill label-default">${$item.label}</div><i if.bind="$item.icon" class.bind="$item.icon">&nbsp;</i>${$item.text}
+        </template>
+      </div></a></div>
+</template>

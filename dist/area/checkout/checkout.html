@@ -1,0 +1,266 @@
+
+<template>
+  <div if.bind="currentCheckoutStep === 1">
+    <div class="row">
+      <div class="col-lg-7 col-xs-12">
+        <div class="card">
+          <div class="card-block">
+            <form>
+              <h4>${'checkout.userInfo.title' | t}</h4>
+              <hr/>
+              <div class="form-group row">
+                <div class="col-sm-3 col-xs-12">
+                  <label class="form-control-label">${'models.user.fullName' | t}</label>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                  <input type="text" value.bind="userInfo.fullName" placeholder="${'checkout.userInfo.addName' | t}" required="true" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 col-xs-12">
+                  <label class="form-control-label">${'models.user.email' | t}</label>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                  <input type="email" value.bind="userInfo.email" placeholder="${'checkout.userInfo.addEmail' | t}" required="true" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 col-xs-12">
+                  <label class="form-control-label">${'models.user.phone' | t}</label>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                  <input type="text" value.bind="userInfo.phoneNumber" placeholder="${'checkout.userInfo.addPhoneNumber' | t}" required="true" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 col-xs-12">
+                  <label class="form-control-label">${'models.user.city' | t}</label>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                  <select3 items.bind="cities" value.bind="userInfo.city" options.bind="{emptyValue: undefined, modelValueBind: true}"></select3>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-3 col-xs-12">
+                  <label class="form-control-label">${'models.user.address' | t}</label>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                  <input type="text" value.bind="userInfo.address" placeholder="${'checkout.userInfo.addAddress' | t}" required="true" class="form-control"/>
+                </div>
+              </div>
+              <hr/>
+              <h4>${'checkout.deliveryInfo.title' | t}</h4>
+              <div class="form-group">
+                <div>
+                  <label for="deliveryToAddress">
+                    <input id="deliveryToAddress" type="radio" name="deliveryMethod" model.bind="true" checked.bind="toAddress" required="true"/>&nbsp;
+                    ${'checkout.deliveryInfo.toAddress' | t}
+                  </label>
+                </div>
+                <div>
+                  <label for="deliveryToOffice">
+                    <input id="deliveryToOffice" type="radio" name="deliveryMethod" model.bind="false" checked.bind="toAddress" required="true"/>&nbsp;
+                    ${'checkout.deliveryInfo.toOffice' | t}
+                  </label>
+                </div>
+              </div>
+              <div if.bind="toAddress === true">
+                <div class="form-group">
+                  <input id="differentShipment" type="checkbox" checked.bind="differentShipmentAddress"/>
+                  <label for="differentShipment">${'checkout.deliveryInfo.differentAddress' | t}</label>
+                </div>
+                <div if.bind="differentShipmentAddress === false">
+                  <div>
+                    <label class="font-weight-bold">${'models.user.fullName' | t}:</label>
+                    <text>${userInfo.fullName}</text>
+                  </div>
+                  <div>
+                    <label class="font-weight-bold">${'models.user.phone' | t}:</label>
+                    <text>${userInfo.phoneNumber}</text>
+                  </div>
+                  <div>
+                    <label class="font-weight-bold">${'models.user.city' | t}:</label>
+                    <text>${userInfo.city.name}</text>
+                  </div>
+                  <div>
+                    <label class="font-weight-bold">${'models.user.address' | t}:</label>
+                    <text>${userInfo.address}</text>
+                  </div>
+                </div>
+                <div if.bind="differentShipmentAddress === true">
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-xs-12">
+                      <label class="form-control-label">${'models.user.fullName' | t}</label>
+                    </div>
+                    <div class="col-sm-9 col-xs-12">
+                      <input type="text" value.bind="differentShipmentInfo.clientName" placeholder="${'checkout.userInfo.addName' | t}" class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-xs-12">
+                      <label class="form-control-label">${'models.user.phone' | t}</label>
+                    </div>
+                    <div class="col-sm-9 col-xs-12">
+                      <input type="text" value.bind="differentShipmentInfo.phoneNumber" placeholder="${'checkout.userInfo.addPhoneNumber' | t}" class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-xs-12">
+                      <label class="form-control-label">${'models.user.city' | t}</label>
+                    </div>
+                    <div class="col-sm-9 col-xs-12">
+                      <select3 items.bind="cities" value.bind="differentShipmentInfo.city" options.bind="{emptyValue: undefined, modelValueBind: true}"></select3>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-xs-12">
+                      <label class="form-control-label">${'models.user.address' | t}</label>
+                    </div>
+                    <div class="col-sm-9 col-xs-12">
+                      <input type="text" value.bind="differentShipmentInfo.address" placeholder="${'checkout.userInfo.addAddress' | t}" class="form-control"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div if.bind="toAddress === false">
+                <div class="form-group row">
+                  <div class="col-sm-3 col-xs-12">
+                    <label class="form-control-label">${'models.user.city' | t}</label>
+                  </div>
+                  <div class="col-sm-9 col-xs-12">
+                    <select3 items.bind="cities" value.bind="officeInfo.city" options.bind="{emptyValue: undefined, modelValueBind: true}"></select3>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3 col-xs-12">
+                    <label class="form-control-label">${'checkout.deliveryInfo.office' | t}</label>
+                  </div>
+                  <div class="col-sm-9 col-xs-12">
+                    <select3 items.bind="offices" value.bind="officeInfo.office" options.bind="{emptyValue: undefined, modelValueBind: true}"></select3>
+                  </div>
+                </div>
+              </div>
+              <hr/>
+              <h4>${'checkout.paymentInfo.title' | t}</h4>
+              <div class="form-group">
+                <input id="paymentAtDelivery" type="radio" name="paymentMethod" model.bind="true" checked.bind="paymentAtDelivery" required="true"/>
+                <label for="paymentAtDelivery">${'checkout.paymentInfo.atDelivery.title' | t}</label>
+                <div><small class="text-muted">${'checkout.paymentInfo.atDelivery.description' | t}</small></div>
+              </div>
+              <div class="form-group">
+                <input id="paymentWithCard" type="radio" name="paymentMethod" model.bind="false" checked.bind="paymentAtDelivery" required="true"/>
+                <label for="paymentWithCard">${'checkout.paymentInfo.withCard.title' | t}</label>
+                <div><small class="text-muted">${'checkout.paymentInfo.withCard.description' | t}</small></div>
+              </div>
+              <hr/>
+              <div style="text-align: right"><a href="#/cart" class="btn btn-secondary"><i class="fa fa-angle-double-left"></i>${'cart.back' | t}</a>
+                <base-button on-click.call="proceed()" type="btn-success" title="${'cart.proceed' | t}" name="${'cart.proceed' | t}" icon="fa-angle-double-right"></base-button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 hidden-md-down">
+        <div class="card">
+          <ul class="list-group">
+            <template repeat.for="cartProduct of cartProducts">
+              <li class="list-group-item">
+                <div style="font-size: 0.8em" class="row">
+                  <div class="col-xs-2"><img src.bind="cartProduct.product.picture" style="width: auto; height: 3em" class="card-img-top img-fluid"/></div>
+                  <div class="col-xs-4"><span>${cartProduct.product.title}</span></div>
+                  <div class="col-xs-2"><span>${cartProduct.quantity} ${'checkout.quantityLabel' | t}</span></div>
+                  <div class="col-xs-4">
+                    <label class="font-weight-bold">${cartProduct.product.price | sumFormat}</label>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+          <div style="text-align: right" class="card-block">
+            <div>
+              <label class="font-weight-bold">${'products.price' | t}:</label>
+              <text>${totalProductsPrice | sumFormat}</text>
+            </div>
+            <div>
+              <label class="font-weight-bold">${'cart.deliveryPrice' | t}:</label>
+              <text>${deliveryPrice | sumFormat}</text>
+            </div>
+            <div>
+              <label class="lead">${'cart.totalPrice' | t}:</label>
+              <text class="lead">${totalPrice | sumFormat}</text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div if.bind="currentCheckoutStep === 2">
+    <h1>${'checkout.orderInfo.title' | t}</h1>
+    <div class="row">
+      <div class="col-md-4 col-xs-12">
+        <div class="card card-block">
+          <h5 class="card-title">${'checkout.orderInfo.client' | t}</h5>
+          <hr/>
+          <div>${userInfo.fullName} - ${userInfo.phoneNumber}</div>
+          <div>${userInfo.address}, ${userInfo.city.name}</div>
+          <div>${userInfo.email}</div>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-12">
+        <div class="card card-block">
+          <h5 class="card-title">${'checkout.orderInfo.delivery' | t}</h5>
+          <hr/>
+          <div class="font-weight-bold">${deliveryInfo.type}</div>
+          <div>${deliveryInfo.client.name} - ${deliveryInfo.client.phoneNumber}</div>
+          <div>${deliveryInfo.address}, ${deliveryInfo.city.name}</div>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-12">
+        <div class="card card-block">
+          <h5 class="card-title">${'checkout.orderInfo.payment' | t}</h5>
+          <hr/>
+          <div class="font-weight-bold">${paymentInfo.method}</div>
+          <div>${paymentInfo.description}</div>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="card card-block">
+          <h5 class="card-title">${'checkout.title' | t}</h5>
+          <hr/>
+          <ul class="list-group">
+            <template repeat.for="cartProduct of cartProducts">
+              <li class="list-group-item">
+                <div style="font-size: 0.8em" class="row">
+                  <div class="col-xs-2"><img src.bind="cartProduct.product.picture" style="width: auto; height: 3em" class="card-img-top img-fluid"/></div>
+                  <div class="col-xs-4"><span>${cartProduct.product.title}</span></div>
+                  <div class="col-xs-2"><span>${cartProduct.quantity} ${'checkout.quantityLabel' | t}</span></div>
+                  <div class="col-xs-4">
+                    <label class="font-weight-bold">${cartProduct.product.price | sumFormat}</label>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+          <div class="card-block row">
+            <div class="col-sm-6 col-xs-12">
+              <div>
+                <label class="font-weight-bold">${'products.price' | t}:</label>
+                <text>${totalProductsPrice | sumFormat}</text>
+              </div>
+              <div>
+                <label class="font-weight-bold">${'cart.deliveryPrice' | t}:</label>
+                <text>${deliveryPrice | sumFormat}</text>
+              </div>
+            </div>
+            <div style="text-align: right" class="col-sm-6 col-xs-12">
+              <label class="lead">${'cart.totalPrice' | t}:</label>
+              <text class="lead">${totalPrice | sumFormat}</text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <base-button on-click.call="back()" type="btn-secondary" title="${'cart.back' | t}" name="${'cart.back' | t}" icon="fa-angle-double-left"></base-button>
+    <base-button on-click.call="order()" type="btn-success" title="${'cart.order' | t}" name="${'cart.order' | t}" icon="fa-angle-double-right"></base-button>
+  </div>
+</template>

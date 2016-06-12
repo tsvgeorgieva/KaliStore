@@ -1,0 +1,6 @@
+
+<template>
+  <button click.delegate="buttonClicked()" title.bind="title" class="btn btn-sm ${disabled ? 'disabled ' : ''} ${selected ? 'active btn-primary' : 'btn-secondary'}"><i class.bind="icon" if.bind="icon" class="fa fa-lg"></i><span if.bind="name">&nbsp; ${name}</span>
+    <content></content>
+  </button>
+</template>

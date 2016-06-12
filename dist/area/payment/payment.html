@@ -1,0 +1,49 @@
+
+<template>
+  <form style="max-width: 500px" class="m-x-auto">
+    <h4 class="text-xs-center">${'payment.header' | t}:</h4>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label class="form-control-label"> ${'payment.card.number'| t}:</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="text" value.bind="card.number" placeholder="${'payment.placeholders.number'| t}" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label class="form-control-label">${'payment.card.validUntil'| t}:</label>
+      </div>
+      <div class="col-sm-4">
+        <select3 items.bind="months" value.bind="card.date.month" options.bind="{emptyValue: undefined, modelValueBind: true, caption: 'Месец'}"></select3>
+      </div>
+      <div class="col-sm-4">
+        <select3 items.bind="years" value.bind="card.date.year" options.bind="{emptyValue: undefined, modelValueBind: true, caption: 'Година'}"></select3>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label class="form-control-label">${'payment.card.code'| t}:</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="text" value.bind="card.code" placeholder="${'payment.placeholders.code'| t}" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label class="form-control-label">${'payment.card.ownerName'| t}:</label>
+      </div>
+      <div class="col-sm-8">
+        <input type="text" value.bind="card.ownerName" placeholder="${'payment.placeholders.ownerName'| t}" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 text-xs-center"><span class="lead">${'cart.totalPrice' | t}: ${currentOrder.totalPrice | sumFormat}</span></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 text-xs-center">
+        <base-button on-click.call="buy()" type="btn-success" title="${'payment.buy' | t}" name="${'payment.buy' | t}" icon="fa-angle-double-right"></base-button>
+      </div>
+    </div>
+  </form>
+</template>

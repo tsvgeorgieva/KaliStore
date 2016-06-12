@@ -1,0 +1,68 @@
+
+<template>
+  <form style="max-width: 700px" class="m-x-auto">
+    <h1 class="text-sm-center">${'register.title' | t}</h1>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label"> ${'models.user.userName'| t} *</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="text" value.bind="user.userName" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.password'| t} *</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="password" value.bind="user.password" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'register.confirmPassword'| t} *</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="password" value.bind="confirmPassword" class="form-control"/>
+      </div>
+    </div>
+    <hr/>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.fullName'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="text" value.bind="user.fullName" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.city'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <select3 items.bind="cities" value.bind="user.city" options.bind="{emptyValue: undefined, modelValueBind: true}"></select3>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.address'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="text" value.bind="user.address" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-sm-right col-xs-12">
+        <label class="form-control-label">${'models.user.phone'| t}</label>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <input type="number" value.bind="user.phone" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 text-sm-right col-xs-12">
+        <base-button on-click.call="register()" type="btn-success" title="register.signup" name="register.signup"></base-button>
+      </div>
+    </div>
+  </form>
+</template>

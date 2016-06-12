@@ -1,0 +1,9 @@
+
+<template>
+  <nav class="navbar navbar-light bg-faded">
+    <ul class="nav navbar-nav">
+      <li repeat.for="navModel of router.navigation" class="nav-item"><a href.bind="navModel.href" title.bind="navModel.title" class="nav-link ${ navModel.isActive ? 'active' : '' }">${navModel.title}</a></li>
+    </ul>
+  </nav>
+  <router-view></router-view>
+</template>

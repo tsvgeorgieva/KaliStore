@@ -1,0 +1,16 @@
+
+<template>
+  <grid data.bind="users" show-filters="true">
+    <grid-row>
+      <grid-col heading="models.user.id" field="id" filter="input" min-width="30" class="text-xs-center">${$item.id}</grid-col>
+      <grid-col heading="models.user.userName" field="userName" filter="input" min-width="130">${$item.userName}</grid-col>
+      <grid-col heading="models.user.email" field="email" filter="input" min-width="50">${$item.email}</grid-col>
+      <grid-col heading="models.user.phone" field="phone" filter="input" min-width="50">${$item.phone}</grid-col>
+      <grid-col heading="models.user.isBlocked" field="isBlocked" filter="boolean" min-width="50" class="text-xs-center"><i class="fa fa-lg ${$item.isBlocked ? 'fa-check text-success' : 'fa-times text-danger'}"></i></grid-col>
+      <grid-col nosort="nosort" min-width="50">
+        <base-button if.bind="$item.isBlocked" click.trigger="unblock($item)" name="admin.usersManagement.unblock" title="admin.usersManagement.unblock" type="btn-success" icon="fa-unlock"></base-button>
+        <base-button if.bind="!$item.isBlocked" click.trigger="block($item)" name="admin.usersManagement.block" title="admin.usersManagement.block" type="btn-danger" icon="fa-lock"></base-button>
+      </grid-col>
+    </grid-row>
+  </grid>
+</template>

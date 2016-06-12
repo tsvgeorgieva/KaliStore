@@ -1,0 +1,62 @@
+
+<template>
+  <nav class="navbar navbar-fixed-top navbar-dark bg-primary">
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="nav navbar-nav">
+          <template repeat.for="navModel of router.navigation">
+            <li if.bind="checkAccess(navModel)" class="nav-item ${ navModel.isActive ? 'active' : '' }"><a href.bind="navModel.href" title.bind="navModel.title" class="nav-link"><i class.bind="navModel.config.favicon" if.bind="navModel.config.favicon" class="fa">&nbsp;</i><span if.bind="!navModel.config.iconOnly">${navModel.title}</span></a></li>
+          </template>
+          <li if.bind="isUserAdmin" class="nav-item"><a href="#/admin" title.bind="'admin.title' | t" class="nav-link ${router.currentInstruction.config.name === 'admin' ? 'active' : '' }">${'admin.title' | t}</a></li>
+          <li class="nav-item">
+            <form submit.trigger="search()">
+              <div class="input-group">
+                <input type="text" placeholder.bind="'navbar.search' | t" value.bind="searchQuery" class="form-control"/><span class="input-group-btn">
+                  <button click.trigger="search()" class="btn btn-secondary"><i class="fa fa-search"></i></button></span>
+              </div>
+            </form>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav pull-xs-right">
+          <li class="nav-item"><a href="#/cart" title.bind="'cart.title' | t" class="nav-link"><i style="font-size: 1.9em; color: white" class="fa fa-shopping-cart fa-lg"></i>
+              <!--, class="${cartProductsCount > 0 ? 'text-primary': ''}")-->&nbsp;<span style="font-size: 1em" class="label label-pill ${cartProductsCount &gt; 0 ? 'label-info': 'label-default'}">${cartProductsCount}</span></a></li>
+          <template if.bind="isUserLoggedIn">
+            <li class="nav-item"><a href="#/profile" class="nav-link">${'navbar.hello' | t}, ${session.getUserName()}</a></li>
+            <li class="nav-item"><a href="#/my-orders" class="nav-link">${'navbar.myOrders' | t}</a></li>
+            <li class="nav-item"><a click.trigger="logout()" class="nav-link">${'navbar.logout' | t}</a></li>
+          </template>
+          <template if.bind="!isUserLoggedIn">
+            <li class="nav-item"><a href="#/login" title.bind="'login.title' | t" class="nav-link ${router.currentInstruction.config.name === 'login' ? 'active' : '' }">${'login.title' | t}</a></li>
+            <li class="nav-item"><a href="#/register" title.bind="'register.title' | t" class="nav-link ${router.currentInstruction.config.name === 'register' ? 'active' : '' }">${'register.title' | t}</a></li>
+          </template>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- placeholder for the fixed top navbar-->
+  <nav class="navbar navbar-light bg-faded">
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="nav navbar-nav">
+          <li class="nav-item"><a class="nav-link">pesho</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <nav class="navbar navbar-light bg-faded">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12 text-xs-center"><a href="#"><img src="assets/images/logo.png" style="height:100px; max-width:100%;"/></a></div>
+      </div>
+      <div show.bind="!isInAdminPanel" class="row">
+        <div class="col-xs-12">
+          <ul class="nav navbar-nav">
+            <template repeat.for="category of categories">
+              <li class="nav-item"><a href="#/products/category/${category.id}" class="nav-link">${category.name}</a></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</template>
