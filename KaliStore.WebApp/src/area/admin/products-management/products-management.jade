@@ -1,0 +1,13 @@
+template
+  grid(data.bind="products", show-filters="true")
+    grid-row
+      grid-col.text-lg-center(nosort, heading="models.product.picture", width="67")
+        img(src.bind="$item.picture", style="max-width: 50px")
+      grid-col(field="title", heading="models.product.title", filter="input")
+        | ${$item.title}
+      grid-col(field="category.id", heading="models.product.category", filter="select", filter-items.bind="categories")
+        | ${$item.category.name}
+      grid-col.text-lg-right(field="price.amount", heading="models.product.price", filter="input")
+        | ${$item.price | sumFormat}
+      grid-col(nosort, width="50")
+        edit-button(on-click.call="editProduct($item)", type="btn-sm")

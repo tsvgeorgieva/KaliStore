@@ -8,6 +8,7 @@
 .popover .popover-content > div {
   display: block !important;
 }
+
 // ===========
 
 // ==Toastr under navbar==
@@ -16,6 +17,15 @@
 #toast-container.toast-top-full-width {
   //top: 40px;
 }
+
 // ===========
 
+.row-fluid {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.row-fluid > div {
+  display: inline-block;
+}
 

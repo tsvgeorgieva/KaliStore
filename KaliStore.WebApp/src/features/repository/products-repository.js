@@ -1,25 +1,43 @@
+import {inject} from 'aurelia-framework';
 import {localStorageManager} from 'service';
+import {MaterialsRepository} from './materials-repository';
+import {CategoriesRepository} from './categories-repository';
 
 const productsKey = 'products';
 
+@inject(MaterialsRepository, CategoriesRepository)
 export class ProductsRepository {
-  constructor() {
-    this.products = localStorageManager.get(productsKey);
-    if (this.products === undefined) {
-      this.initialize();
-    }
-  }
+  editableProperties = [
+    'title',
+    'description',
+    'price',
+    'rating',
+    'materials',
+    'size',
+    'picture',
+    'category',
+    'daysToMake'
+  ];
 
-  initialize() {
-    this.products = initialProducts;
-    localStorageManager.save(productsKey, this.products);
+  constructor(materialsRepository, categoriesRepository) {
+    this.materialsRepository = materialsRepository;
+    this.categoriesRepository = categoriesRepository;
+
+    this.products = this._getAllFromLocalStorage();
+    if (this.products.length === 0) {
+      this._initialize();
+    }
   }
 
   get(id) {
     return this.products.find(p => p.id === id);
   }
 
-  getAll() {
+  getAll(copy = false) {
+    if (copy) {
+      return this._getAllFromLocalStorage();
+    }
+
     return this.products;
   }
 
@@ -30,6 +48,46 @@ export class ProductsRepository {
 
   getByCategory(categoryId) {
     return this.products.filter(p => p.category.id === categoryId);
+  }
+
+  save(productData) {
+    const product = {};
+    product.id = ++this.lastId;
+    this.editableProperties.forEach(property => this._editProperty(product, productData, property));
+    this.products.push(product);
+    this._saveAllToLocalStorage();
+    return product.id;
+  }
+
+  edit(productData) {
+    const product = this.get(productData.id);
+    this.editableProperties.forEach(property => this._editProperty(product, productData, property));
+    this._saveAllToLocalStorage();
+  }
+
+  _initialize() {
+    this.products = initialProducts.map(p => {
+      p.materials = p.materials.map(m => this.materialsRepository.get(m.id));
+      p.category = this.categoriesRepository.get(p.category.id);
+      return p;
+    });
+    this._saveAllToLocalStorage();
+  }
+
+  _getAllFromLocalStorage() {
+    return (localStorageManager.get(productsKey) || []).map(p => {
+      p.materials = p.materials.map(m => this.materialsRepository.get(m.id));
+      p.category = this.categoriesRepository.get(p.category.id);
+      return p;
+    });
+  }
+
+  _saveAllToLocalStorage() {
+    localStorageManager.save(productsKey, this.products);
+  }
+
+  _editProperty(product, productData, property) {
+    product[property] = productData[property] || product[property];
   }
 }
 

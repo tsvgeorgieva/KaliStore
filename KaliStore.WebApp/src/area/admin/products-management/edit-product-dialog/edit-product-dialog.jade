@@ -1,0 +1,72 @@
+template
+  ai-dialog(style="width: 600px")
+    ai-dialog-header.text-xs-center
+      h4 ${'admin.productsManagement.editProduct.title' | t}
+    ai-dialog-body(style="max-height: 500px; overflow-y: auto")
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.title'| t}
+        div.col-sm-8.col-xs-12
+          input.form-control(type="text", value.bind="product.title")
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.category'| t}
+        div.col-sm-8.col-xs-12
+          select.form-control(value.bind="product.category")
+            option(repeat.for="category of categories", model.bind="category") ${category.name}
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.price'| t}
+        div.col-sm-4.col-xs-6
+          input.form-control.text-xs-right(type="number", min="0", step="0.01", value.bind="product.price.amount")
+        div.col-sm-4.col-xs-6
+          select.form-control(value.bind="product.price.currency")
+            option(repeat.for="currency of currencies", value.bind="currency") ${currency}
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.pictures'| t}
+        div.col-sm-8.col-xs-12
+          label.file
+            input(type="file", accept="image/*", multiple, files.bind="selectedPictures")
+            span.file-custom
+      div.row-fluid
+        div(class="${product.pictures.length > 1 ? '' : 'col-xs-offset-4'}")
+          div.m-a-1(style="position:relative")
+            span.fa.fa-times-circle.text-danger(click.trigger="deleteFirstPicture()", style="position: absolute; top: 0; right: 0; z-index: 100;")
+            img(src.bind='product.picture', style="width: 150px; height: 150px")
+        div(repeat.for="picture of product.pictures")
+          div.m-a-1(style="position:relative")
+            span.fa.fa-times-circle.text-danger(click.trigger="deletePicture($index)", style="position: absolute; top: 0; right: 0; z-index: 100;")
+            img(src.bind='picture | blobToUrl', style="width: 150px; height: 150px")
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.size'| t}
+        div.col-sm-8.col-xs-12
+          input.form-control(type="text", value.bind="product.size")
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.materials'| t}
+        div.col-sm-8.col-xs-12
+          select.form-control(value.bind="product.materialsIds", multiple)
+            option(repeat.for="material of materials", value.bind="material.id") ${material.name}
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.daysToMake'| t}
+        div.col-sm-8.col-xs-12
+          input.form-control(type="number", value.bind="product.daysToMake")
+
+      div.form-group.row
+        div.col-sm-4.text-sm-right.col-xs-12
+          label.form-control-label  ${'models.product.description'| t}
+        div.col-sm-8.col-xs-12
+          textarea.form-control(value.bind="product.description", style="height: 90px")
+
+    ai-dialog-footer
+      save-button(on-click.call="save()")
+      cancel-button(on-click.call="cancel()")

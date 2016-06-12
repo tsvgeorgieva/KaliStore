@@ -20,6 +20,12 @@ export class AdminIndex extends ChildRouter {
       title: this.i18n.tr('admin.usersManagement.title'),
       nav: true
     }, {
+      route: 'products-management',
+      name: 'products-management',
+      moduleId: './products-management/products-management',
+      title: this.i18n.tr('admin.productsManagement.title'),
+      nav: true
+    }, {
       route: 'categories-management',
       name: 'categories-management',
       moduleId: './categories-management/categories-management',

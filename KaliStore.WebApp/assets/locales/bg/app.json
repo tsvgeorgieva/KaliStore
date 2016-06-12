@@ -11,9 +11,11 @@
   "common": {
     "save": "Запис",
     "cancel": "Отказ",
+    "add": "Добави",
     "search": "Търсене",
     "status": "Статус",
     "name": "Име",
+    "id": "ИД",
     "date": "Дата",
     "fromDate": "От дата",
     "toDate": "До дата",
@@ -62,7 +64,8 @@
     "category": "Категория",
     "similar": "Подобни продукти",
     "daysToMake": "Време за изработка",
-    "days": "дена"
+    "days": "дена",
+    "day": "ден"
   },
   "cart": {
     "title": "Количка",
@@ -163,6 +166,13 @@
       "title": "Управление на потребители",
       "block": "Блокирай",
       "unblock": "Отблокирай"
+    },
+    "productsManagement": {
+      "title": "Управление на продукти",
+      "allCategories": "Всички категории",
+      "editProduct": {
+        "title": "Промяна на продукт"
+      }
     },
     "categoriesManagement": {
       "title": "Управление на категории"

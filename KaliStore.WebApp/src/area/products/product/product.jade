@@ -7,16 +7,19 @@ template
         h4.card-header ${product.title}
         div.card-block
           div
-            label.font-weight-bold ${'products.size' | t}:
-            text ${product.size}
-          div
-            label.font-weight-bold ${'products.materials' | t}:
-            text ${product.materialsList}
-          div
-            label.font-weight-bold ${'products.category' | t}:
+            label.font-weight-bold ${'models.product.category' | t}:
             text ${product.category.name}
           div
-            label.font-weight-bold ${'products.price' | t}:
+            label.font-weight-bold ${'models.product.size' | t}:
+            text ${product.size}
+          div
+            label.font-weight-bold ${'models.product.materials' | t}:
+            text ${product.materialsList}
+          div
+            label.font-weight-bold ${'models.product.daysToMake' | t}:
+            text ${product.daysToMake} ${product.daysToMake > 1 ? 'products.days' : 'products.day' | t}
+          div
+            label.font-weight-bold ${'models.product.price' | t}:
             text ${product.price | sumFormat}
         hr
         div.card-block
