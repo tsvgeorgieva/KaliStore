@@ -9,7 +9,7 @@ template
                 i.fa(class.bind="navModel.config.favicon", if.bind="navModel.config.favicon") &nbsp;
                 span(if.bind="!navModel.config.iconOnly") ${navModel.title}
           li.nav-item(if.bind="isUserAdmin")
-            a.nav-link(href="#/admin", title.bind="'admin.title' | t") ${'admin.title' | t}
+            a.nav-link(href="#/admin", title.bind="'admin.title' | t", class="${router.currentInstruction.config.name === 'admin' ? 'active' : '' }") ${'admin.title' | t}
           li.nav-item
             form(submit.trigger="search()")
               div.input-group
@@ -31,9 +31,9 @@ template
               a.nav-link(click.trigger="logout()") ${'navbar.logout' | t}
           template(if.bind="!isUserLoggedIn")
             li.nav-item
-              a.nav-link(href="#/login", title.bind="'login.title' | t") ${'login.title' | t}
+              a.nav-link(href="#/login", title.bind="'login.title' | t", class="${router.currentInstruction.config.name === 'login' ? 'active' : '' }") ${'login.title' | t}
             li.nav-item
-              a.nav-link(href="#/register", title.bind="'register.title' | t") ${'register.title' | t}
+              a.nav-link(href="#/register", title.bind="'register.title' | t", class="${router.currentInstruction.config.name === 'register' ? 'active' : '' }") ${'register.title' | t}
   // placeholder for the fixed top navbar
   nav.navbar.navbar-light.bg-faded
     div.row
@@ -44,13 +44,9 @@ template
   div.container
     nav.navbar.navbar-light.bg-faded
       div.row
-        div.col-md-3.text-sm-center
-
-        div.col-md-6.text-xs-center
+        div.col-md-6.col-md-offset-3.col-xs-12.text-xs-center
           a(href="#")
             img(src="assets/images/logo.png", style="height:100px; max-width:100%;")
-        div.col-md-3.text-sm-center
-          div
       div.row(show.bind="!isInAdminPanel")
         div.col-xs-12
           ul.nav.navbar-nav
