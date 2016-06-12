@@ -19,6 +19,12 @@ export class AdminIndex extends ChildRouter {
       moduleId: './users-management/users-management',
       title: this.i18n.tr('admin.usersManagement.title'),
       nav: true
+    }, {
+      route: 'materials-management',
+      name: 'materials-management',
+      moduleId: './materials-management/materials-management',
+      title: this.i18n.tr('admin.materialsManagement.title'),
+      nav: true
     }];
   }
 }
