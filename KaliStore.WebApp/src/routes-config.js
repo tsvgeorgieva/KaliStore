@@ -68,6 +68,12 @@ export class RoutesConfig {
       nav: false,
       title: this.i18n.tr('payment.title')
     }, {
+      route: 'my-orders',
+      name: 'my-orders',
+      moduleId: './area/my-orders/my-orders',
+      nav: false,
+      title: this.i18n.tr('myOrders.title')
+    }, {
       route: 'admin',
       name: 'admin',
       moduleId: './area/admin/admin-index',

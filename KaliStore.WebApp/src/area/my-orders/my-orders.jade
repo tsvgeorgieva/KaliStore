@@ -1,0 +1,27 @@
+template
+  h1 ${'myOrders.title' | t}
+  ul.list-group
+    template(repeat.for="order of orders")
+      li.list-group-item
+        h5 ${'myOrders.number' | t}${order.id}
+        div.row
+          div.col-xs-6
+            div
+              label.font-weight-bold ${'myOrders.delivery' | t}:&nbsp;
+              span ${order.delivery.address}, ${order.delivery.city.name}
+            duv
+              label.font-weight-bold ${'myOrders.client' | t}:&nbsp;
+              span ${order.delivery.client.name} - ${order.delivery.client.phoneNumber}
+          div.col-xs-6
+            template(repeat.for="orderProduct of order.products")
+              div ${orderProduct.quantity} x ${orderProduct.product.title}
+            label.lead ${'myOrders.price' | t}:&nbsp;
+            span.lead ${order.totalPrice | sumFormat}
+        div.row
+          div.col-xs-12
+            progress.progress.progress-striped.progress-info(value.bind="order.status", max="4")
+        div.row.text-xs-right
+          span.col-xs-3 ${'order.status.initial' | t}
+          span.col-xs-3 ${'order.status.packaging' | t}
+          span.col-xs-3 ${'order.status.traveling' | t}
+          span.col-xs-3 ${'order.status.delivered' | t}

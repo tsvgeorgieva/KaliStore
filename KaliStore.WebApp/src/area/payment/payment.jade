@@ -25,7 +25,7 @@ template
         input.form-control(type="text", value.bind="card.ownerName", placeholder="${'payment.placeholders.ownerName'| t}")
     div.form-group.row
       div.col-sm-12.text-xs-center
-        span.lead ${'cart.totalPrice' | t}: взимане на ЦЕНА
+        span.lead ${'cart.totalPrice' | t}: ${currentOrder.totalPrice | sumFormat}
     div.form-group.row
       div.col-sm-12.text-xs-center
         base-button(on-click.call="buy()", type="btn-success", title="${'payment.buy' | t}", name="${'payment.buy' | t}" icon="fa-angle-double-right")
