@@ -49,7 +49,8 @@
   "navbar": {
     "search": "Търси",
     "hello": "Здравей",
-    "logout": "Изход"
+    "logout": "Изход",
+    "myOrders": "Моите поръчки"
   },
   "products": {
     "allProducts": "Всички продукти",
@@ -113,7 +114,10 @@
   "order": {
     "successful": "Вашата поръчка беше направена успешно!",
     "status": {
-      "initial": "Потвърдена поръчка"
+      "initial": "Потвърдена поръчка",
+      "packaging": "Товари се",
+      "traveling": "Пътува",
+      "delivered": "Доставена"
     }
   },
   "payment": {
@@ -132,6 +136,14 @@
       "code": "CVV2/CVC2",
       "ownerName": "Името, което е върху картата"
     }
+  },
+  "myOrders": {
+    "title": "Моите поръчки",
+    "number": "Поръчка #",
+    "delivery": "Доставка до",
+    "client": "Получател",
+    "price": "Цена на поръчката",
+    "status": "Статус"
   },
   "models": {
     "user": {

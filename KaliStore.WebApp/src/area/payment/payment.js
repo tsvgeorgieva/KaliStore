@@ -32,7 +32,6 @@ export class Payment {
   }
 
   buy() {
-    this.currentOrder.status = "Платена поръчка";
     this.ordersRepository.save(this.currentOrder);
     localStorageManager.clear("currentOrder");
 

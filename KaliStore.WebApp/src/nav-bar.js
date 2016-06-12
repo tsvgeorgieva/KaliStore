@@ -80,7 +80,7 @@ export class NavBar {
   }
 
   loadCartProducts() {
-    const cart = this.cartRepository.getAll()
+    const cart = this.cartRepository.getAll();
     this.cartProducts = Object.keys(cart).map(k => {
       return {product: this.productsRepository.get(parseInt(k)), quantity: cart[k]}
     });

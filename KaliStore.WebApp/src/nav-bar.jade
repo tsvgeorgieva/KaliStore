@@ -26,6 +26,8 @@ template
             li.nav-item
               a.nav-link(href="#/profile") ${'navbar.hello' | t}, ${session.getUserName()}
             li.nav-item
+              a.nav-link(href="#/my-orders") ${'navbar.myOrders' | t}
+            li.nav-item
               a.nav-link(click.trigger="logout()") ${'navbar.logout' | t}
           template(if.bind="!isUserLoggedIn")
             li.nav-item

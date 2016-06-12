@@ -115,9 +115,9 @@ export class Checkout {
     const order = {
       user: this.userInfo,
       delivery: this.deliveryInfo,
-      products: this.cart,
+      products: this.cartProducts,
       totalPrice: this.totalPrice,
-      status: this.i18n.tr('order.status.initial')
+      status: 1
     };
     if (this.paymentAtDelivery) {
       this.ordersRepository.save(order);

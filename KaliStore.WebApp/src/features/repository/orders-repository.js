@@ -25,7 +25,7 @@ export class OrdersRepository {
   }
 
   getByUserId(userId){
-    return this.orders.find(o => o.user.id === userId);
+    return this.orders.filter(o => o.user.id === userId);
   }
 
   getAll() {
@@ -55,20 +55,131 @@ const initialOrders = [{
     email: 'pesho@abv.bg'
   },
   delivery: {
-    city: 'Пловдив',
+    city: {
+      id: 2,
+      name: 'Пловдив'
+    },
     address: 'ул. Някоя си 72',
     client: {
       name: 'Иван Пешев',
       phoneNumber: '0988855'
     }
   },
-  products: {
-    1: 2,
-    3: 1
-  },
+  products: [{
+      product: {
+        id: 1,
+        title: 'Пролетна картичка',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+        'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        price: {
+          amount: 10,
+          currency: 'BGN'
+        },
+        rating: 4.1,
+        materials: [{
+          id: 1,
+          name: 'Картон'
+        }],
+        size: '20см x 10см',
+        picture: `assets/images/kartichka1.jpg`,
+        category: {
+          id: 1,
+          title: 'Картички'
+        },
+        daysToMake: 2
+      },
+      quantity: 2
+    }, {
+      product: {
+        id: 3,
+        title: 'Коледна картичка с елен',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+        'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        price: {
+          amount: 10,
+          currency: 'BGN'
+        },
+        rating: 4.6,
+        materials: [{
+          id: 1,
+          name: 'Картон'
+        }, {
+          id: 2,
+          name: 'Брокат'
+        }],
+        size: '20см x 10см',
+        picture: `assets/images/kartichka3.jpg`,
+        category: {
+          id: 1,
+          title: 'Картички'
+        },
+        daysToMake: 2
+      },
+      quantity: 1
+    }
+  ],
   totalPrice: {
     amount: 33.70,
     currency: 'BGN'
   },
-  status: 'Доставена'
+  status: 4
+}, {
+  id: 2,
+  user: {
+    id: 1,
+    userName: 'pesho',
+    fullName: 'Pesho Peshev',
+    city: {
+      id: 1,
+      name: 'София'
+    },
+    address: 'ул. Пършевица 5',
+    phone: '2873278',
+    email: 'pesho@abv.bg'
+  },
+  delivery: {
+    city: {
+      id: 2,
+      name: 'Пловдив'
+    },
+    address: 'ул. Някоя си 72',
+    client: {
+      name: 'Иван Пешев',
+      phoneNumber: '0988855'
+    }
+  },
+  products: [{
+    product: {
+      id: 5,
+      title: 'Детска диадема',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+      'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      price: {
+        amount: 8,
+        currency: 'BGN'
+      },
+      rating: 4.1,
+      materials: [{
+        id: 5,
+        name: 'Мъниста'
+      }, {
+        id: 4,
+        name: 'Панделка'
+      }],
+      size: 'стандартен',
+      picture: `assets/images/diadema.jpg`,
+      category: {
+        id: 3,
+        title: 'Аксесоари'
+      },
+      daysToMake: 3
+    },
+    quantity: 1
+  }
+  ],
+  totalPrice: {
+    amount: 11.70,
+    currency: 'BGN'
+  },
+  status: 3
 }];
