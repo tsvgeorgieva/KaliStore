@@ -16,6 +16,7 @@ System.config({
   map: {
     "CodeSeven/toastr": "github:CodeSeven/toastr@2.1.2",
     "Eonasdan/bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker@4.17.37",
+    "HubSpot/tether": "github:HubSpot/tether@1.1.1",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.1.0",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.1.1",
     "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.0.0-beta.1.1.2",
