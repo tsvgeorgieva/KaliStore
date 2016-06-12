@@ -36,7 +36,7 @@ export class LocalStore extends BaseStore {
           continue;
         }
 
-        let applyFilterAgainstValue = row[col.getFieldName()];
+        let applyFilterAgainstValue = this._getItemColValue(row, col.getFieldName());
         if (col.matchFilter(applyFilterAgainstValue) === false) {
           include = false;
           break;
@@ -45,6 +45,15 @@ export class LocalStore extends BaseStore {
 
       return include;
     });
+  }
+
+  _getItemColValue(row, fieldName){
+    let fields = fieldName.split('.');
+    let value = row;
+    while(fields.length > 0) {
+      value = value[fields.shift()]
+    }
+    return value;
   }
 
   applyPagination(data) {
