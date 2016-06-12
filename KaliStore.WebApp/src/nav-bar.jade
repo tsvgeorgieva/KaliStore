@@ -8,6 +8,8 @@ template
               a.nav-link(href.bind="navModel.href", title.bind="navModel.title")
                 i.fa(class.bind="navModel.config.favicon", if.bind="navModel.config.favicon") &nbsp;
                 span(if.bind="!navModel.config.iconOnly") ${navModel.title}
+          li.nav-item(if.bind="isUserAdmin")
+            a.nav-link(href="#/admin", title.bind="'admin.title' | t") ${'admin.title' | t}
           li.nav-item
             form(submit.trigger="search()")
               div.input-group
