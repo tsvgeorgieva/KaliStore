@@ -144,6 +144,17 @@
       "phone": "Телефон",
       "email": "Имейл",
       "isBlocked": "Блокиран"
+    },
+    "product": {
+      "title": "Заглавие",
+      "description": "Описание",
+      "size": "Размер",
+      "materials": "Материали",
+      "price": "Цена",
+      "category": "Категория",
+      "daysToMake": "Време за изработка",
+      "picture": "Снимка",
+      "pictures": "Снимки"
     }
   },
   "admin": {
