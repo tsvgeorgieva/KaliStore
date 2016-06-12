@@ -7,6 +7,7 @@ export class SaveButton {
   @bindable onClick = null;
   @bindable title = 'Съхрани';
   @bindable name = '';
+  @bindable type = '';
 
   constructor(element) {
     this.element = element;

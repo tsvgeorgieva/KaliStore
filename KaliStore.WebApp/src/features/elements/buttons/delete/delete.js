@@ -7,6 +7,7 @@ export class DeleteButton {
   @bindable onClick = null;
   @bindable title = 'Изтрий';
   @bindable name = '';
+  @bindable type = '';
 
   constructor(element) {
     this.element = element;

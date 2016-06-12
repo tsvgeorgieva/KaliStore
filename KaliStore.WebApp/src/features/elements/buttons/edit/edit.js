@@ -7,6 +7,7 @@ export class EditButton {
   @bindable onClick = null;
   @bindable title = 'Редакция';
   @bindable name = '';
+  @bindable type = 'btn-default';
 
   constructor(element) {
     this.element = element;
