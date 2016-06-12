@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {Session, HttpSessionTimedOutMessage, localStorageManager} from 'service';
 import {AddProductToCartEvent, RemoveProductFromCartEvent, OrderComplete} from 'events';
 import {CategoriesRepository, CartRepository, ProductsRepository} from 'repository';
+import {accessRight} from 'enum';
 
 @inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository, ProductsRepository)
 export class NavBar {
@@ -51,6 +52,10 @@ export class NavBar {
 
   get userName() {
     return this.session.getUserName();
+  }
+
+  get isUserAdmin() {
+    return this.session.userHasAccessRight(accessRight.adminPanel);
   }
 
   checkIfInAdminPanel(){

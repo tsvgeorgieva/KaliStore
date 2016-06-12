@@ -3,6 +3,7 @@ import {I18N} from 'aurelia-i18n';
 import {Router} from 'aurelia-router';
 import {Session, Logger} from 'service';
 import {UsersRepository} from 'repository';
+import {accessRight} from 'enum';
 
 @inject(Session, Logger, I18N, Router, UsersRepository)
 export class Login {
@@ -21,7 +22,11 @@ export class Login {
     let user = this.usersRepository.getByUserName(this.userName);
     if (user !== undefined && user.isBlocked !== true && this.password === user.password) {
       this.session.loginUser(user.id);
-      this.router.navigate('');
+      if (this.session.userHasAccessRight(accessRight.adminPanel)) {
+        this.router.navigate('admin');
+      } else {
+        this.router.navigate('');
+      }
     } else {
       this.logger.error(this.i18n.tr('login.loginUnsuccessful'));
     }

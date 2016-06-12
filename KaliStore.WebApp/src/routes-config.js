@@ -77,7 +77,7 @@ export class RoutesConfig {
       route: 'admin',
       name: 'admin',
       moduleId: './area/admin/admin-index',
-      nav: true,
+      nav: false,
       title: this.i18n.tr('admin.title'),
       accessRight: accessRight.adminPanel
     }];

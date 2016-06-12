@@ -4,7 +4,7 @@ import {inject, useView} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 
 @inject(Session, I18N)
-@useView('libs/child-router/tabs-router.html')
+@useView('libs/child-router/navbar-router.html')
 //@useView('libs/child-router/null-router.html')
 export class AdminIndex extends ChildRouter {
   constructor(session, i18n) {
