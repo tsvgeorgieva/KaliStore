@@ -51,7 +51,7 @@ const initialProducts = [{
   picture: `assets/images/kartichka1.jpg`,
   category: {
     id: 1,
-    title: 'Картички'
+    name: 'Картички'
   },
   daysToMake: 2
 }, {
@@ -72,7 +72,7 @@ const initialProducts = [{
   picture: `assets/images/kartichka2.jpg`,
   category: {
     id: 1,
-    title: 'Картички'
+    name: 'Картички'
   },
   daysToMake: 2
 }, {
@@ -96,7 +96,7 @@ const initialProducts = [{
   picture: `assets/images/kartichka3.jpg`,
   category: {
     id: 1,
-    title: 'Картички'
+    name: 'Картички'
   },
   daysToMake: 2
 }, {
@@ -123,7 +123,7 @@ const initialProducts = [{
   picture: `assets/images/torta.jpg`,
   category: {
     id: 2,
-    title: 'Торти'
+    name: 'Торти'
   },
   daysToMake: 5
 }, {
@@ -147,7 +147,7 @@ const initialProducts = [{
   picture: `assets/images/diadema.jpg`,
   category: {
     id: 3,
-    title: 'Аксесоари'
+    name: 'Аксесоари'
   },
   daysToMake: 3
 }];

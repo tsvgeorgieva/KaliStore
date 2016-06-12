@@ -25,11 +25,11 @@ export class CategoriesRepository {
 
 const initialCategories = [{
   id: 1,
-  title: 'Картички'
+  name: 'Картички'
 }, {
   id: 2,
-  title: 'Торти'
+  name: 'Торти'
 }, {
   id: 3,
-  title: 'Аксесоари'
+  name: 'Аксесоари'
 }];
