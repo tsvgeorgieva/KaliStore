@@ -1,8 +1,10 @@
 import {localStorageManager} from 'service';
 
+const categoriesKey = 'categories';
+
 export class CategoriesRepository {
   constructor() {
-    this.categories = localStorageManager.get('categories');
+    this.categories = localStorageManager.get(categoriesKey);
     if (this.categories === undefined) {
       this.initialize();
     }
@@ -11,7 +13,7 @@ export class CategoriesRepository {
   initialize() {
     this.categories = initialCategories;
 
-    localStorageManager.save('categories', this.categories);
+    localStorageManager.save(categoriesKey, this.categories);
   }
 
   get(id) {
