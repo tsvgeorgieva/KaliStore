@@ -1,0 +1,39 @@
+template
+  div.row
+    div.col-sm-5
+      img(src.bind="product.picture", style="max-width: 400px;")
+    div.col-sm-7
+      div.card
+        h4.card-header ${product.title}
+        div.card-block
+          div
+            label.font-weight-bold ${'models.product.category' | t}:
+            text ${product.category.name}
+          div
+            label.font-weight-bold ${'models.product.size' | t}:
+            text ${product.size}
+          div
+            label.font-weight-bold ${'models.product.materials' | t}:
+            text ${product.materialsList}
+          div
+            label.font-weight-bold ${'models.product.daysToMake' | t}:
+            text ${product.daysToMake} ${product.daysToMake > 1 ? 'products.days' : 'products.day' | t}
+          div
+            label.font-weight-bold ${'models.product.price' | t}:
+            text ${product.price | sumFormat}
+        hr
+        div.card-block
+          p ${product.description}
+        div.card-footer
+          base-button(on-click.call="addToCart()", type="btn-primary", icon="fa-cart-plus", name="products.buy", title="products.buy")
+  div.m-t-2
+    h3 ${'products.similar' | t}:
+    div.row.m-t-2
+      template(repeat.for="similarProduct of similarProducts")
+        div.col-sm-2
+          div.card
+            a(href="#/products/${similarProduct.id}")
+              img.card-img-top.img-fluid(src.bind="similarProduct.picture")
+            div.card-block
+              h5.card-title
+                a(href="#/products/${similarProduct.id}") ${similarProduct.title}

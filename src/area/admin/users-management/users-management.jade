@@ -1,0 +1,20 @@
+template
+  grid(data.bind="users", show-filters="true")
+    grid-row
+      grid-col.text-xs-center(heading="models.user.id", field="id", filter="input", min-width="30")
+        | ${$item.id}
+      grid-col(heading="models.user.userName", field="userName", filter="input", min-width="130")
+        | ${$item.userName}
+      grid-col(heading="models.user.email", field="email", filter="input", min-width="50")
+        | ${$item.email}
+      grid-col(heading="models.user.phone", field="phone", filter="input", min-width="50")
+        | ${$item.phone}
+      grid-col.text-xs-center(heading="models.user.isBlocked", field="isBlocked", filter="boolean", min-width="50")
+        i.fa.fa-lg(class="${$item.isBlocked ? 'fa-check text-success' : 'fa-times text-danger'}")
+      grid-col(nosort, min-width="50")
+        base-button(if.bind="$item.isBlocked", click.trigger="unblock($item)",
+        name="admin.usersManagement.unblock", title="admin.usersManagement.unblock",
+        type="btn-success", icon="fa-unlock")
+        base-button(if.bind="!$item.isBlocked", click.trigger="block($item)",
+        name="admin.usersManagement.block", title="admin.usersManagement.block",
+        type="btn-danger", icon="fa-lock")

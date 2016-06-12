@@ -1,0 +1,34 @@
+template
+  h1 ${'cart.title' | t}
+  div.row
+    div.col-lg-8.col-md-12
+      ul.list-group
+        template(repeat.for="cartProduct of cartProducts")
+          li.list-group-item
+            div.row
+              div.col-sm-5
+                a(href="#/products/${cartProduct.product.id}")
+                  img.card-img-top.img-fluid(src.bind="cartProduct.product.picture", style="width: auto; height: 10em")
+              div.col-sm-7
+                div.row
+                  div.col-sm-10
+                    h4
+                      a(href="#/products/${cartProduct.product.id}") ${cartProduct.product.title}
+                  div.col-sm-2
+                    remove-button(on-click.call="removeProduct(cartProduct)", type="btn-sm btn-secondary")
+                div
+                  label.font-weight-bold ${'products.daysToMake' | t}:
+                  text ${cartProduct.product.daysToMake} ${'products.days' | t}
+                div(style="width: 20%;")
+                  input.form-control(type="number", min="1", max="30", value.bind="cartProduct.quantity", change.trigger="changeProductQuantity(cartProduct)")
+                label.lead ${cartProduct.product.price | sumFormat}
+    div.col-lg-4.col-md-12
+      div.card
+        div.card-block
+          div(style="font-size: 1.5em")
+            label.font-weight-bold ${'cart.totalPrice' | t}:
+            text ${totalPrice | sumFormat}
+          a.btn.btn-success(href="#/checkout", name="cart.order")
+            i.fa.fa-angle-double-right.fa-lg
+            | &nbsp;
+            | ${'cart.order' | t}

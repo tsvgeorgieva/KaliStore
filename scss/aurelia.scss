@@ -1,0 +1,66 @@
+﻿/*
+ * Base structure
+ */
+body {
+  //background: #ffcccc;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+//.page-host {
+//  position: absolute;
+//  left: 0;
+//  right: 0;
+//  top: 136px;
+//  bottom: 0;
+//  overflow-x: hidden;
+//  overflow-y: auto;
+//}
+
+@media only screen and (max-width: 768px) {
+  .page-host {
+    top: 149px;
+  }
+}
+
+.splash {
+  text-align: center;
+  margin: 10% 0 0 0;
+  box-sizing: border-box;
+}
+
+.splash .message {
+  font-size: 72px;
+  line-height: 72px;
+  //color: rgb(222, 222, 212);
+  text-shadow: black 0 0 5px;
+  //text-transform: uppercase;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.splash .fa {
+  text-align: center;
+  display: inline-block;
+  font-size: 72px;
+  margin-top: 50px;
+}
+
+sup > i.required-asterisk {
+  color: #ff0000;
+  font-size: 8px;
+}
+
+//.content-host {
+//  position: relative;
+//  height: 100%;
+//  bottom: 0;
+//  overflow-y: auto;
+//  padding-top: 3px;
+//}
+
+router-view {
+  display: block;
+  //height: 100%;
+}
+
+

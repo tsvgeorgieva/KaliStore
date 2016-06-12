@@ -1,0 +1,14 @@
+template
+  add-button(on-click.call="add()", type="btn-info m-y-1", name="admin.materialsManagement.addMaterial", title="admin.materialsManagement.addMaterial")
+  grid(data.bind="materials", show-filters="true")
+    grid-row
+      grid-col(nosort, heading="common.id")
+        | ${$item.id}
+      grid-col(heading="common.name", field="name", filter="input")
+        template(if.bind="!$item.isInEditMode")
+          | ${$item.name}
+        template(if.bind="$item.isInEditMode")
+          input.form-control(type="text", value.bind="$item.name")
+      grid-col(nosort)
+        edit-button(if.bind="!$item.isInEditMode", on-click.call="edit($item)", type="btn-sm")
+        save-button(if.bind="$item.isInEditMode", on-click.call="save($item)", type="btn-sm")

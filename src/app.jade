@@ -1,0 +1,11 @@
+﻿template
+  require(from="./nav-bar")
+  require(from="CodeSeven/toastr/build/toastr.min.css")
+
+  nav-bar(router.bind="router")
+
+  div.page-host.m-t-1(style="background: white;")
+    div.container
+      router-view
+
+  loading-mask(show-mask.bind="showLoadingMask")

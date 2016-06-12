@@ -1,0 +1,200 @@
+{
+  "config": {
+    "pageTitle": "Нещо Красиво"
+  },
+  "login": {
+    "title": "Вход",
+    "signin": "Влез",
+    "loginSuccessful": "Успешен вход в системата",
+    "loginUnsuccessful": "Неуспешен вход в системата"
+  },
+  "common": {
+    "save": "Запис",
+    "cancel": "Отказ",
+    "add": "Добави",
+    "search": "Търсене",
+    "status": "Статус",
+    "name": "Име",
+    "id": "ИД",
+    "date": "Дата",
+    "fromDate": "От дата",
+    "toDate": "До дата",
+    "saveSuccessful": "Данните са записани успешно.",
+    "dateAdded": "Дата на добавяне",
+    "value": "Стойност",
+    "ok": "Ок",
+    "close": "Затвори",
+    "yes": "Да",
+    "no": "Не",
+    "amount": "Сума",
+    "currency": "Валута",
+    "count": "Брой",
+    "filter": "Филтрирай"
+  },
+  "home": {
+    "title": "Начало"
+  },
+  "contacts": {
+    "title": "Контакти"
+  },
+  "aboutUs": {
+    "title": "За нас"
+  },
+  "register": {
+    "title": "Регистрация",
+    "confirmPassword": "Повторете паролата",
+    "passwordsDoNotMatch": "Паролите не съвпадат",
+    "signup": "Регистрирай се",
+    "userNameTaken": "Потребителското име е заето. Моля, изберете друго",
+    "fillAllRequiredFields": "Моля попълнете всички задължителни полета"
+  },
+  "navbar": {
+    "search": "Търси",
+    "hello": "Здравей",
+    "logout": "Изход",
+    "myOrders": "Моите поръчки"
+  },
+  "products": {
+    "allProducts": "Всички продукти",
+    "buy": "Купи",
+    "details": "Детайли",
+    "detailsForProduct": "Детайли за продукт",
+    "size": "Размер",
+    "materials": "Материали",
+    "price": "Цена",
+    "category": "Категория",
+    "similar": "Подобни продукти",
+    "daysToMake": "Време за изработка",
+    "days": "дена",
+    "day": "ден"
+  },
+  "cart": {
+    "title": "Количка",
+    "infoText": "Информация за поръчката",
+    "productsPrice": "Всички продукти",
+    "deliveryPrice": "Доставка",
+    "totalPrice": "Обща сума",
+    "proceed": "Продължи",
+    "back": "Обратно",
+    "order": "Поръчай"
+  },
+  "checkout": {
+    "title": "Поръчка",
+    "userInfo": {
+      "title": "Данни за клиента",
+      "addName": "Въведете Вашето име и фамилия",
+      "addEmail": "Въведете имейл адрес",
+      "addPhoneNumber": "Въведете телефонен номер",
+      "addAddress": "Въведете адрес"
+    },
+    "deliveryInfo": {
+      "title": "Данни за доставката",
+      "differentAddress": "Желая поръчката да се достави на друг адрес",
+      "toOffice": "Взимане лично от офис на куриер",
+      "toAddress": "Доставка до адрес",
+      "office": "Офис",
+      "selectOffice": "Изберете офис"
+    },
+    "paymentInfo": {
+      "title": "Начин на плащане",
+      "atDelivery": {
+        "title": "Наложен платеж",
+        "description": "Ще заплатиш при получаване на поръчката или при взимане от офис на куриер."
+      },
+      "withCard": {
+        "title": "Плащане с карта",
+        "description": "След изпращане на поръчката ще бъдеш пренасочен към страницата за плащане."
+      }
+    },
+    "orderInfo": {
+      "title": "Информация за поръчката",
+      "client": "Клиент",
+      "delivery": "Доставка",
+      "payment": "Начин на плащане"
+    },
+    "quantityLabel": "бр."
+  },
+  "order": {
+    "successful": "Вашата поръчка беше направена успешно!",
+    "status": {
+      "initial": "Потвърдена поръчка",
+      "packaging": "Товари се",
+      "traveling": "Пътува",
+      "delivered": "Доставена"
+    }
+  },
+  "payment": {
+    "title": "Плащане",
+    "header": "Данни на картата за плащането",
+    "buy": "Купи сега",
+    "card": {
+      "number": "Номер на картата",
+      "code": "CVV2/CVC2 код",
+      "codePlaceholder": "CVV2/CVC2",
+      "validUntil": "Дата на изтичане на картата",
+      "ownerName": "Притежател на картата"
+    },
+    "placeholders": {
+      "number": "XXXX XXXX XXXX XXXX",
+      "code": "CVV2/CVC2",
+      "ownerName": "Името, което е върху картата"
+    }
+  },
+  "myOrders": {
+    "title": "Моите поръчки",
+    "number": "Поръчка #",
+    "delivery": "Доставка до",
+    "client": "Получател",
+    "price": "Цена на поръчката",
+    "status": "Статус"
+  },
+  "models": {
+    "user": {
+      "id": "ИД",
+      "userName": "Потребителско име",
+      "fullName": "Име",
+      "password": "Парола",
+      "city": "Град",
+      "address": "Адрес",
+      "phone": "Телефон",
+      "email": "Имейл",
+      "isBlocked": "Блокиран"
+    },
+    "product": {
+      "title": "Заглавие",
+      "description": "Описание",
+      "size": "Размер",
+      "materials": "Материали",
+      "price": "Цена",
+      "category": "Категория",
+      "daysToMake": "Време за изработка",
+      "picture": "Снимка",
+      "pictures": "Снимки"
+    }
+  },
+  "admin": {
+    "title": "Администрация",
+    "usersManagement": {
+      "title": "Управление на потребители",
+      "block": "Блокирай",
+      "unblock": "Отблокирай"
+    },
+    "productsManagement": {
+      "title": "Управление на продукти",
+      "allCategories": "Всички категории",
+      "editProduct": {
+        "title": "Промяна на продукт"
+      }
+    },
+    "categoriesManagement": {
+      "title": "Управление на категории"
+    },
+    "materialsManagement": {
+      "title": "Управление на материали",
+      "addMaterial": "Добави материал"
+    }
+  },
+  "userProfile" : {
+    "title": "Профил"
+  }
+}

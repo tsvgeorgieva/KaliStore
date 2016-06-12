@@ -1,0 +1,31 @@
+template
+  form.m-x-auto(style="max-width: 500px")
+    h4.text-xs-center ${'payment.header' | t}:
+    div.form-group.row
+      div.col-sm-4
+        label.form-control-label  ${'payment.card.number'| t}:
+      div.col-sm-8
+        input.form-control(type="text", value.bind="card.number" , placeholder="${'payment.placeholders.number'| t}")
+    div.form-group.row
+      div.col-sm-4
+        label.form-control-label ${'payment.card.validUntil'| t}:
+      div.col-sm-4
+        select3(items.bind="months", value.bind="card.date.month", options.bind="{emptyValue: undefined, modelValueBind: true, caption: 'Месец'}")
+      div.col-sm-4
+        select3(items.bind="years", value.bind="card.date.year", options.bind="{emptyValue: undefined, modelValueBind: true, caption: 'Година'}")
+    div.form-group.row
+      div.col-sm-4
+        label.form-control-label ${'payment.card.code'| t}:
+      div.col-sm-8
+        input.form-control(type="text", value.bind="card.code", placeholder="${'payment.placeholders.code'| t}")
+    div.form-group.row
+      div.col-sm-4
+        label.form-control-label ${'payment.card.ownerName'| t}:
+      div.col-sm-8
+        input.form-control(type="text", value.bind="card.ownerName", placeholder="${'payment.placeholders.ownerName'| t}")
+    div.form-group.row
+      div.col-sm-12.text-xs-center
+        span.lead ${'cart.totalPrice' | t}: ${currentOrder.totalPrice | sumFormat}
+    div.form-group.row
+      div.col-sm-12.text-xs-center
+        base-button(on-click.call="buy()", type="btn-success", title="${'payment.buy' | t}", name="${'payment.buy' | t}" icon="fa-angle-double-right")

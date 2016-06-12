@@ -1,0 +1,24 @@
+﻿doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon")
+    link(rel="stylesheet" type="text/css" href="styles/styles.css")
+    title Нещо Красиво
+  body(aurelia-app="main")
+    div.splash
+      // todo: i18n
+      div.message Нещо Красиво
+      div
+        //span.fa.fa-sun-o.fa-spin.fa-5x
+        span.fa.fa-gift.animated.tada.infinite
+      //img(src="assets/images/loader.gif")
+
+    // todo: on release build change to minifiyed version
+    script(src="jspm_packages/github/hubspot/tether@1.1.1/js/tether.js")
+    script(src="jspm_packages/github/petkaantonov/bluebird@3.2.1/js/browser/bluebird.js")
+    script(src="jspm_packages/system.js")
+    script(src="config.js")
+    script System.import('aurelia-bootstrapper');

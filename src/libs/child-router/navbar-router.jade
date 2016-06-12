@@ -1,0 +1,7 @@
+template
+  nav.navbar.navbar-light.bg-faded
+    ul.nav.navbar-nav
+      li.nav-item(repeat.for="navModel of router.navigation")
+        a.nav-link(href.bind="navModel.href", title.bind="navModel.title", class="${ navModel.isActive ? 'active' : '' }") ${navModel.title}
+
+  router-view
