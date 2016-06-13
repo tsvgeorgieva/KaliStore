@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import bootstrap from 'twbs/bootstrap';
 
-import {hostConsts} from './libs/host-consts';
+//import {hostConsts} from './libs/host-consts';
 
 export function configure(aurelia) {
-  const hosts = {};
-  hosts[hostConsts.cssSystem] = 'http://localhost:58619/api';
+  //const hosts = {};
+  //hosts[hostConsts.cssSystem] = 'http://localhost:58619/api';
 
   aurelia.use
     .standardConfiguration()
@@ -31,13 +31,7 @@ export function configure(aurelia) {
     })
     .feature('features/service', (config) => {
       config.useLocale('bg-BG');
-      config.setHttpService({
-        authHost: 'http://localhost:2222',
-        serviceHost: 'http://localhost:2222',
-        serviceApiPrefix: '/api/',
-        requestTimeout: 30000, // milliseconds
-        hosts: hosts
-      });
+      
       config.routerAuthStep({
         loginRoute: 'login'
       });

@@ -72,7 +72,8 @@ export class RoutesConfig {
       name: 'my-orders',
       moduleId: './area/my-orders/my-orders',
       nav: false,
-      title: this.i18n.tr('myOrders.title')
+      title: this.i18n.tr('myOrders.title'),
+      accessRight: accessRight.userProfile
     }, {
       route: 'admin',
       name: 'admin',
