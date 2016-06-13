@@ -1,7 +1,9 @@
 template
   h1 ${'cart.title' | t}
-  div.row
-    div.col-lg-8.col-md-12
+  div(if.bind="cartProducts.length === 0")
+    i ${'cart.noProductsInCart' | t}
+  div.row(if.bind="cartProducts.length > 0")
+    div.col-lg-8.col-md-12.col-xs-12
       ul.list-group
         template(repeat.for="cartProduct of cartProducts")
           li.list-group-item

@@ -1,11 +1,13 @@
 import {inject} from 'aurelia-framework';
+import moment from 'moment';
 import {localStorageManager} from 'service';
 import {MaterialsRepository} from './materials-repository';
 import {CategoriesRepository} from './categories-repository';
+import {ReviewsRepository} from './reviews-repository';
 
 const productsKey = 'products';
 
-@inject(MaterialsRepository, CategoriesRepository)
+@inject(MaterialsRepository, CategoriesRepository, ReviewsRepository)
 export class ProductsRepository {
   editableProperties = [
     'title',
@@ -19,9 +21,10 @@ export class ProductsRepository {
     'daysToMake'
   ];
 
-  constructor(materialsRepository, categoriesRepository) {
+  constructor(materialsRepository, categoriesRepository, reviewsRepository) {
     this.materialsRepository = materialsRepository;
     this.categoriesRepository = categoriesRepository;
+    this.reviewsRepository = reviewsRepository;
 
     this.products = this._getAllFromLocalStorage();
     if (this.products.length === 0) {
@@ -30,7 +33,9 @@ export class ProductsRepository {
   }
 
   get(id) {
-    return this.products.find(p => p.id === id);
+    const product = this.products.find(p => p.id === id);
+    product.rating = this.reviewsRepository.getRatingForProduct(product.id);
+    return product;
   }
 
   getAll(copy = false) {
@@ -38,16 +43,27 @@ export class ProductsRepository {
       return this._getAllFromLocalStorage();
     }
 
+    this.products.forEach(p => {
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+    });
+
     return this.products;
   }
 
   getByQuery(query) {
     const lowerCaseQuery = query.toLocaleLowerCase();
-    return this.products.filter(p => p.title.toLocaleLowerCase().indexOf(lowerCaseQuery) > -1);
+    return this.products.filter(p => p.title.toLocaleLowerCase().indexOf(lowerCaseQuery) > -1)
+      .map(p => {
+        p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+        return p;
+    });
   }
 
   getByCategory(categoryId) {
-    return this.products.filter(p => p.category.id === categoryId);
+    return this.products.filter(p => p.category.id === categoryId).map(p => {
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+      return p;
+    });
   }
 
   save(productData) {
@@ -69,6 +85,7 @@ export class ProductsRepository {
     this.products = initialProducts.map(p => {
       p.materials = p.materials.map(m => this.materialsRepository.get(m.id));
       p.category = this.categoriesRepository.get(p.category.id);
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
       return p;
     });
     this._saveAllToLocalStorage();
@@ -78,6 +95,8 @@ export class ProductsRepository {
     return (localStorageManager.get(productsKey) || []).map(p => {
       p.materials = p.materials.map(m => this.materialsRepository.get(m.id));
       p.category = this.categoriesRepository.get(p.category.id);
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+      p.dateTimeAdded = moment(p.dateTimeAdded);
       return p;
     });
   }

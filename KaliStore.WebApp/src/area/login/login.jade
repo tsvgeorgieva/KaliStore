@@ -1,16 +1,16 @@
 template
-  form.m-x-auto(style="max-width: 500px")
+  form.m-x-auto(style="max-width: 700px")
     h1.text-xs-center ${'login.title' | t}
     div.form-group.row
-      div.col-sm-4
+      div.col-sm-4.col-xs-12.text-sm-right
         label.form-control-label  ${'models.user.userName'| t}
-      div.col-sm-8
+      div.col-sm-8.col-xs-12
         input.form-control(type="text", value.bind="userName")
     div.form-group.row
-      div.col-sm-4
+      div.col-sm-4.col-xs-12.text-sm-right
         label.form-control-label ${'models.user.password'| t}
-      div.col-sm-8
+      div.col-sm-8.col-xs-12
         input.form-control(type="password", value.bind="password")
     div.form-group.row
-      div.col-sm-12.text-sm-right
+      div.col-sm-12.text-sm-right.col-xs-12
         base-button(on-click.call="login()", type="btn-success", title="login.signin", name="login.signin")
