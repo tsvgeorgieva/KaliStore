@@ -1,11 +1,14 @@
 template
   div.row
-    div.col-sm-5
-      img(src.bind="product.picture", style="max-width: 400px;")
-    div.col-sm-7
+    div.col-md-5.col-xs-12
+      img.img-responsive(src.bind="product.picture", style="max-width: 100%")
+    div.col-md-7.col-xs-12
       div.card
         h4.card-header ${product.title}
         div.card-block
+          div
+            label.font-weight-bold ${'models.product.rating' | t}:
+            rating(rating.bind="product.rating", readonly.bind="true")
           div
             label.font-weight-bold ${'models.product.category' | t}:
             text ${product.category.name}
@@ -30,10 +33,49 @@ template
     h3 ${'products.similar' | t}:
     div.row.m-t-2
       template(repeat.for="similarProduct of similarProducts")
-        div.col-sm-2
+        div.col-sm-2.col-xs-12
           div.card
             a(href="#/products/${similarProduct.id}")
               img.card-img-top.img-fluid(src.bind="similarProduct.picture")
             div.card-block
               h5.card-title
                 a(href="#/products/${similarProduct.id}") ${similarProduct.title}
+  section.row
+    div.col-md-offset-1.col-md-10.col-xs-12
+      div.row.m-y-2
+        div.col-sm-6.col-xs-12
+          h3 ${'reviews.title' | t}
+        div.col-sm-6.col-xs-12.text-sm-right
+          add-button(type="btn-primary", on-click.call="addReviewClick()", name="reviews.addReview", title="reviews.addReview")
+      div.row.m-y-1(show.bind="showAddReviewForm")
+        div.col-md-offset-3.col-md-6.col-xs-12
+          div.form-group.row
+            label.form-control-label.col-sm-4.col-xs-12 ${'reviews.yourName' | t}
+            div.col-sm-8.col-xs-12
+              input.form-control(type="text", value.bind="review.userName")
+          div.form-group.row
+            label.form-control-label.col-sm-4.col-xs-12 ${'models.product.rating' | t}
+            div.col-sm-8.col-xs-12
+              rating(rating.bind="review.rating", rate.trigger="rate($event.detail.rateValue)")
+          div.form-group.row
+            label.form-control-label.col-sm-4.col-xs-12 ${'reviews.review' | t}
+            div.col-sm-8.col-xs-12
+              textarea.form-control(value.bind="review.text", style="height: 90px")
+          save-button(on-click.call="saveReview()", name="common.save", title="common.save")
+      div(if.bind="reviews.length === 0")
+        p
+          i
+            |${'reviews.noReviewsYet' | t}
+            | &nbsp;
+            a(click.trigger="addReviewClick()") ${'reviews.addFirstReview' | t}
+
+      ul.list-group.m-y-2
+        li.list-group-item(repeat.for="reviewItem of reviews")
+          blockquote.blockquote
+            rating(rating.bind="reviewItem.rating", readonly.bind="true")
+            p.m-b-0 ${reviewItem.text}
+            footer.blockquote-footer
+              div
+                i ${reviewItem.userName || 'reviews.anonymous' | t}
+              small ${reviewItem.dateTimeAdded | shortDateTimeFormat}
+

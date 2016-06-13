@@ -1,11 +1,13 @@
 import {inject} from 'aurelia-framework';
+import moment from 'moment';
 import {localStorageManager} from 'service';
 import {MaterialsRepository} from './materials-repository';
 import {CategoriesRepository} from './categories-repository';
+import {ReviewsRepository} from './reviews-repository';
 
 const productsKey = 'products';
 
-@inject(MaterialsRepository, CategoriesRepository)
+@inject(MaterialsRepository, CategoriesRepository, ReviewsRepository)
 export class ProductsRepository {
   editableProperties = [
     'title',
@@ -19,9 +21,10 @@ export class ProductsRepository {
     'daysToMake'
   ];
 
-  constructor(materialsRepository, categoriesRepository) {
+  constructor(materialsRepository, categoriesRepository, reviewsRepository) {
     this.materialsRepository = materialsRepository;
     this.categoriesRepository = categoriesRepository;
+    this.reviewsRepository = reviewsRepository;
 
     this.products = this._getAllFromLocalStorage();
     if (this.products.length === 0) {
@@ -30,7 +33,9 @@ export class ProductsRepository {
   }
 
   get(id) {
-    return this.products.find(p => p.id === id);
+    const product = this.products.find(p => p.id === id);
+    product.rating = this.reviewsRepository.getRatingForProduct(product.id);
+    return product;
   }
 
   getAll(copy = false) {
@@ -38,16 +43,27 @@ export class ProductsRepository {
       return this._getAllFromLocalStorage();
     }
 
+    this.products.forEach(p => {
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+    });
+
     return this.products;
   }
 
   getByQuery(query) {
     const lowerCaseQuery = query.toLocaleLowerCase();
-    return this.products.filter(p => p.title.toLocaleLowerCase().indexOf(lowerCaseQuery) > -1);
+    return this.products.filter(p => p.title.toLocaleLowerCase().indexOf(lowerCaseQuery) > -1)
+      .map(p => {
+        p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+        return p;
+    });
   }
 
   getByCategory(categoryId) {
-    return this.products.filter(p => p.category.id === categoryId);
+    return this.products.filter(p => p.category.id === categoryId).map(p => {
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+      return p;
+    });
   }
 
   save(productData) {
@@ -69,6 +85,7 @@ export class ProductsRepository {
     this.products = initialProducts.map(p => {
       p.materials = p.materials.map(m => this.materialsRepository.get(m.id));
       p.category = this.categoriesRepository.get(p.category.id);
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
       return p;
     });
     this._saveAllToLocalStorage();
@@ -78,6 +95,8 @@ export class ProductsRepository {
     return (localStorageManager.get(productsKey) || []).map(p => {
       p.materials = p.materials.map(m => this.materialsRepository.get(m.id));
       p.category = this.categoriesRepository.get(p.category.id);
+      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+      p.dateTimeAdded = moment(p.dateTimeAdded);
       return p;
     });
   }
@@ -203,6 +222,105 @@ const initialProducts = [{
   }],
   size: 'стандартен',
   picture: `assets/images/diadema.jpg`,
+  category: {
+    id: 3,
+    name: 'Аксесоари'
+  },
+  daysToMake: 3
+}, {
+  id: 6,
+  title: 'Ръчно изработена картонена торта',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 20,
+    currency: 'BGN'
+  },
+  rating: 4.3,
+  materials: [{
+    id: 1,
+    name: 'Картон'
+  }, {
+    id: 3,
+    name: 'Стикери'
+  }, {
+    id: 4,
+    name: 'Панделка'
+  }],
+  size: '40см x 40см x 20см',
+  picture: `assets/images/torta2.jpg`,
+  category: {
+    id: 2,
+    name: 'Торти'
+  },
+  daysToMake: 5
+}, {
+  id: 7,
+  title: 'Огърлица със сърце',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 7,
+    currency: 'BGN'
+  },
+  rating: 4.8,
+  materials: [{
+    id: 6,
+    name: 'Въже'
+  }, {
+    id: 7,
+    name: 'Висулка'
+  }],
+  size: 'стандартен',
+  picture: `assets/images/gerdan.jpg`,
+  category: {
+    id: 3,
+    name: 'Аксесоари'
+  },
+  daysToMake: 2
+}, {
+  id: 8,
+  title: 'Гривна със сърце',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 7,
+    currency: 'BGN'
+  },
+  rating: 4.8,
+  materials: [{
+    id: 5,
+    name: 'Мъниста'
+  }, {
+    id: 7,
+    name: 'Висулка'
+  }],
+  size: 'стандартен',
+  picture: `assets/images/grivna.jpg`,
+  category: {
+    id: 3,
+    name: 'Аксесоари'
+  },
+  daysToMake: 2
+}, {
+  id: 9,
+  title: 'Обици',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 8,
+    currency: 'BGN'
+  },
+  rating: 5,
+  materials: [{
+    id: 6,
+    name: 'Въже'
+  }, {
+    id: 7,
+    name: 'Висулка'
+  }],
+  size: 'стандартен',
+  picture: `assets/images/obici.jpg`,
   category: {
     id: 3,
     name: 'Аксесоари'

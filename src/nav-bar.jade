@@ -1,6 +1,9 @@
 template
   nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
-    div.row
+    div.hidden-md-up
+      button.navbar-toggler(type="button" data-toggle="collapse" data-target="#fixedNavbar")
+        |&#9776;
+    div#fixedNavbar.collapse.navbar-toggleable-sm
       div.col-sm-12
         ul.nav.navbar-nav
           template(repeat.for="navModel of router.navigation")
@@ -21,7 +24,6 @@ template
           li.nav-item
             a.nav-link(href="#/cart", title.bind="'cart.title' | t")
               i.fa.fa-shopping-cart.fa-lg(style="font-size: 1.9em; color: white")
-              //, class="${cartProductsCount > 0 ? 'text-primary': ''}")
               | &nbsp;
               span.label.label-pill(style="font-size: 1em", class="${cartProductsCount > 0 ? 'label-info': 'label-default'}") ${cartProductsCount}
           template(if.bind="isUserLoggedIn")

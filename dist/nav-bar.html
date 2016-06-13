@@ -1,7 +1,10 @@
 
 <template>
   <nav class="navbar navbar-fixed-top navbar-dark bg-primary">
-    <div class="row">
+    <div class="hidden-md-up">
+      <button type="button" data-toggle="collapse" data-target="#fixedNavbar" class="navbar-toggler">&#9776;</button>
+    </div>
+    <div id="fixedNavbar" class="collapse navbar-toggleable-sm">
       <div class="col-sm-12">
         <ul class="nav navbar-nav">
           <template repeat.for="navModel of router.navigation">
@@ -18,8 +21,7 @@
           </li>
         </ul>
         <ul class="nav navbar-nav pull-xs-right">
-          <li class="nav-item"><a href="#/cart" title.bind="'cart.title' | t" class="nav-link"><i style="font-size: 1.9em; color: white" class="fa fa-shopping-cart fa-lg"></i>
-              <!--, class="${cartProductsCount > 0 ? 'text-primary': ''}")-->&nbsp;<span style="font-size: 1em" class="label label-pill ${cartProductsCount &gt; 0 ? 'label-info': 'label-default'}">${cartProductsCount}</span></a></li>
+          <li class="nav-item"><a href="#/cart" title.bind="'cart.title' | t" class="nav-link"><i style="font-size: 1.9em; color: white" class="fa fa-shopping-cart fa-lg"></i>&nbsp;<span style="font-size: 1em" class="label label-pill ${cartProductsCount &gt; 0 ? 'label-info': 'label-default'}">${cartProductsCount}</span></a></li>
           <template if.bind="isUserLoggedIn">
             <li class="nav-item"><a href="#/profile" class="nav-link">${'navbar.hello' | t}, ${session.getUserName()}</a></li>
             <li class="nav-item"><a href="#/my-orders" class="nav-link">${'navbar.myOrders' | t}</a></li>

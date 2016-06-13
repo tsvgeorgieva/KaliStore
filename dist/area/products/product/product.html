@@ -1,11 +1,15 @@
 
 <template>
   <div class="row">
-    <div class="col-sm-5"><img src.bind="product.picture" style="max-width: 400px;"/></div>
-    <div class="col-sm-7">
+    <div class="col-md-5 col-xs-12"><img src.bind="product.picture" style="max-width: 100%" class="img-responsive"/></div>
+    <div class="col-md-7 col-xs-12">
       <div class="card">
         <h4 class="card-header">${product.title}</h4>
         <div class="card-block">
+          <div>
+            <label class="font-weight-bold">${'models.product.rating' | t}:</label>
+            <rating rating.bind="product.rating" readonly.bind="true"></rating>
+          </div>
           <div>
             <label class="font-weight-bold">${'models.product.category' | t}:</label>
             <text>${product.category.name}</text>
@@ -41,7 +45,7 @@
     <h3>${'products.similar' | t}:</h3>
     <div class="row m-t-2">
       <template repeat.for="similarProduct of similarProducts">
-        <div class="col-sm-2">
+        <div class="col-sm-2 col-xs-12">
           <div class="card"><a href="#/products/${similarProduct.id}"><img src.bind="similarProduct.picture" class="card-img-top img-fluid"/></a>
             <div class="card-block">
               <h5 class="card-title"><a href="#/products/${similarProduct.id}">${similarProduct.title}</a></h5>
@@ -51,4 +55,55 @@
       </template>
     </div>
   </div>
+  <section class="row">
+    <div class="col-md-offset-1 col-md-10 col-xs-12">
+      <div class="row m-y-2">
+        <div class="col-sm-6 col-xs-12">
+          <h3>${'reviews.title' | t}</h3>
+        </div>
+        <div class="col-sm-6 col-xs-12 text-sm-right">
+          <add-button type="btn-primary" on-click.call="addReviewClick()" name="reviews.addReview" title="reviews.addReview"></add-button>
+        </div>
+      </div>
+      <div show.bind="showAddReviewForm" class="row m-y-1">
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+          <div class="form-group row">
+            <label class="form-control-label col-sm-4 col-xs-12">${'reviews.yourName' | t}</label>
+            <div class="col-sm-8 col-xs-12">
+              <input type="text" value.bind="review.userName" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="form-control-label col-sm-4 col-xs-12">${'models.product.rating' | t}</label>
+            <div class="col-sm-8 col-xs-12">
+              <rating rating.bind="review.rating" rate.trigger="rate($event.detail.rateValue)"></rating>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="form-control-label col-sm-4 col-xs-12">${'reviews.review' | t}</label>
+            <div class="col-sm-8 col-xs-12">
+              <textarea value.bind="review.text" style="height: 90px" class="form-control"></textarea>
+            </div>
+          </div>
+          <save-button on-click.call="saveReview()" name="common.save" title="common.save"></save-button>
+        </div>
+      </div>
+      <div if.bind="reviews.length === 0">
+        <p><i>
+            ${'reviews.noReviewsYet' | t}
+            &nbsp;<a click.trigger="addReviewClick()">${'reviews.addFirstReview' | t}</a></i></p>
+      </div>
+      <ul class="list-group m-y-2">
+        <li repeat.for="reviewItem of reviews" class="list-group-item">
+          <blockquote class="blockquote">
+            <rating rating.bind="reviewItem.rating" readonly.bind="true"></rating>
+            <p class="m-b-0">${reviewItem.text}</p>
+            <footer class="blockquote-footer">
+              <div><i>${reviewItem.userName || 'reviews.anonymous' | t}</i></div><small>${reviewItem.dateTimeAdded | shortDateTimeFormat}</small>
+            </footer>
+          </blockquote>
+        </li>
+      </ul>
+    </div>
+  </section>
 </template>

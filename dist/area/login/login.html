@@ -1,25 +1,25 @@
 
 <template>
-  <form style="max-width: 500px" class="m-x-auto">
+  <form style="max-width: 700px" class="m-x-auto">
     <h1 class="text-xs-center">${'login.title' | t}</h1>
     <div class="form-group row">
-      <div class="col-sm-4">
+      <div class="col-sm-4 col-xs-12 text-sm-right">
         <label class="form-control-label"> ${'models.user.userName'| t}</label>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-8 col-xs-12">
         <input type="text" value.bind="userName" class="form-control"/>
       </div>
     </div>
     <div class="form-group row">
-      <div class="col-sm-4">
+      <div class="col-sm-4 col-xs-12 text-sm-right">
         <label class="form-control-label">${'models.user.password'| t}</label>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-8 col-xs-12">
         <input type="password" value.bind="password" class="form-control"/>
       </div>
     </div>
     <div class="form-group row">
-      <div class="col-sm-12 text-sm-right">
+      <div class="col-sm-12 text-sm-right col-xs-12">
         <base-button on-click.call="login()" type="btn-success" title="login.signin" name="login.signin"></base-button>
       </div>
     </div>

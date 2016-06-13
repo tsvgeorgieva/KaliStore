@@ -76,7 +76,8 @@
     "totalPrice": "Обща сума",
     "proceed": "Продължи",
     "back": "Обратно",
-    "order": "Поръчай"
+    "order": "Поръчай",
+    "noProductsInCart": "Количката е празна."
   },
   "checkout": {
     "title": "Поръчка",
@@ -169,7 +170,8 @@
       "category": "Категория",
       "daysToMake": "Време за изработка",
       "picture": "Снимка",
-      "pictures": "Снимки"
+      "pictures": "Снимки",
+      "rating": "Рейтинг"
     }
   },
   "admin": {
@@ -196,5 +198,14 @@
   },
   "userProfile" : {
     "title": "Профил"
+  },
+  "reviews": {
+    "title": "Ревюта",
+    "addReview": "Добави ревю",
+    "review":"Ревю",
+    "anonymous": "Анонимен",
+    "noReviewsYet": "Този продукт няма ревюта.",
+    "addFirstReview": "Защо не добавиш първото?",
+    "yourName": "Вашето име"
   }
 }

@@ -1,8 +1,9 @@
 
 <template>
   <h1>${'cart.title' | t}</h1>
-  <div class="row">
-    <div class="col-lg-8 col-md-12">
+  <div if.bind="cartProducts.length === 0"><i>${'cart.noProductsInCart' | t}</i></div>
+  <div if.bind="cartProducts.length &gt; 0" class="row">
+    <div class="col-lg-8 col-md-12 col-xs-12">
       <ul class="list-group">
         <template repeat.for="cartProduct of cartProducts">
           <li class="list-group-item">
