@@ -70,4 +70,10 @@ const initialMaterials = [{
 }, {
   id: 5,
   name: 'Мъниста'
+}, {
+  id: 6,
+  name: 'Въже'
+}, {
+  id: 7,
+  name: 'Висулка'
 }];

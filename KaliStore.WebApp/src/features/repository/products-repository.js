@@ -208,4 +208,103 @@ const initialProducts = [{
     name: 'Аксесоари'
   },
   daysToMake: 3
+}, {
+  id: 6,
+  title: 'Ръчно изработена картонена торта',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 20,
+    currency: 'BGN'
+  },
+  rating: 4.3,
+  materials: [{
+    id: 1,
+    name: 'Картон'
+  }, {
+    id: 3,
+    name: 'Стикери'
+  }, {
+    id: 4,
+    name: 'Панделка'
+  }],
+  size: '40см x 40см x 20см',
+  picture: `assets/images/torta2.jpg`,
+  category: {
+    id: 2,
+    name: 'Торти'
+  },
+  daysToMake: 5
+}, {
+  id: 7,
+  title: 'Огърлица със сърце',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 7,
+    currency: 'BGN'
+  },
+  rating: 4.8,
+  materials: [{
+    id: 6,
+    name: 'Въже'
+  }, {
+    id: 7,
+    name: 'Висулка'
+  }],
+  size: 'стандартен',
+  picture: `assets/images/gerdan.jpg`,
+  category: {
+    id: 3,
+    name: 'Аксесоари'
+  },
+  daysToMake: 2
+}, {
+  id: 8,
+  title: 'Гривна със сърце',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 7,
+    currency: 'BGN'
+  },
+  rating: 4.8,
+  materials: [{
+    id: 5,
+    name: 'Мъниста'
+  }, {
+    id: 7,
+    name: 'Висулка'
+  }],
+  size: 'стандартен',
+  picture: `assets/images/grivna.jpg`,
+  category: {
+    id: 3,
+    name: 'Аксесоари'
+  },
+  daysToMake: 2
+}, {
+  id: 9,
+  title: 'Обици',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  price: {
+    amount: 8,
+    currency: 'BGN'
+  },
+  rating: 5,
+  materials: [{
+    id: 6,
+    name: 'Въже'
+  }, {
+    id: 7,
+    name: 'Висулка'
+  }],
+  size: 'стандартен',
+  picture: `assets/images/obici.jpg`,
+  category: {
+    id: 3,
+    name: 'Аксесоари'
+  },
+  daysToMake: 3
 }];
