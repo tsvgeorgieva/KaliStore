@@ -38,6 +38,14 @@ export function configure(aurelia) {
       config.setLoggerService({
         positionClass: 'toast-top-right'
       });
+
+      config.setHttpService({
+        authHost: 'http://localhost:5000',
+        serviceHost: 'http://localhost:5000',
+        serviceApiPrefix: '/rest/',
+        requestTimeout: 30000 // milliseconds
+      });
+
     })
     .feature('features/dialog')
     .feature('features/utils')

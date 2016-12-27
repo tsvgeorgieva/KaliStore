@@ -26,10 +26,16 @@ export class Product {
   }
 
   activate(routeParams) {
-    this.product = this.productsRepository.get(parseInt(routeParams.productId));
-    this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
-    this.setSimilarProducts();
-    this.reviews = this.reviewsRepository.getAllForProduct(this.product.id);
+    return this.productsRepository.get(parseInt(routeParams.productId)).then(x => {
+      console.log(x);
+      debugger;
+
+      this.product = x.product;
+      //this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
+      this.setSimilarProducts();
+      this.reviews = this.reviewsRepository.getAllForProduct(this.product.id);
+    });
+
   }
 
   addToCart() {
@@ -49,7 +55,7 @@ export class Product {
     this.review.userId = this.currentUser.id || -1;
     this.review.userName = this.review.userName || this.currentUser.fullName || this.i18n.tr('reviews.anonymous');
     this.review.productId = this.product.id;
-    
+
     this.reviewsRepository.save(this.review);
 
     this.review = {rating: 0};

@@ -1,13 +1,14 @@
 import {inject} from 'aurelia-framework';
 import moment from 'moment';
 import {localStorageManager} from 'service';
+import {HaikuHttp} from './../service/http-client/haiku-http';
 import {MaterialsRepository} from './materials-repository';
 import {CategoriesRepository} from './categories-repository';
 import {ReviewsRepository} from './reviews-repository';
 
 const productsKey = 'products';
 
-@inject(MaterialsRepository, CategoriesRepository, ReviewsRepository)
+@inject(MaterialsRepository, CategoriesRepository, ReviewsRepository, HaikuHttp)
 export class ProductsRepository {
   editableProperties = [
     'title',
@@ -21,10 +22,11 @@ export class ProductsRepository {
     'daysToMake'
   ];
 
-  constructor(materialsRepository, categoriesRepository, reviewsRepository) {
+  constructor(materialsRepository, categoriesRepository, reviewsRepository, haikuHttp) {
     this.materialsRepository = materialsRepository;
     this.categoriesRepository = categoriesRepository;
     this.reviewsRepository = reviewsRepository;
+    this.http = haikuHttp;
 
     this.products = this._getAllFromLocalStorage();
     if (this.products.length === 0) {
@@ -33,9 +35,8 @@ export class ProductsRepository {
   }
 
   get(id) {
-    const product = this.products.find(p => p.id === id);
-    product.rating = this.reviewsRepository.getRatingForProduct(product.id);
-    return product;
+    return this.http.get('catalog/productById', {productId: id})
+      .catch(x => console.log(x));
   }
 
   getAll(copy = false) {

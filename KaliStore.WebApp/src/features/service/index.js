@@ -4,8 +4,8 @@ export {Logger} from './logger';
 export {Session} from './session';
 export {localStorageManager} from './local-storage-manager';
 export {Http} from './http-client/http';
-export {HubFactory} from './ws/hub-factory';
-export {WS} from './ws/ws';
+export {HaikuHttp} from './http-client/haiku-http';
+
 export {HttpRequestStartedMessage, HttpRequestFinishedMessage,
   HttpBadRequestMessage, HttpServerErrorRequestMessage,
   HttpSessionTimedOutMessage} from './http-client/http-client-messages';
