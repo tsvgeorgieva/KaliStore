@@ -5,6 +5,7 @@ import {HaikuHttp} from './../service/http-client/haiku-http';
 import {MaterialsRepository} from './materials-repository';
 import {CategoriesRepository} from './categories-repository';
 import {ReviewsRepository} from './reviews-repository';
+import {mappers} from './mappers';
 
 const productsKey = 'products';
 
@@ -36,6 +37,12 @@ export class ProductsRepository {
 
   get(id) {
     return this.http.get('catalog/productById', {productId: id})
+      .then(response => {
+        response.product.categories = mappers.objToArray(response.product.categories);
+        response.product.materials = mappers.objToArray(response.product.materials);
+        response.product.price = mappers.amountToPrice(response.product.price);
+        return response.product;
+      })
       .catch(x => console.log(x));
   }
 

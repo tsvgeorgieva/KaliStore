@@ -26,16 +26,13 @@ export class Product {
   }
 
   activate(routeParams) {
-    return this.productsRepository.get(parseInt(routeParams.productId)).then(x => {
-      console.log(x);
-      debugger;
-
-      this.product = x.product;
-      //this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
+    return this.productsRepository.get(parseInt(routeParams.productId)).then(product => {
+      this.product = product;
+      this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
+      this.product.categoriesList = this.product.categories.map(c => c.name).join(', ');
       this.setSimilarProducts();
       this.reviews = this.reviewsRepository.getAllForProduct(this.product.id);
     });
-
   }
 
   addToCart() {
@@ -44,7 +41,8 @@ export class Product {
   }
 
   setSimilarProducts() {
-    this.similarProducts = this.productsRepository.getByCategory(this.product.category.id).filter(p => p.id !== this.product.id);
+    // todo: fix
+    this.similarProducts = this.productsRepository.getByCategory(this.product.categories[0].id).filter(p => p.id !== this.product.id);
   }
 
   rate(rateValue) {

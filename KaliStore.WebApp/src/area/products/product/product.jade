@@ -1,7 +1,7 @@
 template
   div.row
     div.col-md-5.col-xs-12
-      img.img-responsive(src.bind="product.picture", style="max-width: 100%")
+      img.img-responsive(src="assets/images/${product.image}", style="max-width: 100%")
     div.col-md-7.col-xs-12
       div.card
         h4.card-header ${product.title}
@@ -11,7 +11,7 @@ template
             rating(rating.bind="product.rating", readonly.bind="true")
           div
             label.font-weight-bold ${'models.product.category' | t}:
-            text ${product.category.name}
+            text ${product.categoriesList}
           div
             label.font-weight-bold ${'models.product.size' | t}:
             text ${product.size}
