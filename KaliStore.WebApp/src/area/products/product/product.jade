@@ -36,7 +36,7 @@ template
         div.col-sm-2.col-xs-12
           div.card
             a(href="#/products/${similarProduct.id}")
-              img.card-img-top.img-fluid(src.bind="similarProduct.picture")
+              img.card-img-top.img-fluid(src="assets/images/${similarProduct.image}")
             div.card-block
               h5.card-title
                 a(href="#/products/${similarProduct.id}") ${similarProduct.title}

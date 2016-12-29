@@ -14,12 +14,18 @@ export class AllProducts {
     this.categoryId = routeParams.categoryId;
 
     if (this.searchQuery) {
-      this.products = this.productsRepository.getByQuery(this.searchQuery);
+      this.productsRepository.getByQuery(this.searchQuery).then(products => {
+        this.products = products;
+      });
     } else if (this.categoryId !== undefined && this.categoryId !== '') {
       this.categoryId = parseInt(this.categoryId);
-      this.products = this.productsRepository.getByCategory(this.categoryId);
+      this.productsRepository.getByCategory(this.categoryId).then(products => {
+        this.products = products;
+      });
     } else {
-      this.products = this.productsRepository.getAll();
+      this.productsRepository.getAll().then(products => {
+        this.products = products;
+      });
     }
   }
 }

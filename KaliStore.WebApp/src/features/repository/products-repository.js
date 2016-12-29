@@ -47,31 +47,52 @@ export class ProductsRepository {
   }
 
   getAll(copy = false) {
-    if (copy) {
-      return this._getAllFromLocalStorage();
-    }
+    return this.http.get('catalog/allProducts')
+      .then(response => {
+        response.product = mappers.objToArray(response.product);
+        response.product = response.product.map(p => {
+          p.categories = mappers.objToArray(p.categories);
+          p.materials = mappers.objToArray(p.materials);
+          p.price = mappers.amountToPrice(p.price);
+          p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+          return p;
+        });
 
-    this.products.forEach(p => {
-      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
-    });
-
-    return this.products;
+        return response.product;
+      }).catch(x => console.log(x));
   }
 
   getByQuery(query) {
     const lowerCaseQuery = query.toLocaleLowerCase();
-    return this.products.filter(p => p.title.toLocaleLowerCase().indexOf(lowerCaseQuery) > -1)
-      .map(p => {
-        p.rating = this.reviewsRepository.getRatingForProduct(p.id);
-        return p;
-    });
+    return this.http.get('catalog/productsByQuery', {query: lowerCaseQuery})
+      .then(response => {
+        response.product = mappers.objToArray(response.product);
+        response.product = response.product.map(p => {
+          p.categories = mappers.objToArray(p.categories);
+          p.materials = mappers.objToArray(p.materials);
+          p.price = mappers.amountToPrice(p.price);
+          p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+          return p;
+        });
+
+        return response.product;
+      }).catch(x => console.log(x));
   }
 
   getByCategory(categoryId) {
-    return this.products.filter(p => p.category.id === categoryId).map(p => {
-      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
-      return p;
-    });
+    return this.http.get('catalog/productsByCategory', {categoryId: categoryId})
+      .then(response => {
+        response.product = mappers.objToArray(response.product);
+        response.product = response.product.map(p => {
+          p.categories = mappers.objToArray(p.categories);
+          p.materials = mappers.objToArray(p.materials);
+          p.price = mappers.amountToPrice(p.price);
+          p.rating = this.reviewsRepository.getRatingForProduct(p.id);
+          return p;
+        });
+
+        return response.product;
+      }).catch(x => console.log(x));
   }
 
   save(productData) {

@@ -41,8 +41,10 @@ export class Product {
   }
 
   setSimilarProducts() {
-    // todo: fix
-    this.similarProducts = this.productsRepository.getByCategory(this.product.categories[0].id).filter(p => p.id !== this.product.id);
+    // todo: fix this.product.categories[0]
+    this.productsRepository.getByCategory(this.product.categories[0].id).then(products => {
+      this.similarProducts = products.filter(p => p.id !== this.product.id);
+    });
   }
 
   rate(rateValue) {
