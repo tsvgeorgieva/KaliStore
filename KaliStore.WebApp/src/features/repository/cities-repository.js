@@ -1,9 +1,14 @@
+import {inject} from 'aurelia-framework';
 import {localStorageManager} from 'service';
+import {HaikuHttp} from './../service/http-client/haiku-http';
+import {mappers} from './mappers';
 
 const citiesKey = 'cities';
-
+@inject(HaikuHttp)
 export class CitiesRepository {
-  constructor() {
+  constructor(http) {
+    this.http = http;
+
     this.cities = localStorageManager.get(citiesKey);
     if (this.cities === undefined) {
       this.initialize();
@@ -11,9 +16,11 @@ export class CitiesRepository {
   }
 
   initialize() {
-    this.cities = initialCities;
+    this.http.get('city/allCities').then(response => {
+      this.cities = mappers.objToArray(response.city);
 
-    localStorageManager.save(citiesKey, this.cities);
+      localStorageManager.save(citiesKey, this.cities);
+    });
   }
 
   get(id) {
@@ -24,13 +31,3 @@ export class CitiesRepository {
     return this.cities;
   }
 }
-
-const initialCities = [
-  {id: 1, name: "София"},
-  {id: 2, name: "Пловдив"},
-  {id: 3, name: "Варна"},
-  {id: 4, name: "Бургас"},
-  {id: 5, name: "Плевен"},
-  {id: 6, name: "Стара Загора"},
-  {id: 7, name: "Шумен"}
-];
