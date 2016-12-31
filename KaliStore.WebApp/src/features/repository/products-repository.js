@@ -33,6 +33,12 @@ export class ProductsRepository {
       .catch(x => console.log(x));
   }
 
+  getByIds(ids) {
+    return this.http.get('catalog/productsByIds', {productIds: ids})
+      .then(x => this._parseResponse(x))
+      .catch(x => console.log(x));
+  }
+
   getAll(copy = false) {
     return this.http.get('catalog/allProducts')
       .then(x => this._parseResponse(x))

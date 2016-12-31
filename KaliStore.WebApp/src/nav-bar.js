@@ -3,10 +3,10 @@ import {Router} from 'aurelia-router';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Session, HttpSessionTimedOutMessage, localStorageManager} from 'service';
 import {AddProductToCartEvent, RemoveProductFromCartEvent, OrderComplete} from 'events';
-import {CategoriesRepository, CartRepository, ProductsRepository} from 'repository';
+import {CategoriesRepository, CartRepository} from 'repository';
 import {accessRight} from 'enum';
 
-@inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository, ProductsRepository)
+@inject(Session, EventAggregator, Router, CategoriesRepository, CartRepository)
 export class NavBar {
   @bindable router = null;
   categories = [];
@@ -14,12 +14,11 @@ export class NavBar {
   cartProducts = [];
   cartProductsCount = 0;
 
-  constructor(session, eventAggregator, router, categoriesRepository, cartRepository, productsRepository) {
+  constructor(session, eventAggregator, router, categoriesRepository, cartRepository) {
     this.session = session;
     this.router = router;
     this.categoriesRepository = categoriesRepository;
     this.cartRepository = cartRepository;
-    this.productsRepository = productsRepository;
 
     this.categories = this.categoriesRepository.getAll();
 
@@ -58,7 +57,7 @@ export class NavBar {
     return this.session.userHasAccessRight(accessRight.adminPanel);
   }
 
-  checkIfInAdminPanel(){
+  checkIfInAdminPanel() {
     // FIXME: huge hack...
     this.isInAdminPanel = this.router.currentInstruction.config.name === 'admin';
   }
@@ -87,7 +86,7 @@ export class NavBar {
   loadCartProducts() {
     const cart = this.cartRepository.getAll();
     this.cartProducts = Object.keys(cart).map(k => {
-      return {product: this.productsRepository.get(parseInt(k)), quantity: cart[k]}
+      return {productId: parseInt(k), quantity: cart[k]}
     });
     this.cartProductsCount = this.cartProducts.reduce((sum, cartProduct) => sum + cartProduct.quantity, 0);
   }

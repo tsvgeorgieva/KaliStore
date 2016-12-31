@@ -13,19 +13,27 @@ export class Cart {
     this.productsRepository = productsRepository;
     this.cart = this.cartRepository.getAll();
     this.loadProducts();
-    this.calculateTotalPrice();
   }
-  
+
   loadProducts() {
+    var productIds = Object.keys(this.cart).map(k => parseInt(k));
+    this.productsRepository.getByIds(productIds).then(products => {
+      this.products = products;
+      this._loadProducts();
+    })
+
+  }
+
+  _loadProducts() {
     this.cartProducts = Object.keys(this.cart).map(k => {
-      return {product: this.productsRepository.get(parseInt(k)), quantity: this.cart[k]}
+      return {product: this.products.find(p => p.id === parseInt(k)), quantity: this.cart[k]}
     });
+    this.calculateTotalPrice();
   }
 
   removeProduct(cartProduct) {
     this.cartRepository.remove(cartProduct.product.id);
-    this.loadProducts();
-    this.calculateTotalPrice();
+    this._loadProducts();
     this.eventAggregator.publish(new RemoveProductFromCartEvent(cartProduct.product, cartProduct.quantity));
   }
 
@@ -39,8 +47,8 @@ export class Cart {
       this.cartRepository.add(cartProduct.product.id, newQuantity - oldQuantity);
       this.eventAggregator.publish(new AddProductToCartEvent(cartProduct.product, newQuantity - oldQuantity));
     }
-    this.loadProducts();
-    this.calculateTotalPrice();
+
+    this._loadProducts();
   }
 
   calculateTotalPrice() {
