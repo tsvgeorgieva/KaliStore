@@ -1,31 +1,45 @@
+import {inject} from 'aurelia-framework';
 import {localStorageManager} from 'service';
 import {accessRight} from 'enum';
+import {HaikuHttp} from './../service/http-client/haiku-http';
 
 const usersKey = 'users';
 
+@inject(HaikuHttp)
 export class UsersRepository {
   lastId = 0;
 
-  constructor() {
+  constructor(http) {
+    this.http = http;
+
     this.users = localStorageManager.get(usersKey);
     if (this.users === undefined) {
       this.initialize();
     }
-    
+
     this.lastId = this.users.length;
   }
 
   initialize() {
-    this.users = initialUsers;
+    this.users = [];
 
     localStorageManager.save(usersKey, this.users);
   }
 
   get(id) {
-    return this.users.find(u => u.id === id);
+    return this.http.get('user/info', {userId: id}).then(response => {
+      var user = response.user;
+      user.userName = user.username;
+      delete user.username;
+      return user;
+    });
   }
 
-  getByUserName(userName){
+  login(user) {
+    return this.http.post('user/login', {user: user});
+  }
+
+  getByUserName(userName) {
     return this.users.find(u => u.userName === userName);
   }
 
@@ -42,7 +56,7 @@ export class UsersRepository {
     return user.id;
   }
 
-  edit(userData){
+  edit(userData) {
     const user = this.get(userData.id);
 
     //TODO: separate method for changing password?
@@ -54,14 +68,14 @@ export class UsersRepository {
     user.phone = userData.phone || user.phone;
     localStorageManager.save(usersKey, this.users);
   }
-  
-  block(userId){
+
+  block(userId) {
     const user = this.get(userId);
     user.isBlocked = true;
     localStorageManager.save(usersKey, this.users);
   }
-  
-  unblock(userId){
+
+  unblock(userId) {
     const user = this.get(userId);
     user.isBlocked = false;
     localStorageManager.save(usersKey, this.users);
@@ -79,47 +93,3 @@ export class UsersRepository {
     });
   }
 }
-
-const initialUsers = [{
-  id: 1,
-  userName: 'pesho',
-  password: '123',
-  fullName: 'Pesho Peshev',
-  city: {
-    id: 1,
-    name: 'София'
-  },
-  address: 'ул. Пършевица 5',
-  phone: '2873278',
-  email: 'pesho@abv.bg',
-  isBlocked: false,
-  userAccessRights: [accessRight.userProfile]
-}, {
-  id: 2,
-  userName: 'admin',
-  password: 'admin',
-  fullName: 'Admin Adminski',
-  city: {
-    id: 2,
-    name: 'Пловдив'
-  },
-  address: 'ул. Пършевица 5',
-  phone: '2873278',
-  email: 'admin@neshtokrasivo.bg',
-  isBlocked: false,
-  userAccessRights: [accessRight.userProfile, accessRight.adminPanel]
-}, {
-  id: 3,
-  userName: 'loshiq',
-  password: '123',
-  fullName: 'Losho Loshev',
-  city: {
-    id: 1,
-    name: 'София'
-  },
-  address: 'ул. Ала Бала 5',
-  phone: '5555555',
-  email: 'loshiq@losho.bg',
-  isBlocked: true,
-  userAccessRights: [accessRight.userProfile]
-}];

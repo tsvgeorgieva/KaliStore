@@ -19,17 +19,20 @@ export class Login {
   }
 
   login() {
-    let user = this.usersRepository.getByUserName(this.userName);
-    if (user !== undefined && user.isBlocked !== true && this.password === user.password) {
-      this.session.loginUser(user.id);
-      if (this.session.userHasAccessRight(accessRight.adminPanel)) {
-        this.router.navigate('admin');
-      } else {
+    //let user = this.usersRepository.getByUserName(this.userName);
+    this.usersRepository.login({username: this.userName, password: this.password})
+      .then(userId => {
+        this.session.loginUser(userId);
+        // if (this.session.userHasAccessRight(accessRight.adminPanel)) {
+        //   this.router.navigate('admin');
+        // } else {
         this.router.navigate('');
-      }
-    } else {
-      this.logger.error(this.i18n.tr('login.loginUnsuccessful'));
-    }
+        // }
+      }).catch(x => {
+        if (x.statusCode === 401) {
+          this.logger.error(this.i18n.tr('login.loginUnsuccessful'));
+        }
+    });
   }
 }
 

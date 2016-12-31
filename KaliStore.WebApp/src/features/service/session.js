@@ -4,6 +4,7 @@ import {UserLoggedInEvent} from './event/user-logged-in-event';
 import {UserLoggedOutEvent} from './event/user-logged-out-event';
 import {UsersRepository} from 'repository';
 import {localStorageManager} from './local-storage-manager';
+import {accessRight} from 'enum';
 
 const currentUserKey = 'currentUser';
 
@@ -30,9 +31,13 @@ export class Session {
   }
 
   loginUser(userId) {
-    this.user = this.usersRepository.get(userId);
-    localStorageManager.save(currentUserKey, this.user);
-    this.restoreData();
+    this.usersRepository.get(userId).then(user => {
+      this.user = user;
+      this.user.userAccessRights = [accessRight.userProfile];
+      localStorageManager.save(currentUserKey, this.user);
+      this.restoreData();
+    })
+
   }
 
   logoutUser() {
@@ -63,7 +68,7 @@ export class Session {
     data = data || localStorageManager.get(currentUserKey);
 
     this.user = data;
-    this.userAccessRights = this._reduceToHash(data.userAccessRights);
+    this.userAccessRights = this._reduceToHash(data.userAccessRights || []);
 
     this.isLoggedIn = true;
     this.eventAggregator.publish(new UserLoggedInEvent());
@@ -76,8 +81,12 @@ export class Session {
   getUserId() {
     return this.user.id;
   }
-  
-  _reduceToHash(array){
+
+  getUser() {
+    return this.user;
+  }
+
+  _reduceToHash(array) {
     return array.reduce((hash, item) => {
       hash[item] = true;
       return hash;

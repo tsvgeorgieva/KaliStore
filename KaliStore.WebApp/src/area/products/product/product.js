@@ -1,11 +1,11 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {inject} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
-import {ProductsRepository, CartRepository, ReviewsRepository, UsersRepository} from 'repository';
+import {ProductsRepository, CartRepository, ReviewsRepository} from 'repository';
 import {AddProductToCartEvent} from 'events';
 import {Session} from 'service';
 
-@inject(EventAggregator, ProductsRepository, CartRepository, ReviewsRepository, UsersRepository, Session, I18N)
+@inject(EventAggregator, ProductsRepository, CartRepository, ReviewsRepository, Session, I18N)
 export class Product {
   similarProducts = [];
   review = {rating: 0};
@@ -13,16 +13,15 @@ export class Product {
   reviews = [];
   showAddReviewForm = false;
 
-  constructor(eventAggregator, productsRepository, cartRepository, reviewsRepository, usersRepository, session, i18n) {
+  constructor(eventAggregator, productsRepository, cartRepository, reviewsRepository, session, i18n) {
     this.eventAggregator = eventAggregator;
     this.productsRepository = productsRepository;
     this.cartRepository = cartRepository;
     this.reviewsRepository = reviewsRepository;
-    this.usersRepository = usersRepository;
     this.session = session;
     this.i18n = i18n;
 
-    this.currentUser = this.session.isUserLoggedIn() ? this.usersRepository.get(this.session.getUserId()) : {};
+    this.currentUser = this.session.isUserLoggedIn() ? this.session.getUser() : {};
   }
 
   activate(routeParams) {

@@ -153,7 +153,7 @@ export class HaikuHttp {
       this.eventAggregator.publish(new HttpServerErrorRequestMessage(errors));
     } else if (response.statusCode === 401) {
       this.eventAggregator.publish(new HttpSessionTimedOutMessage());
-      this.logger.warn(this.locale.translate('notAuthorized'));
+      //this.logger.warn(this.locale.translate('notAuthorized'));
     } else if (response.statusCode === 403) {
       this.logger.warn(this.locale.translate('accessDenied'));
     } else if (response.statusCode === 500) {
