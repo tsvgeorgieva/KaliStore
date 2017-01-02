@@ -1,9 +1,15 @@
+import {inject} from 'aurelia-framework';
 import {localStorageManager} from 'service';
+import {HaikuHttp} from './../service/http-client/haiku-http';
+import {mappers} from './mappers';
 
 const officesKey = 'offices';
 
+@inject(HaikuHttp)
 export class OfficesRepository {
-  constructor() {
+  constructor(http) {
+    this.http = http;
+
     this.offices = localStorageManager.get(officesKey);
     if (this.offices === undefined) {
       this.initialize();
@@ -11,9 +17,7 @@ export class OfficesRepository {
   }
 
   initialize() {
-    this.offices = initialOffices;
-
-    localStorageManager.save(officesKey, this.offices);
+    this.getAll();
   }
 
   get(id) {
@@ -21,14 +25,10 @@ export class OfficesRepository {
   }
 
   getAll() {
-    return this.offices;
+    return this.http.get('office/allOffices').then(response => {
+      this.offices = mappers.objToArray(response.office);
+      localStorageManager.save(officesKey, this.offices);
+      return this.offices;
+    });
   }
 }
-
-const initialOffices = [
-  {id: 1, name: "Econt офис 1"},
-  {id: 2, name: "Econt офис 2"},
-  {id: 3, name: "Econt офис 3"},
-  {id: 4, name: "Speedy офис 1"},
-  {id: 5, name: "Speedy офис 1"}
-];

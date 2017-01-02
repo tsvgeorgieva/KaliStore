@@ -40,33 +40,42 @@ export class Checkout {
     this.session = session;
     this.eventAggregator = eventAggregator;
 
-    if (this.session.isUserLoggedIn()) {
-      const currentUser = this.usersRepository.get(this.session.getUserId());
-      this.userInfo = {
-        fullName: currentUser.fullName,
-        email: currentUser.email,
-        phoneNumber: currentUser.phone,
-        city: currentUser.city,
-        address: currentUser.address
-      };
-    }
+    this.citiesRepository.getAll().then(cities => {
+      this.cities = cities;
 
-    this.cities = this.citiesRepository.getAll();
-    this.offices = this.officesRepository.getAll();
+      if (this.session.isUserLoggedIn()) {
+        const currentUser = this.session.getUser();
+        this.userInfo = {
+          fullName: currentUser.fullName,
+          email: currentUser.email,
+          phoneNumber: currentUser.phone,
+          city: currentUser.mainAddress.city,
+          address: currentUser.mainAddress.addressLine
+        };
+      }
+    });
+
+    this.officesRepository.getAll().then(offices => {
+      this.offices = offices;
+    });
+
     this.cart = this.cartRepository.getAll();
     this.loadProducts();
-    this.calculatePrices();
-
-    this.deliveryPrice = {
-      amount: 3.70,
-      currency: 'BGN'
-    };
   }
 
   loadProducts() {
+    var productIds = Object.keys(this.cart).map(k => parseInt(k));
+    this.productsRepository.getByIds(productIds).then(products => {
+      this.products = products;
+      this._loadProducts();
+    })
+  }
+
+  _loadProducts() {
     this.cartProducts = Object.keys(this.cart).map(k => {
-      return {product: this.productsRepository.get(parseInt(k)), quantity: this.cart[k]}
+      return {product: this.products.find(p => p.id === parseInt(k)), quantity: this.cart[k]}
     });
+    this.calculatePrices();
   }
 
   calculatePrices() {
@@ -139,12 +148,12 @@ export class Checkout {
       status: 1
     };
     if (this.paymentAtDelivery) {
-      this.ordersRepository.save(order);
-
-      this.logger.success(this.i18n.tr('order.successful'));
-      this.router.navigate('');
-      this.cartRepository.empty();
-      this.eventAggregator.publish(new OrderComplete({}));
+      this.ordersRepository.save(order).then(response => {
+        this.logger.success(this.i18n.tr('order.successful'));
+        this.router.navigate('');
+        this.cartRepository.empty();
+        this.eventAggregator.publish(new OrderComplete({}));
+      });
     } else if (this.paymentAtDelivery === false) {
       localStorageManager.save("currentOrder", order);
 

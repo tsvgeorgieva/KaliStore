@@ -1,11 +1,16 @@
+import {inject} from 'aurelia-framework';
 import {localStorageManager} from 'service';
-
+import {HaikuHttp} from './../service/http-client/haiku-http';
+import {mappers} from './mappers';
 const ordersKey = 'orders';
 
+@inject(HaikuHttp)
 export class OrdersRepository {
   lastId = 0;
 
-  constructor() {
+  constructor(http) {
+    this.http = http;
+
     this.orders = localStorageManager.get(ordersKey);
     if (this.orders === undefined) {
       this.initialize();
@@ -33,10 +38,7 @@ export class OrdersRepository {
   }
 
   save(order) {
-    order.id = ++this.lastId;
-    this.orders.push(order);
-
-    localStorageManager.save(ordersKey, this.orders);
+    return this.http.post('order/create', {order: order});
   }
 }
 

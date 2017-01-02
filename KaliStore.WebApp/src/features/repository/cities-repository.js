@@ -16,11 +16,7 @@ export class CitiesRepository {
   }
 
   initialize() {
-    this.http.get('city/allCities').then(response => {
-      this.cities = mappers.objToArray(response.city);
-
-      localStorageManager.save(citiesKey, this.cities);
-    });
+    this.getAll();
   }
 
   get(id) {
@@ -30,6 +26,7 @@ export class CitiesRepository {
   getAll() {
     return this.http.get('city/allCities').then(response => {
       this.cities = mappers.objToArray(response.city);
+      localStorageManager.save(citiesKey, this.cities);
       return this.cities;
     });
   }

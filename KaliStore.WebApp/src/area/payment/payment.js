@@ -32,12 +32,13 @@ export class Payment {
   }
 
   buy() {
-    this.ordersRepository.save(this.currentOrder);
-    localStorageManager.clear("currentOrder");
+    this.ordersRepository.save(this.currentOrder).then(response => {
+      localStorageManager.clear("currentOrder");
 
-    this.logger.success(this.i18n.tr('order.successful'));
-    this.router.navigate('');
-    this.cartRepository.empty();
-    this.eventAggregator.publish(new OrderComplete({}));
+      this.logger.success(this.i18n.tr('order.successful'));
+      this.router.navigate('');
+      this.cartRepository.empty();
+      this.eventAggregator.publish(new OrderComplete({}));
+    });
   }
 }

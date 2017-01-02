@@ -119,7 +119,7 @@ template
               li.list-group-item
                 div.row(style="font-size: 0.8em")
                   div.col-xs-2
-                    img.card-img-top.img-fluid(src.bind="cartProduct.product.picture", style="width: auto; height: 3em")
+                    img.card-img-top.img-fluid(src="assets/images/${cartProduct.product.image}", style="width: auto; height: 3em")
                   div.col-xs-4
                     span ${cartProduct.product.title}
                   div.col-xs-2
@@ -168,7 +168,7 @@ template
               li.list-group-item
                 div.row(style="font-size: 0.8em")
                   div.col-xs-2
-                    img.card-img-top.img-fluid(src.bind="cartProduct.product.picture", style="width: auto; height: 3em")
+                    img.card-img-top.img-fluid(src="assets/images/${cartProduct.product.image}", style="width: auto; height: 3em")
                   div.col-xs-4
                     span ${cartProduct.product.title}
                   div.col-xs-2
@@ -186,5 +186,5 @@ template
             div.col-sm-6.col-xs-12(style="text-align: right")
               label.lead ${'cart.totalPrice' | t}:
               text.lead ${totalPrice | sumFormat}
-    base-button(on-click.call="back()", type="btn-secondary", title="${'cart.back' | t}", name="${'cart.back' | t}" icon="fa-angle-double-left")
-    base-button(on-click.call="order()", type="btn-success", title="${'cart.order' | t}", name="${'cart.order' | t}" icon="fa-angle-double-right")
+          base-button(on-click.call="back()", type="btn-secondary", title="${'cart.back' | t}", name="${'cart.back' | t}" icon="fa-angle-double-left")
+          base-button(on-click.call="order()", type="btn-success", title="${'cart.order' | t}", name="${'cart.order' | t}" icon="fa-angle-double-right")
