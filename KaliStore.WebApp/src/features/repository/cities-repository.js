@@ -28,6 +28,9 @@ export class CitiesRepository {
   }
 
   getAll() {
-    return this.cities;
+    return this.http.get('city/allCities').then(response => {
+      this.cities = mappers.objToArray(response.city);
+      return this.cities;
+    });
   }
 }

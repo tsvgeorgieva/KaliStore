@@ -18,8 +18,11 @@ export class UserProfile {
     this.citiesRepository = citiesRepository;
     this.usersRepository = usersRepository;
 
-    this.user = new User(this.usersRepository.get(this.session.getUserId()));
-    this.cities = this.citiesRepository.getAll();
+    this.citiesRepository.getAll().then(cities =>{
+      this.cities = cities;
+    });
+
+    this.user = new User(this.session.getUser());
   }
 
   save() {
