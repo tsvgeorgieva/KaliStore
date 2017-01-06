@@ -60,13 +60,15 @@ export class RoutesConfig {
       name: 'checkout',
       moduleId: './area/checkout/checkout',
       nav: false,
-      title: this.i18n.tr('checkout.title')
+      title: this.i18n.tr('checkout.title'),
+      accessRight: accessRight.userProfile
     }, {
       route: 'payment',
       name: 'payment',
       moduleId: './area/payment/payment',
       nav: false,
-      title: this.i18n.tr('payment.title')
+      title: this.i18n.tr('payment.title'),
+      accessRight: accessRight.userProfile
     }, {
       route: 'my-orders',
       name: 'my-orders',
