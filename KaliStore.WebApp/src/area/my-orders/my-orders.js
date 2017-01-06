@@ -11,6 +11,8 @@ export class MyOrders {
   }
   
   loadCurrentUserOrders() {
-    this.orders = this.ordersRepository.getByUserId(this.session.getUserId());
+    this.ordersRepository.getByUserId(this.session.getUserId()).then(orders => {
+      this.orders = orders;
+    });
   }
 }

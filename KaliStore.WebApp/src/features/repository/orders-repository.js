@@ -30,7 +30,19 @@ export class OrdersRepository {
   }
 
   getByUserId(userId){
-    return this.orders.filter(o => o.user.id === userId);
+    return this.http.get('order/allForUser', {userId: userId}).then(response => {
+      var orders = mappers.objToArray(response.order).map(o => {
+        o.products = mappers.objToArray(o.products).map(p => {
+          p.price = mappers.amountToPrice(p.price);
+          return p;
+        });
+
+        o.totalPrice = mappers.amountToPrice(o.totalPrice);
+        return o;
+      });
+
+      return orders;
+    })
   }
 
   getAll() {

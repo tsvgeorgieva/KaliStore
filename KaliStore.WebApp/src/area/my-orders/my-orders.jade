@@ -8,13 +8,14 @@ template
           div.col-xs-6
             div
               label.font-weight-bold ${'myOrders.delivery' | t}:&nbsp;
-              span ${order.delivery.address}, ${order.delivery.city.name}
+              span ${order.delivery.address.addressLine}, ${order.delivery.address.city.name}
             duv
               label.font-weight-bold ${'myOrders.client' | t}:&nbsp;
-              span ${order.delivery.client.name} - ${order.delivery.client.phoneNumber}
+              span ${order.delivery.client.fullName} - ${order.delivery.client.phone}
           div.col-xs-6
             template(repeat.for="orderProduct of order.products")
-              div ${orderProduct.quantity} x ${orderProduct.product.title}
+              div ${orderProduct.quantity}&nbsp;x&nbsp;
+                a(href="#/products/${orderProduct.product.id}") ${orderProduct.product.title}
             label.lead ${'myOrders.price' | t}:&nbsp;
             span.lead ${order.totalPrice | sumFormat}
         div.row
