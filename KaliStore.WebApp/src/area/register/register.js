@@ -2,7 +2,6 @@ import {inject} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
 import {Router} from 'aurelia-router';
 import {Session, Logger} from 'service';
-import {User} from 'models';
 import {CitiesRepository, UsersRepository} from 'repository';
 
 @inject(Session, Logger, I18N, Router, CitiesRepository, UsersRepository)
@@ -19,7 +18,7 @@ export class Register {
     this.citiesRepository = citiesRepository;
     this.usersRepository = usersRepository;
 
-    this.user = new User();
+    this.user = {};
     this.citiesRepository.getAll().then(cities => {
       this.cities = cities;
     });
@@ -37,9 +36,11 @@ export class Register {
       return;
     }
 
-    this.usersRepository.save(this.user.getData()).then(response => {
-      this.session.loginUser(this.user.id);
-      this.router.navigate('');
+    this.usersRepository.save(this.user).then(response => {
+      this.usersRepository.login(this.user).then(userId => {
+          this.session.loginUser(userId);
+          this.router.navigate('');
+        });
     });
   }
 }

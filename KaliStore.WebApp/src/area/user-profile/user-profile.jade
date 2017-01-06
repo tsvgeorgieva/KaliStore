@@ -10,12 +10,12 @@ template
       div.col-sm-4.text-sm-right.col-xs-12
         label.form-control-label ${'models.user.city'| t}
       div.col-sm-8.col-xs-12
-        select3(items.bind="cities", value.bind="user.city", options.bind="{emptyValue: undefined, modelValueBind: true}")
+        select3(items.bind="cities", value.bind="user.mainAddress.city", options.bind="{emptyValue: undefined, modelValueBind: true}")
     div.form-group.row
       div.col-sm-4.text-sm-right.col-xs-12
         label.form-control-label ${'models.user.address'| t}
       div.col-sm-8.col-xs-12
-        input.form-control(type="text", value.bind="user.address")
+        input.form-control(type="text", value.bind="user.mainAddress.addressLine")
     div.form-group.row
       div.col-sm-4.text-sm-right.col-xs-12
         label.form-control-label ${'models.user.phone'| t}

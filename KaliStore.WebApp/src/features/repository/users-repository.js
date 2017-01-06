@@ -39,16 +39,17 @@ export class UsersRepository {
     return this.http.post('user/login', {user: user});
   }
 
+  save(user) {
+    user.username = user.userName;
+    return this.http.post('user/register', {user: user});
+  }
+
   getByUserName(userName) {
     return this.users.find(u => u.userName === userName);
   }
 
   getAll() {
     return this.users;
-  }
-
-  save(user) {
-    return this.http.post('user/register');
   }
 
   edit(userData) {

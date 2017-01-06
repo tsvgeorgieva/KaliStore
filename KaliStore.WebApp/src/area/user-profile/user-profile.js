@@ -20,13 +20,12 @@ export class UserProfile {
 
     this.citiesRepository.getAll().then(cities =>{
       this.cities = cities;
+      this.user = this.session.getUser();
     });
-
-    this.user = new User(this.session.getUser());
   }
 
   save() {
-    this.user.id = this.usersRepository.edit(this.user.getData());
+    this.usersRepository.edit(this.user);
   }
 }
 
