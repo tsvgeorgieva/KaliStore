@@ -48,12 +48,7 @@ export class UsersRepository {
   }
 
   save(user) {
-    user.id = ++this.lastId;
-    user.userAccessRights = [accessRight.userProfile];
-    this.users.push(user);
-
-    localStorageManager.save(usersKey, this.users);
-    return user.id;
+    return this.http.post('user/register');
   }
 
   edit(userData) {

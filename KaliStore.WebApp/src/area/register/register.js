@@ -20,7 +20,9 @@ export class Register {
     this.usersRepository = usersRepository;
 
     this.user = new User();
-    this.cities = this.citiesRepository.getAll();
+    this.citiesRepository.getAll().then(cities => {
+      this.cities = cities;
+    });
   }
 
   register() {
@@ -29,20 +31,16 @@ export class Register {
       return;
     }
 
-    let sameUser = this.usersRepository.getByUserName(this.user.userName);
-    if (sameUser !== undefined) {
-      this.logger.error(this.i18n.tr('register.userNameTaken'));
-      return;
-    }
 
     if (this.user.password !== this.confirmPassword) {
       this.logger.error(this.i18n.tr('register.passwordsDoNotMatch'));
       return;
     }
 
-    this.user.id = this.usersRepository.save(this.user.getData());
-    this.session.loginUser(this.user.id);
-    this.router.navigate('');
+    this.usersRepository.save(this.user.getData()).then(response => {
+      this.session.loginUser(this.user.id);
+      this.router.navigate('');
+    });
   }
 }
 
