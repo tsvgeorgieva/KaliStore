@@ -87,7 +87,6 @@ export class ProductsRepository {
       p.categories = mappers.objToArray(p.categories);
       p.materials = mappers.objToArray(p.materials);
       p.price = mappers.amountToPrice(p.price);
-      p.rating = this.reviewsRepository.getRatingForProduct(p.id);
       return p;
     });
 

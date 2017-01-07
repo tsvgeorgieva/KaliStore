@@ -52,7 +52,7 @@ template
           div.form-group.row
             label.form-control-label.col-sm-4.col-xs-12 ${'reviews.yourName' | t}
             div.col-sm-8.col-xs-12
-              input.form-control(type="text", value.bind="review.userName")
+              input.form-control(type="text", value.bind="review.user.fullName")
           div.form-group.row
             label.form-control-label.col-sm-4.col-xs-12 ${'models.product.rating' | t}
             div.col-sm-8.col-xs-12
@@ -76,6 +76,6 @@ template
             p.m-b-0 ${reviewItem.text}
             footer.blockquote-footer
               div
-                i ${reviewItem.userName || 'reviews.anonymous' | t}
+                i ${reviewItem.user.fullName || 'reviews.anonymous' | t}
               small ${reviewItem.dateTimeAdded | shortDateTimeFormat}
 

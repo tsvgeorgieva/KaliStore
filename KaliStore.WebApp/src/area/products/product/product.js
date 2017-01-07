@@ -8,7 +8,7 @@ import {Session} from 'service';
 @inject(EventAggregator, ProductsRepository, CartRepository, ReviewsRepository, Session, I18N)
 export class Product {
   similarProducts = [];
-  review = {rating: 0};
+  review = {rating: 0, user: {}};
   currentUser = {};
   reviews = [];
   showAddReviewForm = false;
@@ -30,7 +30,9 @@ export class Product {
       this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
       this.product.categoriesList = this.product.categories.map(c => c.name).join(', ');
       this.setSimilarProducts();
-      this.reviews = this.reviewsRepository.getAllForProduct(this.product.id);
+      this.reviewsRepository.getAllForProduct(this.product.id).then(reviews => {
+        this.reviews = reviews;
+      });
     });
   }
 
@@ -51,18 +53,21 @@ export class Product {
   }
 
   saveReview() {
-    this.review.userId = this.currentUser.id || -1;
-    this.review.userName = this.review.userName || this.currentUser.fullName || this.i18n.tr('reviews.anonymous');
-    this.review.productId = this.product.id;
+    this.review.user = {
+      id: this.currentUser.id || -1,
+      fullName: this.review.user.fullName || this.currentUser.fullName || this.i18n.tr('reviews.anonymous')
+    };
+    this.review.product = {id: this.product.id};
 
-    this.reviewsRepository.save(this.review);
+    this.reviewsRepository.save(this.review).then(() => {
+      this.review = {rating: 0};
+      this.reviewsRepository.getAllForProduct(this.product.id).then(reviews => {
+        this.reviews = reviews;
+      });
+      //this.product.rating = this.reviewsRepository.getRatingForProduct(this.product.id);
 
-    this.review = {rating: 0};
-    this.reviews = this.reviewsRepository.getAllForProduct(this.product.id);
-    this.product.rating = this.reviewsRepository.getRatingForProduct(this.product.id);
-
-    this.showAddReviewForm = false;
-
+      this.showAddReviewForm = false;
+    });
   }
 
   addReviewClick() {

@@ -18,7 +18,7 @@ export class Checkout {
   currentCheckoutStep = 1;
   differentShipmentAddress = false;
   toAddress;
-  paymentAtDelivery;
+  paymentAtDelivery = true;
   cities = [];
   offices = [];
   userInfo = {};
@@ -114,6 +114,7 @@ export class Checkout {
       this.deliveryInfo.type = this.i18n.tr('checkout.deliveryInfo.toOffice');
       this.deliveryInfo.city = this.officeInfo.city;
       this.deliveryInfo.address = this.officeInfo.office.name;
+      this.deliveryInfo.client = {};
       this.deliveryInfo.client.name = this.userInfo.fullName;
       this.deliveryInfo.client.phoneNumber = this.userInfo.phoneNumber;
     }
@@ -141,10 +142,13 @@ export class Checkout {
     }
 
     const order = {
-      user: this.userInfo,
-      delivery: this.deliveryInfo,
-      products: this.cartProducts,
-      totalPrice: this.totalPrice,
+      user: {id: this.userInfo.id},
+      delivery: this.getDeliveryInfo(),
+      products: this.cartProducts.map(p => {
+        p.product.price = p.product.price.amount;
+        return p;
+      }),
+      totalPrice: this.totalPrice.amount,
       status: 1
     };
     if (this.paymentAtDelivery) {
@@ -159,5 +163,22 @@ export class Checkout {
 
       this.router.navigate('#/payment');
     }
+  }
+
+  getDeliveryInfo() {
+    var map = {
+      isToOffice: this.toAddress ? 0 : 1,
+      differentAddress: this.differentShipmentAddress ? 1 : 0,
+      address: {
+        addressLine: this.deliveryInfo.address,
+        city: this.deliveryInfo.city
+      },
+      client: {
+        phone: this.deliveryInfo.client.phoneNumber,
+        fullName: this.deliveryInfo.client.name
+      },
+      officeId: this.officeInfo.office ? this.officeInfo.office.id : 0
+    };
+    return map;
   }
 }

@@ -12,7 +12,7 @@ template
                   label.form-control-label ${'models.user.fullName' | t}
                 div.col-sm-9.col-xs-12
                   input.form-control(type='text', value.bind="userInfo.fullName", placeholder="${'checkout.userInfo.addName' | t}", required="true")
-              div.form-group.row
+              //div.form-group.row
                 div.col-sm-3.col-xs-12
                   label.form-control-label ${'models.user.email' | t}
                 div.col-sm-9.col-xs-12
@@ -101,7 +101,7 @@ template
                 label(for="paymentAtDelivery") ${'checkout.paymentInfo.atDelivery.title' | t}
                 div
                   small.text-muted ${'checkout.paymentInfo.atDelivery.description' | t}
-              div.form-group
+              //div.form-group
                 input#paymentWithCard(type="radio", name="paymentMethod", model.bind="false", checked.bind="paymentAtDelivery", required="true")
                 label(for="paymentWithCard") ${'checkout.paymentInfo.withCard.title' | t}
                 div
@@ -111,7 +111,7 @@ template
                 a.btn.btn-secondary(href="#/cart")
                   i.fa.fa-angle-double-left
                   | ${'cart.back' | t}
-                base-button(on-click.call="proceed()", type="btn-success", title="${'cart.proceed' | t}", name="${'cart.proceed' | t}" icon="fa-angle-double-right")
+                base-button(on-click.call="proceed()", type="btn-success", title="${'cart.proceed' | t}", name="${'cart.proceed' | t}" icon="fa-angle-double-right", disabled.bind="toAddress === undefined")
       div.col-lg-5.hidden-md-down
         div.card
           ul.list-group
