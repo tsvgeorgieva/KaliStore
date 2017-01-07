@@ -38,6 +38,10 @@ export class UsersRepository {
   login(user) {
     return this.http.post('user/login', {user: user});
   }
+  
+  facebookLogin(user){
+    return this.http.post('user/facebook', {user: user});
+  }
 
   save(user) {
     user.username = user.userName;

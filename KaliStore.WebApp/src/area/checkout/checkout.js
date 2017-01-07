@@ -142,7 +142,13 @@ export class Checkout {
     }
 
     const order = {
-      user: {id: this.userInfo.id},
+      user: {
+        id: this.userInfo.id,
+        mainAddress: {
+          city: this.userInfo.city,
+          addressLine: this.userInfo.address
+        }
+      },
       delivery: this.getDeliveryInfo(),
       products: this.cartProducts.map(p => {
         p.product.price = p.product.price.amount;

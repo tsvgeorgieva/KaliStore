@@ -1,20 +1,22 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {Router} from 'aurelia-router';
 import {UserLoggedInEvent} from './event/user-logged-in-event';
 import {UserLoggedOutEvent} from './event/user-logged-out-event';
-import {UsersRepository} from 'repository';
+import {UsersRepository, FacebookRepository} from 'repository';
 import {localStorageManager} from './local-storage-manager';
 import {accessRight} from 'enum';
 
 const currentUserKey = 'currentUser';
 
-@inject(EventAggregator, UsersRepository)
+@inject(EventAggregator, UsersRepository, Router)
 export class Session {
 
-  constructor(eventAggregator, usersRepository) {
+  constructor(eventAggregator, usersRepository, router) {
     this.eventAggregator = eventAggregator;
     this.usersRepository = usersRepository;
-
+    this.facebookRepository = new FacebookRepository(usersRepository, this, router);
+    this.facebookRepository.init();
     this.initUserData();
 
     if (this.userRemembered()) {
@@ -42,6 +44,7 @@ export class Session {
 
   logoutUser() {
     localStorageManager.clear(currentUserKey);
+    this.facebookRepository.logout();
     this.initUserData();
     this.eventAggregator.publish(new UserLoggedOutEvent());
   }

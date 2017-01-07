@@ -14,3 +14,9 @@ template
     div.form-group.row
       div.col-sm-12.text-sm-right.col-xs-12
         base-button(on-click.call="login()", type="btn-success", title="login.signin", name="login.signin")
+
+    h2.text-xs-center Влез с външен профил
+    div.form-group.row
+      div.col-sm-12.col-xs-12.text-xs-center
+        base-button(on-click.call="fblogin()", type="btn-block btn-social btn-facebook", title="Влез с Facebook", name="Влез с Facebook", icon="fa-facebook")
+

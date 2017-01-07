@@ -80,7 +80,7 @@ export class NavBar {
 
   logout() {
     this.session.logoutUser();
-    this.router.navigate('login');
+    this.router.navigate('');
   }
 
   loadCartProducts() {
