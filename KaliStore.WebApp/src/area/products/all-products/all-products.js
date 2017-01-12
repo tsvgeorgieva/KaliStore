@@ -23,7 +23,7 @@ export class AllProducts {
         this.products = products;
       });
     } else {
-      this.productsRepository.getAll().then(products => {
+      this.productsRepository.getRecommendationsByRating().then(products => {
         this.products = products;
       });
     }

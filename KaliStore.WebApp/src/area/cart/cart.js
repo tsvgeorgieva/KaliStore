@@ -2,15 +2,18 @@ import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {ProductsRepository, CartRepository} from 'repository';
 import {AddProductToCartEvent, RemoveProductFromCartEvent} from 'events';
+import {Session} from 'service';
 
-@inject(EventAggregator, CartRepository, ProductsRepository)
+@inject(EventAggregator, CartRepository, ProductsRepository, Session)
 export class Cart {
   totalPrice = {};
 
-  constructor(eventAggregator, cartRepository, productsRepository) {
+  constructor(eventAggregator, cartRepository, productsRepository, session) {
     this.eventAggregator = eventAggregator;
     this.cartRepository = cartRepository;
     this.productsRepository = productsRepository;
+    this.session = session;
+    
     this.cart = this.cartRepository.getAll();
     this.loadProducts();
   }

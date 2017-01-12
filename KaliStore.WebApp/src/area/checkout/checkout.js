@@ -53,14 +53,16 @@ export class Checkout {
           address: currentUser.mainAddress.addressLine
         };
       }
-    });
 
-    this.officesRepository.getAll().then(offices => {
-      this.offices = offices;
+      this.officesRepository.getAll().then(offices => {
+        this.offices = offices;
+
+        this.loadProducts();
+      });
     });
 
     this.cart = this.cartRepository.getAll();
-    this.loadProducts();
+
   }
 
   loadProducts() {

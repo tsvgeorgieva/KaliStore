@@ -45,7 +45,7 @@ export class FacebookRepository {
 
   login(){
     FB.login((response) => {
-      console.log(response);
+      //console.log(response);
       this.statusChangeCallback(response);
     });
   }
@@ -53,7 +53,7 @@ export class FacebookRepository {
   logout(){
     FB.logout((response) => {
       // Person is now logged out
-      console.log(response);
+      //console.log(response);
     });
   }
 
@@ -64,7 +64,7 @@ export class FacebookRepository {
   }
 
   statusChangeCallback(response) {
-    console.log(response);
+    //console.log(response);
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       this.loginUser(response.authResponse);
@@ -80,15 +80,12 @@ export class FacebookRepository {
   }
 
   loginUser(authResponse) {
-    console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', {fields: 'email, name'}, (response) => {
-      console.log(response);
-      console.log('Successful login for: ' + response.name);
       var user = {
         fbId: response.id,
         fbToken: authResponse.accessToken,
         fullName: response.name,
-        username: response.email
+        username: response.email || response.name
       };
 
       this.usersRepository.facebookLogin(user).then(userId => {

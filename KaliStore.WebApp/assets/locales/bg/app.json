@@ -6,7 +6,8 @@
     "title": "Вход",
     "signin": "Влез",
     "loginSuccessful": "Успешен вход в системата",
-    "loginUnsuccessful": "Неуспешен вход в системата"
+    "loginUnsuccessful": "Неуспешен вход в системата",
+    "pleaseLogin": "Моля, първо влезте в системата"
   },
   "common": {
     "save": "Запис",
@@ -63,7 +64,7 @@
     "materials": "Материали",
     "price": "Цена",
     "category": "Категория",
-    "similar": "Подобни продукти",
+    "similar": "Препоръчани продукти",
     "daysToMake": "Време за изработка",
     "days": "дена",
     "day": "ден"

@@ -157,11 +157,11 @@ export class HaikuHttp {
     } else if (response.statusCode === 403) {
       this.logger.warn(this.locale.translate('accessDenied'));
     } else if (response.statusCode === 500) {
-      this.logger.error(this.locale.translate('internalServerError'));
+      //this.logger.error(this.locale.translate('internalServerError'));
     } else if (response.timeout === true) {
       this.logger.error(this.locale.translate('requestTimeout'));
     } else {
-      this.logger.error(this.locale.translate('errorHappend'));
+      //this.logger.error(this.locale.translate('errorHappend'));
     }
   }
 

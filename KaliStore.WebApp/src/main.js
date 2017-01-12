@@ -40,9 +40,9 @@ export function configure(aurelia) {
       });
 
       config.setHttpService({
-        authHost: 'http://localhost:5000',
-        serviceHost: 'http://localhost:5000',
-        serviceApiPrefix: '/rest/',
+        authHost: 'http://192.168.0.103:8080',
+        serviceHost: 'http://192.168.0.103:8080',
+        serviceApiPrefix: '/DataManagementApp/rest/',
         requestTimeout: 30000 // milliseconds
       });
 

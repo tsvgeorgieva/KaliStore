@@ -58,6 +58,18 @@ export class ProductsRepository {
       .catch(x => console.log(x));
   }
 
+  getRecommendationsByRating() {
+    return this.http.get('catalog/productRecommendationsByRating')
+      .then(x => this._parseResponse(x))
+      .catch(x => console.log(x));
+  }
+
+  productRecommendationsByProduct(productId) {
+    return this.http.get('catalog/productRecommendationsByProduct', {productId: productId})
+      .then(x => this._parseResponse(x))
+      .catch(x => console.log(x));
+  }
+
   save(productData) {
     const product = {};
     product.id = ++this.lastId;

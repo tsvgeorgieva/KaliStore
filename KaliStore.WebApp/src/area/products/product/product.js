@@ -29,9 +29,10 @@ export class Product {
       this.product = product;
       this.product.materialsList = this.product.materials.map(m => m.name).join(', ');
       this.product.categoriesList = this.product.categories.map(c => c.name).join(', ');
-      this.setSimilarProducts();
+
       this.reviewsRepository.getAllForProduct(this.product.id).then(reviews => {
         this.reviews = reviews;
+        this.setSimilarProducts();
       });
     });
   }
@@ -42,8 +43,7 @@ export class Product {
   }
 
   setSimilarProducts() {
-    // todo: fix this.product.categories[0]
-    this.productsRepository.getByCategory(this.product.categories[0].id).then(products => {
+    this.productsRepository.productRecommendationsByProduct(this.product.id).then(products => {
       this.similarProducts = products.filter(p => p.id !== this.product.id);
     });
   }

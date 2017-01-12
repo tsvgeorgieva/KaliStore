@@ -30,7 +30,10 @@ template
           div(style="font-size: 1.5em")
             label.font-weight-bold ${'cart.totalPrice' | t}:
             text ${totalPrice | sumFormat}
-          a.btn.btn-success(href="#/checkout", name="cart.order")
+          a.btn.btn-primary(href="#/checkout", name="cart.order", class="${session.isUserLoggedIn() ? '' : 'disabled'}")
             i.fa.fa-angle-double-right.fa-lg
             | &nbsp;
             | ${'cart.order' | t}
+          div
+            a(if.bind="!session.isUserLoggedIn()", href="#/login") ${'login.pleaseLogin' | t}
+

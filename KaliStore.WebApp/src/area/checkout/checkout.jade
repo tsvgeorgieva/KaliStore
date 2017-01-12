@@ -111,7 +111,7 @@ template
                 a.btn.btn-secondary(href="#/cart")
                   i.fa.fa-angle-double-left
                   | ${'cart.back' | t}
-                base-button(on-click.call="proceed()", type="btn-success", title="${'cart.proceed' | t}", name="${'cart.proceed' | t}" icon="fa-angle-double-right", disabled.bind="toAddress === undefined")
+                base-button(on-click.call="proceed()", type="btn-primary", title="${'cart.proceed' | t}", name="${'cart.proceed' | t}" icon="fa-angle-double-right", disabled.bind="toAddress === undefined")
       div.col-lg-5.hidden-md-down
         div.card
           ul.list-group
